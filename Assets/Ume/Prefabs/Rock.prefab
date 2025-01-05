@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5230828102616836037}
   - component: {fileID: 6337934129026308318}
   - component: {fileID: 5116547447111697057}
-  - component: {fileID: 7335104924919152457}
+  - component: {fileID: 3352029891014225049}
   m_Layer: 0
-  m_Name: fish
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b4896bec840e980488647d28b4fdccc5, type: 2}
+  - {fileID: 2100000, guid: 8d4823cf4423d8d44bc5c87175f3baf7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7335104924919152457
+--- !u!114 &3352029891014225049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5222166266405135396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d776a525519cee4da94c9df99ed04af, type: 3}
+  m_Script: {fileID: 11500000, guid: f028056ffec65564f8baf7b7cf9c7712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
