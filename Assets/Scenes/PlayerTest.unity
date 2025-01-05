@@ -123,6 +123,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &535851641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4732140658450917605, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
+  m_PrefabInstance: {fileID: 1806923944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &535851646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535851641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fea507136cfeb4680c309468daeb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReflecting: 0
+  reflectDuration: 2
+  disableDuration: 2
 --- !u!1 &776937617
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +268,7 @@ MonoBehaviour:
   acceleration: 2
   deceleration: 1
   maxSpeed: 5
-  turnSpeed: 3
+  playerHP: 3
 --- !u!1 &1485102378
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +410,7 @@ MonoBehaviour:
   acceleration: 2
   deceleration: 1
   maxSpeed: 5
-  turnSpeed: 3
+  playerHP: 3
 --- !u!65 &1615501795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -486,6 +506,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 139358773684853420, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 139358773684853420, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 139358773684853420, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6319086292968066481, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
       propertyPath: m_Controller
       value: 
@@ -553,6 +585,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6319086292977565285, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1038502533}
+    - targetCorrespondingSourceObject: {fileID: 4732140658450917605, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 535851646}
   m_SourcePrefab: {fileID: 100100000, guid: 56fc080e7bbacb24c86fd1e5760231bd, type: 3}
 --- !u!1 &1866973586
 GameObject:

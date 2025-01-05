@@ -4,40 +4,83 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float acceleration = 2f;   // ‰Á‘¬—Í
-    public float deceleration = 1f;   // Œ¸‘¬—Í
-    public float maxSpeed = 5f;       // Å‘å‘¬“x
-    public float turnSpeed = 3f;      // ‰ñ“]‘¬“xi•ûŒü“]Š·‚Ì“İ‚³j
+    public float acceleration = 5f;   // åŠ é€ŸåŠ›
+    public float deceleration = 2f;   // æ¸›é€ŸåŠ›
+    public float maxSpeed = 10f;      // æœ€å¤§é€Ÿåº¦
+    public int playerHP = 3;          // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®HP
 
-    private Vector3 currentVelocity = Vector3.zero; // Œ»İ‚Ì‘¬“xƒxƒNƒgƒ‹
+    private Vector3 currentVelocity = Vector3.zero; // ç¾åœ¨ã®é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«
+    private bool isDodging = false;                 // å›é¿ä¸­ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+
+    private Animator animator;                      // Animator ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+
+    void Start()
+    {
+        animator = GetComponent<Animator>(); // Animator ã‚’å–å¾—
+    }
 
     void Update()
     {
-        // “ü—Í‚ğæ“¾
+        // å›é¿ä¸­ã¯ç§»å‹•ã‚’ç„¡åŠ¹åŒ–
+        if (isDodging)
+        {
+            return;
+        }
+
+        // å…¥åŠ›ã‚’å–å¾—
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
         Vector3 inputDirection = new Vector3(moveX, 0, moveZ).normalized;
 
-        // “ü—Í‚ª‚ ‚éê‡‚Í‰Á‘¬A‚È‚¢ê‡‚ÍŒ¸‘¬
+        // å…¥åŠ›ãŒã‚ã‚‹å ´åˆã¯åŠ é€Ÿã€ãªã„å ´åˆã¯æ¸›é€Ÿ
         if (inputDirection.magnitude > 0)
         {
-            // Œ»İ‚Ì‘¬“x‚ğ“ü—Í•ûŒü‚ÉŒü‚¯‚Ä‰Á‘¬
             currentVelocity = Vector3.Lerp(currentVelocity, inputDirection * maxSpeed, acceleration * Time.deltaTime);
+
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’é€²è¡Œæ–¹å‘ã«å‘ã‘ã‚‹
+            Quaternion targetRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10f * Time.deltaTime); // 10fã¯å›è»¢é€Ÿåº¦
         }
         else
         {
-            // Œ»İ‚Ì‘¬“x‚ğŒ¸‘¬
             currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
 
-        // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚ğ•ÏXi™X‚ÉŒü‚«‚ğ‡‚í‚¹‚éj
-        if (currentVelocity.magnitude > 0.1f) // ”÷¬‚È‘¬“x‚Å‚ÍŒü‚«‚ğ•Ï‚¦‚È‚¢
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(currentVelocity);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-        }
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’æ›´æ–°
+        animator.SetFloat("Speed", currentVelocity.magnitude);
 
-        // ƒvƒŒƒCƒ„[‚ğˆÚ“®
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç§»å‹•
         transform.Translate(currentVelocity * Time.deltaTime, Space.World);
+
+        // å›é¿å‡¦ç†
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(Dodge());
+        }
+    }
+
+    private IEnumerator Dodge()
+    {
+        isDodging = true; // å›é¿ä¸­ãƒ•ãƒ©ã‚°ã‚’æœ‰åŠ¹åŒ–
+
+        // ç¾åœ¨ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å¼·åˆ¶çµ‚äº†ã—å›é¿ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
+        animator.Play("Dodge", 0, 0); 
+
+        // å›é¿ä¸­ã¯ä¸€å®šæ™‚é–“åœæ­¢
+        yield return new WaitForSeconds(2f); // å›é¿ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã®é•·ã•ã«å¿œã˜ã¦èª¿æ•´
+
+        isDodging = false; // å›é¿çµ‚äº†
+    }
+
+    public void TakeDamage()
+    {
+        playerHP--;
+        Debug.Log("Player HP: " + playerHP);
+
+        if (playerHP <= 0)
+        {
+            Debug.Log("Game Over");
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†ã‚’ã“ã“ã«è¨˜è¿°
+        }
     }
 }
