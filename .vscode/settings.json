@@ -52,5 +52,5 @@
         "Temp/": true
     },
     "dotnet.preferCSharpExtension": true,
-    "dotnet.defaultSolution": "2024_12_26newTeamB.sln"
+    "dotnet.defaultSolution": "New_B.sln"
 }
