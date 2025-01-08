@@ -11,8 +11,6 @@ public class BossScript : MonoBehaviour
     [SerializeField] private int attackNumber = 2; //攻撃の種類
     int attackType = 1; //攻撃の種類
 
-
-    private bool isFishAttack = true; //攻撃の切り替えフラグ
     public float fishSpeed = 10;
     private Transform player; //playerの位置を入れる変数
     void Awake()
