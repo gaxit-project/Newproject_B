@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class ShieldController : MonoBehaviour
 {
-    public bool isReflecting = false;
+    public GameObject shield; // シールドオブジェクト
     public float reflectDuration = 2f;
     public float disableDuration = 2f;
 
     private Renderer shieldRenderer;
+    private bool isReflecting = false;
 
     void Start()
     {
-        shieldRenderer = GetComponent<Renderer>();
-        SetShieldColor(Color.blue); // 初期状態: 青
+        if (shield != null)
+        {
+            shieldRenderer = shield.GetComponent<Renderer>();
+            SetShieldColor(Color.blue); // 初期状態: 青
+        }
     }
 
     void Update()
@@ -27,14 +31,28 @@ public class ShieldController : MonoBehaviour
     private IEnumerator ReflectCoroutine()
     {
         isReflecting = true;
-        SetShieldColor(Color.green); // 反射中: 緑
+
+        if (shield != null)
+        {
+            SetShieldColor(Color.green); // 反射中: 緑
+        }
+
         yield return new WaitForSeconds(reflectDuration);
 
         isReflecting = false;
-        SetShieldColor(Color.red); // 無効化: 赤 ここは後で消滅に
+
+        if (shield != null)
+        {
+            shield.SetActive(false); // 非アクティブ化
+        }
+
         yield return new WaitForSeconds(disableDuration);
 
-        SetShieldColor(Color.blue); // 待機: 青
+        if (shield != null)
+        {
+            shield.SetActive(true); // 再アクティブ化
+            SetShieldColor(Color.blue); // 待機: 青
+        }
     }
 
     private void SetShieldColor(Color color)
