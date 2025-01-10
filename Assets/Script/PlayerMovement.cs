@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -92,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Game Over");
             // プレイヤーのゲームオーバー処理をここに記述
+            SceneManager.LoadScene("Gameoverscene");
         }
         else
         {
