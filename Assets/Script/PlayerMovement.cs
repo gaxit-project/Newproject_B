@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 5f;   // 加速力
     public float deceleration = 2f;   // 減速力
     public float maxSpeed = 10f;      // 最大速度
-    public int playerHP = 3;          // プレイヤーのHP
+    public int playerHP = 10;          // プレイヤーのHP
 
     private Vector3 currentVelocity = Vector3.zero; // 現在の速度ベクトル
     private bool isDodging = false;                 // 回避中かどうかのフラグ
@@ -81,6 +81,16 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Game Over");
             // プレイヤーのゲームオーバー処理をここに記述
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Fishタグを持つオブジェクトに当たった場合、HPを減らす
+        if (other.CompareTag("Fish"))
+        {
+            Debug.Log("Fishに当たりました！");
+            TakeDamage(); // HPを減少させる
         }
     }
 }
