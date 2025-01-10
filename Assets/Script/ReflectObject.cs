@@ -6,7 +6,7 @@ public class ReflectObject : MonoBehaviour
 {
     public float speed = 5f; // オブジェクトの移動速度
 
-    void OnCollisionEnter(Collision collision)
+    /*void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Shield"))
         {
@@ -23,15 +23,15 @@ public class ReflectObject : MonoBehaviour
                 GetComponent<Rigidbody>().velocity = reflectDirection * speed;
 
                 // ボスの場合の追加処理
-                /*if (CompareTag("Boss"))
+                if (CompareTag("Boss"))
                 {
                     BossController boss = GetComponent<BossController>();
                     if (boss != null)
                     {
                         boss.TakeDamage(1); // ダメージを与える
                     }
-                }*/
+                }
             }
         }
-    }
+    }*/
 }
