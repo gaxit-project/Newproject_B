@@ -84,6 +84,11 @@ public class ShieldController : MonoBehaviour
 
         isReflecting = false;
     }
+    
+    public bool IsReflecting()
+    {
+        return isReflecting; // 反射モード中かどうかを返す
+    }
 
     public void ReduceShieldHP()
     {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shield
   - Fish
+  - Rubble
   layers:
   - Default
   - TransparentFX
