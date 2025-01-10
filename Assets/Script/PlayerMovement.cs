@@ -7,16 +7,21 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 5f;   // 加速力
     public float deceleration = 2f;   // 減速力
     public float maxSpeed = 10f;      // 最大速度
-    public int playerHP = 10;          // プレイヤーのHP
+    public int playerHP = 10;         // プレイヤーのHP
+    public float invincibilityDuration = 2f; // 無敵状態の継続時間
+    public float blinkInterval = 0.1f; // 点滅間隔
 
     private Vector3 currentVelocity = Vector3.zero; // 現在の速度ベクトル
     private bool isDodging = false;                 // 回避中かどうかのフラグ
+    private bool isInvincible = false;             // 無敵状態かどうかのフラグ
 
     private Animator animator;                      // Animator コンポーネント
+    private Renderer playerRenderer;               // プレイヤーのRenderer
 
     void Start()
     {
         animator = GetComponent<Animator>(); // Animator を取得
+        playerRenderer = GetComponentInChildren<Renderer>(); // Renderer を取得
     }
 
     void Update()
@@ -64,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         isDodging = true; // 回避中フラグを有効化
 
         // 現在のアニメーションを強制終了し回避モーションを再生
-        animator.Play("Dodge", 0, 0); 
+        animator.Play("Dodge", 0, 0);
 
         // 回避中は一定時間停止
         yield return new WaitForSeconds(2f); // 回避モーションの長さに応じて調整
@@ -74,6 +79,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (isInvincible)
+        {
+            Debug.Log("無敵状態のためダメージを無効化しました。");
+            return;
+        }
+
         playerHP--;
         Debug.Log("Player HP: " + playerHP);
 
@@ -82,6 +93,29 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Game Over");
             // プレイヤーのゲームオーバー処理をここに記述
         }
+        else
+        {
+            StartCoroutine(StartInvincibility()); // ダメージを受けた後に無敵状態を開始
+        }
+    }
+
+    private IEnumerator StartInvincibility()
+    {
+        isInvincible = true;
+
+        float elapsed = 0f;
+        bool isVisible = true;
+
+        while (elapsed < invincibilityDuration)
+        {
+            isVisible = !isVisible; // 表示/非表示を切り替え
+            playerRenderer.enabled = isVisible; // レンダラーをオン/オフ
+            yield return new WaitForSeconds(blinkInterval); // 点滅間隔
+            elapsed += blinkInterval;
+        }
+
+        playerRenderer.enabled = true; // 最後に表示を確実にオンにする
+        isInvincible = false;
     }
 
     private void OnTriggerEnter(Collider other)
