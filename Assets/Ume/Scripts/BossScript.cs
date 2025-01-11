@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossScript : MonoBehaviour
 {
@@ -9,15 +10,16 @@ public class BossScript : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float attackInterval = 2f;
     [SerializeField] private int attackNumber = 2; //攻撃の種類
+    [SerializeField] private Slider bossHpSlider;
     int attackType = 1; //攻撃の種類
 
-    public float fishSpeed = 10;
     private Transform player; //playerの位置を入れる変数
     void Awake()
     {
         // タグが"Player"のオブジェクトを探してTransformを取得
         player = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("Attack", attackInterval, attackInterval);
+        bossHpSlider.value = 100;
 
     }
 
@@ -54,7 +56,7 @@ public class BossScript : MonoBehaviour
             case 2:
                 currentAttack = rockPrefab;
                 break;
-
+    
             default:
                 currentAttack = null;
                 break;
@@ -72,11 +74,15 @@ public class BossScript : MonoBehaviour
             attackType = 1; // 循環するようにリセット
         }
     }
-    private void fishShot()
-    {
-        GameObject newFish = Instantiate(fishPrefab);//, this.transform.position, Quaternion.identity);
-        Rigidbody fishRigidbody = newFish.GetComponent<Rigidbody>();
-        fishRigidbody.AddForce(this.transform.forward * fishSpeed, ForceMode.Impulse);
-        Destroy(newFish, 10); //10秒後に削除
+
+
+    public void OnTriggerEnter(Collider collision){
+        if(collision.gameObject.CompareTag("Rubble")){
+            bossHpSlider.value -= 10;
+            Debug.Log(bossHpSlider.value);
+
+        }else{
+            Debug.Log("何かに当たったよ");
+        }
     }
 }
