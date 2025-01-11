@@ -1,10 +1,11 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TestRubble : MonoBehaviour
 {
+    public ShieldController shieldController; // ShieldManagerにアタッチされたShieldControllerを参照
+
     public float speed = 5f; // 移動速度
     public float continueStraightDuration = 2f; // プレイヤー位置到達後に真っ直ぐ進む時間
 
@@ -26,6 +27,16 @@ public class TestRubble : MonoBehaviour
         else
         {
             Debug.LogError("Playerタグを持つオブジェクトが見つかりません！");
+        }
+
+        // ShieldControllerがインスペクターで指定されていない場合、自動検索
+        if (shieldController == null)
+        {
+            shieldController = FindObjectOfType<ShieldController>();
+            if (shieldController == null)
+            {
+                Debug.LogError("ShieldController が見つかりません！インスペクターで設定してください。");
+            }
         }
     }
 
@@ -62,7 +73,6 @@ public class TestRubble : MonoBehaviour
         // Shieldタグと衝突した場合
         if (other.CompareTag("Shield"))
         {
-            ShieldController shieldController = other.GetComponentInParent<ShieldController>();
             if (shieldController != null && shieldController.IsReflecting())
             {
                 Reflect(); // 反射処理を呼び出し
