@@ -8,6 +8,7 @@ public class TestRubble : MonoBehaviour
 
     public float speed = 5f; // 移動速度
     public float continueStraightDuration = 2f; // プレイヤー位置到達後に真っ直ぐ進む時間
+    private float initialY; // 初期のY座標を保持
 
     private Vector3 targetPosition; // 目標位置
     private bool reachedTarget = false; // 目標位置に到達したかどうか
@@ -16,12 +17,16 @@ public class TestRubble : MonoBehaviour
 
     void Start()
     {
+        // Y座標を固定
+        initialY = transform.position.y;
+
         // プレイヤーの位置を目標位置として設定
         GameObject player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
 
         if (player != null)
         {
             targetPosition = player.transform.position;
+            targetPosition.y = initialY; // プレイヤーの高さを固定
             moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
         }
         else
@@ -45,7 +50,9 @@ public class TestRubble : MonoBehaviour
         if (!reachedTarget && !isReflected)
         {
             // 目標位置に向かって進む
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            newPosition.y = initialY; // Y座標を固定
+            transform.position = newPosition;
 
             // 到達したらフラグを設定
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
@@ -57,7 +64,9 @@ public class TestRubble : MonoBehaviour
         else
         {
             // 目標到達後、または反射後に真っ直ぐ進む
-            transform.position += moveDirection * speed * Time.deltaTime;
+            Vector3 newPosition = transform.position + moveDirection * speed * Time.deltaTime;
+            newPosition.y = initialY; // Y座標を固定
+            transform.position = newPosition;
         }
     }
 
@@ -75,7 +84,9 @@ public class TestRubble : MonoBehaviour
         {
             if (shieldController != null && shieldController.IsReflecting())
             {
-                Reflect(); // 反射処理を呼び出し
+                // 衝突面を近似
+                Vector3 collisionNormal = (transform.position - other.transform.position).normalized;
+                Reflect(collisionNormal); // 近似した法線を渡して反射
                 return; // 反射時は破壊せずリターン
             }
         }
@@ -88,15 +99,23 @@ public class TestRubble : MonoBehaviour
         }
     }
 
-    private void Reflect()
+    private void Reflect(Vector3 collisionNormal)
+{
+    if (!isReflected)
     {
-        if (!isReflected)
-        {
-            isReflected = true;
+        isReflected = true;
 
-            // X軸とZ軸の方向を反転
-            moveDirection = new Vector3(-moveDirection.x, moveDirection.y, -moveDirection.z);
-            Debug.Log($"{gameObject.name} が反射しました。新しい方向: {moveDirection}");
-        }
+        // 反射方向を計算
+        moveDirection = Vector3.Reflect(moveDirection, collisionNormal).normalized;
+
+        // X軸とZ軸を反転
+        moveDirection = new Vector3(-moveDirection.x, moveDirection.y, -moveDirection.z);
+
+        // Y方向の動きを排除
+        moveDirection.y = 0;
+
+        Debug.Log($"{gameObject.name} が反射しました。新しい方向: {moveDirection}");
     }
+}
+
 }
