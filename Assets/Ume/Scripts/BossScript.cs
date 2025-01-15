@@ -19,6 +19,7 @@ public class BossScript : MonoBehaviour
         // タグが"Player"のオブジェクトを探してTransformを取得
         player = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("Attack", attackInterval, attackInterval);
+        
         bossHpSlider.value = 100;
 
     }
@@ -64,7 +65,8 @@ public class BossScript : MonoBehaviour
 
         if (currentAttack != null)
         {
-            Instantiate(currentAttack, spawnPoint.position, spawnPoint.rotation);
+            Vector3 spawnPosition = spawnPoint.position + spawnPoint.forward * 10f; // ボスの前方向に生成する
+            Instantiate(currentAttack, spawnPosition, spawnPoint.rotation);
         }
 
         // 攻撃タイプを切り替え
@@ -79,6 +81,7 @@ public class BossScript : MonoBehaviour
     public void OnTriggerEnter(Collider collision){
         if(collision.gameObject.CompareTag("Rubble")){
             bossHpSlider.value -= 10;
+            //bossHpSlider.value = Mathf.Clamp(bossHpSlider.value, 0, bossHpSlider.maxValue); // 範囲を制限
             Debug.Log(bossHpSlider.value);
 
         }else{
