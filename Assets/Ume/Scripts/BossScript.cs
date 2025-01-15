@@ -21,6 +21,7 @@ public class BossScript : MonoBehaviour
         InvokeRepeating("Attack", attackInterval, attackInterval);
         
         bossHpSlider.value = 100;
+        bossHpSlider.maxValue = 100;
 
     }
 
@@ -83,6 +84,7 @@ public class BossScript : MonoBehaviour
             bossHpSlider.value -= 10;
             //bossHpSlider.value = Mathf.Clamp(bossHpSlider.value, 0, bossHpSlider.maxValue); // 範囲を制限
             Debug.Log(bossHpSlider.value);
+            Destroy(collision.gameObject);
 
         }else{
             Debug.Log("何かに当たったよ");
