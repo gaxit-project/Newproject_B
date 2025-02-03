@@ -105,7 +105,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 10, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7231362654146192884
 MonoBehaviour:
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8653b80756562fb4d90d157fb7122880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldController: {fileID: 0}
   speed: 15
   continueStraightDuration: 2
 --- !u!54 &4394778857417261506
