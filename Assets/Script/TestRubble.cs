@@ -68,27 +68,26 @@ public class TestRubble : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-{
-    if (other.CompareTag("Shield"))
     {
-        if (shieldController != null && shieldController.IsReflecting())
+        if (other.CompareTag("Shield"))
         {
-            // 近い衝突点を取得し、そこから法線を計算
-            Vector3 collisionPoint = other.ClosestPoint(transform.position);
-            Vector3 collisionNormal = (transform.position - collisionPoint).normalized;
+            if (shieldController != null && shieldController.IsReflecting())
+            {
+                // 近い衝突点を取得し、そこから法線を計算
+                Vector3 collisionPoint = other.ClosestPoint(transform.position);
+                Vector3 collisionNormal = (transform.position - collisionPoint).normalized;
 
-            Reflect(collisionNormal);
-            return;
+                Reflect(collisionNormal);
+                return;
+            }
+        }
+
+        if (other.CompareTag("Player") || other.CompareTag("Shield"))
+        {
+            Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
+            Destroy(gameObject);
         }
     }
-
-    if (other.CompareTag("Player") || other.CompareTag("Shield"))
-    {
-        Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
-        Destroy(gameObject);
-    }
-}
-
 
     private void Reflect(Vector3 collisionNormal)
     {
