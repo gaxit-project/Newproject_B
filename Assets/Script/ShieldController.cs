@@ -7,6 +7,7 @@ public class ShieldController : MonoBehaviour
     public List<GameObject> shieldPrefabs; // 盾のプレハブリスト
     public List<int> shieldHP; // 各盾のHP
     public Transform shieldSpawnPoint; // 盾を生成する位置
+    public Transform playerTransform; // プレイヤーのTransform
     public float reflectDuration = 2f; // 反射モードの継続時間
     public float disableDuration = 2f; // 盾が非アクティブになる時間
 
@@ -46,7 +47,6 @@ public class ShieldController : MonoBehaviour
             LogInfo($"盾HPリストが多すぎたため、プレハブリストと一致するように調整しました。");
         }
 
-        // 各盾のHPをログに出力
         for (int i = 0; i < shieldHP.Count; i++)
         {
             LogInfo($"盾 {i + 1} のHP: {shieldHP[i]}");
@@ -65,29 +65,26 @@ public class ShieldController : MonoBehaviour
     {
         isReflecting = true;
 
-        // 反射モードの色変更
         ChangeShieldColor(Color.green);
         LogInfo("反射モードが開始されました。");
 
         yield return new WaitForSeconds(reflectDuration);
 
-        // 反射モード終了後、盾を一時的に無効化
         SetShieldActive(false);
         LogInfo("盾が一時的に無効化されました。");
 
         yield return new WaitForSeconds(disableDuration);
 
-        // 盾を再有効化し、色を通常モードに戻す
         SetShieldActive(true);
         ChangeShieldColor(Color.blue);
         LogInfo("盾が再有効化されました。");
 
         isReflecting = false;
     }
-    
+
     public bool IsReflecting()
     {
-        return isReflecting; // 反射モード中かどうかを返す
+        return isReflecting;
     }
 
     public void ReduceShieldHP()
@@ -113,9 +110,9 @@ public class ShieldController : MonoBehaviour
     {
         if (currentShieldIndex < shieldPrefabs.Count - 1)
         {
-            DestroyCurrentShield(); // 現在の盾を破壊
+            DestroyCurrentShield();
             currentShieldIndex++;
-            SpawnShield(); // 次の盾を生成
+            SpawnShield();
         }
         else
         {
@@ -125,11 +122,19 @@ public class ShieldController : MonoBehaviour
 
     private void SpawnShield()
     {
-        // 現在の盾を生成
-        currentShield = Instantiate(shieldPrefabs[currentShieldIndex], shieldSpawnPoint.position, Quaternion.identity, shieldSpawnPoint);
-        currentShield.name = $"Shield_{currentShieldIndex}"; // デバッグ用名前
+        if (playerTransform == null)
+        {
+            LogError("プレイヤーのTransformが設定されていません！");
+            return;
+        }
 
-        // 必要なコンポーネントの取得
+        // プレイヤーの向きを盾に適用
+        Quaternion shieldRotation = playerTransform.rotation;
+
+        // 現在の盾を生成し、プレイヤーの向きに合わせる
+        currentShield = Instantiate(shieldPrefabs[currentShieldIndex], shieldSpawnPoint.position, shieldRotation, shieldSpawnPoint);
+        currentShield.name = $"Shield_{currentShieldIndex}";
+
         shieldRenderer = currentShield.GetComponent<Renderer>();
         if (shieldRenderer == null) LogError($"Rendererが見つかりません: {currentShield.name}");
 
@@ -143,12 +148,9 @@ public class ShieldController : MonoBehaviour
             LogError($"ShieldCollisionが見つかりません: {currentShield.name}");
         }
 
-        ChangeShieldColor(Color.blue); // デフォルト色を青に設定
-
-        // 盾のHPを設定
+        ChangeShieldColor(Color.blue);
         currentShieldHP = shieldHP[currentShieldIndex];
 
-        // 現在の盾のHPを正確にログ出力
         LogInfo($"現在の盾 (Shield_{currentShieldIndex}) のHP: {currentShieldHP}");
     }
 
