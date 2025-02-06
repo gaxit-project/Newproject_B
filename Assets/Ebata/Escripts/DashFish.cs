@@ -15,6 +15,7 @@ public class DashFish : MonoBehaviour
     private Vector3 moveDirection; // 目標位置への移動方向
     private bool startMoving = false; //動き始めるかどうか
     private bool stopDefine = false; //目標位置の更新を止めるかどうか
+
     void Start()
     {
         Invoke("MoveTowardPlayer", startDashingTime);  //指定時間後動き始める
@@ -24,14 +25,25 @@ public class DashFish : MonoBehaviour
     {
         if(!startMoving)
         {
-            Invoke("DefinePlayerPosition", 0); //目標位置の更新
-        }
-        else if(!reachedTarget)
-        {
-            // 目標位置に向かって進む
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            // プレイヤーの位置を目標位置として設定
+            GameObject player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
 
+            if (player != null && !stopDefine)
+            {
+                targetPosition = player.transform.position;
+                moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+            }
+            else if(!stopDefine)
+            {
+                Debug.LogError("Playerタグを持つオブジェクトが見つかりません！");
+            }
+            }
+            else if(!reachedTarget)
+            {
+                // 目標位置に向かって進む
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
+        
         if (!reachedTarget)
         {
             // 到達したらフラグを設定
@@ -48,21 +60,6 @@ public class DashFish : MonoBehaviour
         }
     }
 
-    private void DefinePlayerPosition()
-    {
-        // プレイヤーの位置を目標位置として設定
-        GameObject player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
-
-        if (player != null && !stopDefine)
-        {
-            targetPosition = player.transform.position;
-            moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
-        }
-        else if(!stopDefine)
-        {
-            Debug.LogError("Playerタグを持つオブジェクトが見つかりません！");
-        }
-    }
     private async void MoveTowardPlayer()
     {
         stopDefine = true;
