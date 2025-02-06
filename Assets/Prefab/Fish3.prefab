@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7516394152508392341}
   - component: {fileID: 6850011887086812447}
   - component: {fileID: 1336162554708184466}
-  - component: {fileID: -312117991432004571}
+  - component: {fileID: -5099707898864695018}
   m_Layer: 0
   m_Name: Fish3
   m_TagString: Fish
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-312117991432004571
+--- !u!114 &-5099707898864695018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,4 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   continueStraightDuration: 2
-  StartDashing: 3
+  startDashingTime: 3

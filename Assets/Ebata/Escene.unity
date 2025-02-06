@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpSlider: {fileID: 441785572}
-  PlayerMovement: {fileID: 1281161359}
+  PlayerMovement: {fileID: 0}
 --- !u!114 &441785572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,17 +1216,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1281161359 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5573764412990026564, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
-  m_PrefabInstance: {fileID: 169930787}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56838486e50303f4487cf3ad18b24df4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1305638716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1305638718}
   - component: {fileID: 1305638717}
+  - component: {fileID: 1305638719}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -1273,6 +1263,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1305638719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305638716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 043e92ca7502b8948807a1f125e19bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PkeySpawn: {fileID: 131302540309070772, guid: 4a87d0c23ef5c7c4d9599fa0f3d56024, type: 3}
+  OkeySpawn: {fileID: 7214076394174812922, guid: 55de56734bdd99c47a171cf771dd7508, type: 3}
 --- !u!1001 &1365720400
 PrefabInstance:
   m_ObjectHideFlags: 0

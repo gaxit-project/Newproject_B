@@ -7,87 +7,112 @@ public class BossScript : MonoBehaviour
 {
     [SerializeField] private GameObject fishPrefab;
     [SerializeField] private GameObject rockPrefab;
+    [SerializeField] private GameObject chargePrefab; // 突進用
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private float attackInterval = 2f;
-    [SerializeField] private int attackNumber = 2; //攻撃の種類
     [SerializeField] private Slider bossHpSlider;
-    int attackType = 1; //攻撃の種類
 
-    private Transform player; //playerの位置を入れる変数
+    private Transform player;
+    private int currentAttackIndex = 0;
+    private List<int> attackPattern;
+
     void Awake()
     {
-        // タグが"Player"のオブジェクトを探してTransformを取得
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        InvokeRepeating("Attack", attackInterval, attackInterval);
-        
         bossHpSlider.value = 100;
         bossHpSlider.maxValue = 100;
 
+        UpdateAttackPattern();
+        InvokeRepeating("Attack", attackInterval, attackInterval);
     }
 
-    // Update is called once per frame
     void Update()
     {
-
         LookAtPlayer();
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            //fishShot(); //Zキー入力で弾を発射
-        }
     }
 
     private void LookAtPlayer()
     {
         if (player != null)
         {
-            // Playerの方向を向く
             transform.LookAt(player);
         }
     }
 
     void Attack()
     {
-        GameObject currentAttack;
+        if (attackPattern == null || attackPattern.Count == 0) return;
 
-        switch (attackType)
+        GameObject currentAttack = null;
+
+        switch (attackPattern[currentAttackIndex])
         {
-            case 1:
+            case 1: // さかな
                 currentAttack = fishPrefab;
                 break;
-            case 2:
+            case 2: // 岩
                 currentAttack = rockPrefab;
                 break;
-    
-            default:
-                currentAttack = null;
+            case 3: // 突進
+                StartCoroutine(ChargeAttack());
                 break;
+            case 99: // 特殊行動（盾破壊）
+                StartCoroutine(SpecialAction());
+                return; // 特殊行動は通常攻撃と別処理なのでここで終了
         }
 
         if (currentAttack != null)
         {
-            Vector3 spawnPosition = spawnPoint.position + spawnPoint.forward * 10f; // ボスの前方向に生成する
+            Vector3 spawnPosition = spawnPoint.position + spawnPoint.forward * 10f;
             Instantiate(currentAttack, spawnPosition, spawnPoint.rotation);
         }
 
-        // 攻撃タイプを切り替え
-        attackType++;
-        if (attackType > attackNumber)
+        // 次の攻撃へ
+        currentAttackIndex = (currentAttackIndex + 1) % attackPattern.Count;
+    }
+
+    IEnumerator ChargeAttack()
+    {
+        // 突進の処理（ボスがプレイヤーに突進）
+        Debug.Log("ボスが突進！");
+        yield return new WaitForSeconds(1f); // 突進アニメーション用
+    }
+
+    IEnumerator SpecialAction()
+    {
+        // 盾を壊す処理
+        Debug.Log("ボスが咆哮！ 盾破壊！");
+        yield return new WaitForSeconds(2f);
+
+        // 盾復活後の攻撃パターン更新
+        UpdateAttackPattern();
+    }
+
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Rubble"))
         {
-            attackType = 1; // 循環するようにリセット
+            bossHpSlider.value -= 10;
+            Debug.Log(bossHpSlider.value);
+            Destroy(collision.gameObject);
+            UpdateAttackPattern(); // HPが減ったら攻撃パターンを更新
         }
     }
 
+    void UpdateAttackPattern()
+    {
+        attackPattern = new List<int>();
 
-    public void OnTriggerEnter(Collider collision){
-        if(collision.gameObject.CompareTag("Rubble")){
-            bossHpSlider.value -= 10;
-            //bossHpSlider.value = Mathf.Clamp(bossHpSlider.value, 0, bossHpSlider.maxValue); // 範囲を制限
-            Debug.Log(bossHpSlider.value);
-            Destroy(collision.gameObject);
-
-        }else{
-            Debug.Log("何かに当たったよ");
+        if (bossHpSlider.value > 50) // HP 10~6
+        {
+            attackPattern.AddRange(new List<int> { 2, 1, 2, 1, 1, 3, 2 }); // 岩⇒さかな⇒岩⇒さかな⇒さかな⇒突進⇒岩
         }
+        else // HP 5~
+        {
+            attackPattern.Add(99); // 特殊行動
+            attackPattern.AddRange(new List<int> { 2, 1, 3, 3, 1, 2, 3 }); // 盾復活後のパターン
+        }
+
+        currentAttackIndex = 0; // パターンを最初から開始
     }
 }
