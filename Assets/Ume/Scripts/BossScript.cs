@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class BossScript : MonoBehaviour
     void Update()
     {
         LookAtPlayer();
+        if(bossHpSlider.value == 0)
+        {
+            SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
+        }
     }
 
     private void LookAtPlayer()

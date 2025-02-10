@@ -9,6 +9,8 @@ TagManager:
   - Rubble
   - Rock
   - Boss
+  - TargetA
+  - TargetB
   layers:
   - Default
   - TransparentFX

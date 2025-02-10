@@ -5,13 +5,14 @@ using UnityEngine;
 public class ChaseFish : MonoBehaviour
 {
     public float speed = 6f; // 移動速度
+    public float disappearTime = 7f; //さかなが自然消滅するまでの秒数
 
     private Vector3 targetPosition; // 目標位置
     private Vector3 moveDirection; // 目標位置への移動方向
 
     void Start()
     {
-        Invoke("Dissappear", 7); // 7秒後にオブジェクトを破壊
+        Invoke("Dissappear", disappearTime); // 指定秒後にオブジェクトを破壊
     }
 
     void Update()
