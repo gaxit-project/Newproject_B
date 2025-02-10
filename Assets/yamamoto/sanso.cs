@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // シーン管理のためのライブラリ
 
 public class TimeDecreasingGauge : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class TimeDecreasingGauge : MonoBehaviour
     public float decreaseRate = 5f; // 時間経過による減少速度（1秒あたりの減少量）
 
     private float currentValue; // 現在の値
-    private PlayerMovement playerHP;
 
     private void Start()
     {
@@ -30,14 +30,13 @@ public class TimeDecreasingGauge : MonoBehaviour
         if (currentValue <= 0)
         {
             OnGaugeDepleted();
-            
         }
     }
 
     // ゲージが空になったときの処理
     private void OnGaugeDepleted()
     {
-        Debug.Log("ゲージが空になりました！");
-        // 必要に応じて追加の処理を書く（ゲームオーバー、警告表示など）
+        Debug.Log("ゲージが空になりました！ ゲームオーバーシーンに遷移します。");
+        SceneManager.LoadScene("GameOverScene"); // "GameOverScene" はゲームオーバーシーンの名前
     }
 }
