@@ -5,11 +5,13 @@ using UnityEngine;
 public class ShieldController : MonoBehaviour
 {
     public List<GameObject> shieldPrefabs; // 盾のプレハブリスト
-    public List<int> shieldHP; // 各盾のHP
+    public List<int> shieldHP; // 各盾のHP（上限）
     public Transform shieldSpawnPoint; // 盾を生成する位置
     public Transform playerTransform; // プレイヤーのTransform
     public float reflectDuration = 2f; // 反射モードの継続時間
     public float disableDuration = 2f; // 盾が非アクティブになる時間
+    public float hpRecoveryInterval = 5f; // HP回復の間隔
+    public int hpRecoveryAmount = 1; // 回復するHPの量
 
     private GameObject currentShield; // 現在の盾
     private Renderer shieldRenderer;
@@ -23,6 +25,7 @@ public class ShieldController : MonoBehaviour
         {
             ValidateShieldHPList(); // HPリストの検証
             SpawnShield(); // 最初の盾を生成
+            StartCoroutine(RecoverShieldHP()); // HP回復開始
         }
         else
         {
@@ -39,12 +42,12 @@ public class ShieldController : MonoBehaviour
             {
                 shieldHP.Add(5); // 不足分をデフォルトHP(5)で補う
             }
-            LogInfo($"盾HPリストが不足していたため、デフォルト値(5)を補いました。");
+            LogInfo("盾HPリストが不足していたため、デフォルト値(5)を補いました。");
         }
         else if (shieldHP.Count > shieldPrefabs.Count)
         {
             shieldHP = shieldHP.GetRange(0, shieldPrefabs.Count); // 過剰分を削除
-            LogInfo($"盾HPリストが多すぎたため、プレハブリストと一致するように調整しました。");
+            LogInfo("盾HPリストが多すぎたため、プレハブリストと一致するように調整しました。");
         }
 
         for (int i = 0; i < shieldHP.Count; i++)
@@ -53,11 +56,41 @@ public class ShieldController : MonoBehaviour
         }
     }
 
+    private IEnumerator RecoverShieldHP()
+{
+    while (true)
+    {
+        yield return new WaitForSeconds(hpRecoveryInterval);
+
+        if (currentShieldHP < shieldHP[currentShieldIndex] || currentShieldIndex > 0)
+        {
+            currentShieldHP += hpRecoveryAmount;
+            LogInfo($"盾 {currentShieldIndex + 1} のHPが {hpRecoveryAmount} 回復しました。現在のHP: {currentShieldHP}");
+
+            if (currentShieldHP > shieldHP[currentShieldIndex])
+            {
+                int excessHP = currentShieldHP - shieldHP[currentShieldIndex];
+                currentShieldHP = shieldHP[currentShieldIndex];
+
+                if (currentShieldIndex > 0)
+                {
+                    DestroyCurrentShield(); // 現在のシールドを破棄
+                    currentShieldIndex--; // 前のシールドに切り替え
+                    SpawnShield(); // 新しいシールドを生成
+                    currentShieldHP = 1; // 戻ったシールドのHPを1に設定
+                    LogInfo($"盾 {currentShieldIndex + 1} に切り替わりました。現在の盾のHPは {currentShieldHP} です。");
+                }
+            }
+        }
+    }
+}
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isReflecting)
         {
-            StartCoroutine(ReflectCoroutine()); // 反射モードを開始
+            StartCoroutine(ReflectCoroutine());
         }
     }
 
@@ -128,10 +161,7 @@ public class ShieldController : MonoBehaviour
             return;
         }
 
-        // プレイヤーの向きを盾に適用
         Quaternion shieldRotation = playerTransform.rotation;
-
-        // 現在の盾を生成し、プレイヤーの向きに合わせる
         currentShield = Instantiate(shieldPrefabs[currentShieldIndex], shieldSpawnPoint.position, shieldRotation, shieldSpawnPoint);
         currentShield.name = $"Shield_{currentShieldIndex}";
 
@@ -155,12 +185,15 @@ public class ShieldController : MonoBehaviour
     }
 
     private void DestroyCurrentShield()
+{
+    if (currentShield != null)
     {
-        if (currentShield != null)
-        {
-            Destroy(currentShield);
-        }
+        Destroy(currentShield);
+        currentShield = null;
+        LogInfo("現在の盾を破壊しました。");
     }
+}
+
 
     private void ChangeShieldColor(Color color)
     {

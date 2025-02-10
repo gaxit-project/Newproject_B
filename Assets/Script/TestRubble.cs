@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TestRubble : MonoBehaviour
@@ -101,6 +100,19 @@ public class TestRubble : MonoBehaviour
             moveDirection.y = 0; // Y方向の動きを防ぐ
 
             Debug.Log($"{gameObject.name} が反射しました。新しい方向: {moveDirection}");
+
+            // 2秒から3秒の間でランダムな遅延時間を生成
+            float randomDelay = Random.Range(2f, 3f);
+
+            // ランダムな遅延時間後に移動を停止するコルーチンを開始
+            StartCoroutine(StopMovementAfterDelay(randomDelay));
         }
+    }
+
+    private IEnumerator StopMovementAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        moveDirection = Vector3.zero; // オブジェクトの移動を停止
+        Debug.Log($"{gameObject.name} は {delay} 秒後に移動を停止しました。");
     }
 }

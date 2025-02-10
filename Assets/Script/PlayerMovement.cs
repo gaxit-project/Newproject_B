@@ -122,11 +122,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Fishタグを持つオブジェクトに当たった場合、HPを減らす
-        if (other.CompareTag("Fish"))
+    // Fish または Rubble タグを持つオブジェクトに当たった場合、HPを減らす
+    if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
         {
-            Debug.Log("Fishに当たりました！");
+            Debug.Log(other.tag + " に当たりました！");
             TakeDamage(); // HPを減少させる
         }
     }
+
 }
