@@ -88,7 +88,7 @@ public class ShieldController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isReflecting)
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0")&& !isReflecting)
         {
             StartCoroutine(ReflectCoroutine());
         }
