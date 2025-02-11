@@ -12,17 +12,23 @@ public class BossScript : MonoBehaviour
     [SerializeField] private Transform spawnPoint; //ボスのトランスフォーム
     [SerializeField] private float attackInterval = 2f;
     [SerializeField] private Slider bossHpSlider;
+    [SerializeField] private float chargeDistance = 10f;
+    [SerializeField] private float chargeSpeed = 10f;
+    [SerializeField] private float rotationSpeed = 2f;
 
     private Transform player;
     private int currentAttackIndex = 0;
     private List<int> attackPattern;
     private bool IsSpecialATC = false;
+    private bool isCharging = false;
+    private Vector3 originalPosition;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         bossHpSlider.value = 100;
         bossHpSlider.maxValue = 100;
+        originalPosition = transform.position;
 
         UpdateAttackPattern();
         InvokeRepeating("Attack", attackInterval, attackInterval);
@@ -30,8 +36,11 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
-        LookAtPlayer();
-        if(bossHpSlider.value == 0)
+        if (!isCharging)
+        {
+            LookAtPlayer();
+        }
+        if (bossHpSlider.value == 0)
         {
             SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
         }
@@ -47,7 +56,7 @@ public class BossScript : MonoBehaviour
 
     void Attack()
     {
-        if (attackPattern == null || attackPattern.Count == 0) 
+        if (isCharging || attackPattern == null || attackPattern.Count == 0)
         {
             return;
         }
@@ -82,14 +91,58 @@ public class BossScript : MonoBehaviour
 
     IEnumerator ChargeAttack()
     {
-        // 突進の処理（ボスがプレイヤーに突進）
-        Debug.Log("ボスが突進！");
-        yield return new WaitForSeconds(1f); // 突進アニメーション用
+        isCharging = true;
+
+        // 1. プレイヤーを見るのをやめる
+        Quaternion originalRotation = transform.rotation;
+
+        // 2. 左右に30度ずつ揺らす
+        float angle = 30f;
+        float duration = 0.5f;
+        Quaternion leftRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y - angle, transform.eulerAngles.z);
+        Quaternion rightRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + angle, transform.eulerAngles.z);
+
+        yield return RotateTo(leftRotation, duration);
+        yield return RotateTo(rightRotation, duration);
+        yield return RotateTo(originalRotation, duration);
+
+        // 3. 突進する（回転なしで現在の向きのまま）
+        Vector3 chargeDirection = transform.forward;
+        Vector3 targetPosition = transform.position + chargeDirection * chargeDistance;
+        yield return MoveTo(targetPosition, chargeSpeed);
+
+        // 4. 元の位置に戻る
+        yield return MoveTo(originalPosition, chargeSpeed);
+
+        isCharging = false;
+    }
+
+    IEnumerator RotateTo(Quaternion targetRotation, float duration)
+    {
+        float time = 0f;
+        Quaternion startRotation = transform.rotation;
+        while (time < duration)
+        {
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.rotation = targetRotation;
+    }
+
+    IEnumerator MoveTo(Vector3 targetPosition, float speed)
+    {
+        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     IEnumerator SpecialAction()
     {
-        if(IsSpecialATC) {
+        if (IsSpecialATC)
+        {
             yield break;
         }
         // 盾を壊す処理
@@ -98,9 +151,8 @@ public class BossScript : MonoBehaviour
         Debug.Log(attackPattern.Count);
 
         // 盾復活後の攻撃パターン更新
-         UpdateAttackPattern();
+        UpdateAttackPattern();
         IsSpecialATC = true;
-
     }
 
     public void OnTriggerEnter(Collider collision)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2806,6 +2806,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223492162}
   m_CullTransparentMesh: 1
+--- !u!1 &1224305884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1926685280287401854, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+  m_PrefabInstance: {fileID: 1365720400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1224305891
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224305884}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.27, y: 3.1986732, z: 0.62}
+  m_Center: {x: 0, y: -0.33373624, z: -0.46593106}
 --- !u!1 &1230047262
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,6 +3289,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 575756509534114270, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1926685280287401854, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -3332,14 +3362,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6145079710935764678, guid: 47c823ccaba76ff429c1c13a6d35624d, type: 3}
     - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: chargeSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: bossHpSlider
       value: 
       objectReference: {fileID: 942665715}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: chargeDistance
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 821546501172024584, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1926685280287401854, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1224305891}
   m_SourcePrefab: {fileID: 100100000, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
 --- !u!1 &1482362440
 GameObject:
