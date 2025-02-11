@@ -10,14 +10,15 @@ public class ShieldCollision : MonoBehaviour
     {
         Debug.Log($"トリガーに入ったオブジェクト: {other.gameObject.name}");
 
-        if (other.gameObject.CompareTag("Fish"))
+        // Fish または Rubble タグのオブジェクトと接触した場合
+        if (other.gameObject.CompareTag("Fish") || other.gameObject.CompareTag("Rubble"))
         {
             shieldController?.ReduceShieldHP(); // HPを減少させる
-            Debug.Log("ShieldがFishとトリガーで接触しました");
+            Debug.Log($"Shieldが {other.gameObject.tag} とトリガーで接触しました");
         }
         else
         {
-            Debug.Log($"Fish以外のオブジェクトがトリガーに入りました: {other.gameObject.tag}");
+            Debug.Log($"対応しないオブジェクトがトリガーに入りました: {other.gameObject.tag}");
         }
     }
 }

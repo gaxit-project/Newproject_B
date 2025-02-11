@@ -2,19 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
     [SerializeField] private GameObject fishPrefab;
     [SerializeField] private GameObject rockPrefab;
     [SerializeField] private GameObject chargePrefab; // 突進用
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform spawnPoint; //ボスのトランスフォーム
     [SerializeField] private float attackInterval = 2f;
     [SerializeField] private Slider bossHpSlider;
 
     private Transform player;
     private int currentAttackIndex = 0;
     private List<int> attackPattern;
+    private bool IsSpecialATC = false;
 
     void Awake()
     {
@@ -29,6 +31,10 @@ public class BossScript : MonoBehaviour
     void Update()
     {
         LookAtPlayer();
+        if(bossHpSlider.value == 0)
+        {
+            SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
+        }
     }
 
     private void LookAtPlayer()
@@ -41,7 +47,10 @@ public class BossScript : MonoBehaviour
 
     void Attack()
     {
-        if (attackPattern == null || attackPattern.Count == 0) return;
+        if (attackPattern == null || attackPattern.Count == 0) 
+        {
+            return;
+        }
 
         GameObject currentAttack = null;
 
@@ -56,9 +65,9 @@ public class BossScript : MonoBehaviour
             case 3: // 突進
                 StartCoroutine(ChargeAttack());
                 break;
-            case 99: // 特殊行動（盾破壊）
+            case 4: // 特殊行動（盾破壊）
                 StartCoroutine(SpecialAction());
-                return; // 特殊行動は通常攻撃と別処理なのでここで終了
+                break; // 特殊行動は通常攻撃と別処理なのでここで終了
         }
 
         if (currentAttack != null)
@@ -80,12 +89,18 @@ public class BossScript : MonoBehaviour
 
     IEnumerator SpecialAction()
     {
+        if(IsSpecialATC) {
+            yield break;
+        }
         // 盾を壊す処理
         Debug.Log("ボスが咆哮！ 盾破壊！");
         yield return new WaitForSeconds(2f);
+        Debug.Log(attackPattern.Count);
 
         // 盾復活後の攻撃パターン更新
-        UpdateAttackPattern();
+         UpdateAttackPattern();
+        IsSpecialATC = true;
+
     }
 
     public void OnTriggerEnter(Collider collision)
@@ -109,7 +124,7 @@ public class BossScript : MonoBehaviour
         }
         else // HP 5~
         {
-            attackPattern.Add(99); // 特殊行動
+            attackPattern.Add(4); // 特殊行動
             attackPattern.AddRange(new List<int> { 2, 1, 3, 3, 1, 2, 3 }); // 盾復活後のパターン
         }
 

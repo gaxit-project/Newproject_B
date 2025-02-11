@@ -9,7 +9,7 @@ public class RockScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, lifeTime); // 一定時間後に消滅
+        //Destroy(gameObject, lifeTime); // 一定時間後に消滅
     }
 
     // Update is called once per frame
