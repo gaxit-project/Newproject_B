@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4102261646755271002}
   - component: {fileID: 6593013774546989534}
   - component: {fileID: 8525086429747444514}
-  - component: {fileID: 575756509534114270}
   - component: {fileID: 4332814559943197487}
   - component: {fileID: 4603963872281189948}
+  - component: {fileID: 5027518780747640518}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,29 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &575756509534114270
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926685280287401854}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4332814559943197487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +104,9 @@ MonoBehaviour:
   spawnPoint: {fileID: 4102261646755271002}
   attackInterval: 2
   bossHpSlider: {fileID: 0}
+  chargeDistance: 10
+  chargeSpeed: 10
+  rotationSpeed: 2
 --- !u!54 &4603963872281189948
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,3 +134,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &5027518780747640518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926685280287401854}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.86, y: 3.1986732, z: 0.87}
+  m_Center: {x: 0, y: 0, z: 0}
