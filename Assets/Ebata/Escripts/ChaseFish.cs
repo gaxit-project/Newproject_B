@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChaseFish : MonoBehaviour
 {
-    public float speed = 6f; // 移動速度
+    public float speed = 5f; // 移動速度
     public float disappearTime = 7f; //さかなが自然消滅するまでの秒数
 
     private Vector3 targetPosition; // 目標位置

@@ -40,7 +40,7 @@ public class BossScript : MonoBehaviour
         {
             LookAtPlayer();
         }
-        if (bossHpSlider.value == 0)
+        if (bossHpSlider.value <= 0)
         {
             SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
         }
