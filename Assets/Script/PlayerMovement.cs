@@ -19,10 +19,20 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;                      // Animator コンポーネント
     private Renderer playerRenderer;               // プレイヤーのRenderer
 
+    private ShieldController shieldController;
+
     void Start()
     {
         animator = GetComponent<Animator>(); // Animator を取得
         playerRenderer = GetComponentInChildren<Renderer>(); // Renderer を取得
+        // ShieldControllerをシーン内から取得
+        shieldController = FindObjectOfType<ShieldController>();
+
+        // シールドの反射時間と同期
+        if (shieldController != null)
+        {
+        invincibilityDuration = shieldController.reflectDuration; // 無敵時間を統一
+        }
     }
 
     void Update()
@@ -73,7 +83,8 @@ public class PlayerMovement : MonoBehaviour
         animator.Play("Dodge", 0, 0);
 
         // 回避中は一定時間停止
-        yield return new WaitForSeconds(2f); // 回避モーションの長さに応じて調整
+        float dodgeDuration = (shieldController != null) ? shieldController.reflectDuration : 2f;
+        yield return new WaitForSeconds(dodgeDuration);
 
         isDodging = false; // 回避終了
     }
