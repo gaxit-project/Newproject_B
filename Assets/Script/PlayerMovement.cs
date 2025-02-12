@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(currentVelocity * Time.deltaTime, Space.World);
 
         // 回避処理
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0"))
         {
             StartCoroutine(Dodge());
         }
