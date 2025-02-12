@@ -894,6 +894,7 @@ GameObject:
   - component: {fileID: 628770894}
   - component: {fileID: 628770893}
   - component: {fileID: 628770896}
+  - component: {fileID: 628770897}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -982,13 +983,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628770892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fbe86a58091ba241b1468dc1951953d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 913058203}
   offset: {x: 0, y: 0, z: 0}
+--- !u!114 &628770897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628770892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3779cddfb3805948bcd0003cbd9a21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target1: {fileID: 913058203}
+  target2: {fileID: 1616671916}
+  smoothSpeed: 40
+  minHeight: 30
+  maxHeight: 120
+  zoomSpeed: 40
 --- !u!1 &827643933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +1684,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.00491333}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &1616671916 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4102261646755271002, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+  m_PrefabInstance: {fileID: 1365720400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1620781666
 GameObject:
   m_ObjectHideFlags: 0
