@@ -1,43 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class LeafFish : MonoBehaviour
 {
-    public float speed = 0.01f; //移動速度
-    public float rotationTime = 10f; //方向転換するまでの間隔
-    public float dissappearTime = 30f; //自然消滅までの時間
+    public float speed = 0.01f; // 移動速度
+    public float rotationTime = 10f; // 方向転換するまでの間隔
+    public float dissappearTime = 30f; // 自然消滅までの時間
 
-    private float additionalAngle; //方向転換の際使用する
-    
-    // Start is called before the first frame update
+    private float additionalAngle; // 方向転換の際使用する
+
     void Start()
     {
-        additionalAngle = Random.Range(-180.0f, 179.9f); //ランダムで方向を決定
+        additionalAngle = Random.Range(-180.0f, 180.0f); // 初期の方向をランダム設定
         Invoke("RotateObject", rotationTime);
         Invoke("Dissappear", dissappearTime);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        var verocity = new Vector3(0f, 0f, speed); //速度の設定
-        //葉っぱのような動きをしながら移動する
-        transform.rotation = Quaternion.Euler(0f, Mathf.PingPong(Time.time * 15f, 60f) - 30f + additionalAngle, 0f);
-        transform.position += transform.rotation * verocity;
+        var velocity = new Vector3(0f, 0f, speed); // 速度の設定
+
+        // ★ 常に +90度 の回転補正を適用
+        transform.rotation = Quaternion.Euler(0f, additionalAngle + Mathf.PingPong(Time.time * 15f, 60f) - 30f, 0f)
+                           * Quaternion.Euler(0, 90, 0); // +90度回転を適用
+
+        // ★ 向いている方向に移動 (現在の回転を考慮)
+        transform.position += transform.rotation * Vector3.forward * speed;
     }
 
     private void RotateObject()
     {
-        additionalAngle += Random.Range(50, 311); //ランダムで方向を決定
-        //値が大きくなりすぎないようにする
-        if(additionalAngle >= 360)
-        {
-            additionalAngle -= 360;
-        }    
-        Invoke("RotateObject", rotationTime); //指定秒数後繰り返す
+        additionalAngle = (additionalAngle + Random.Range(50, 311)) % 360; // 方向変更（360°の範囲に収める）
+        Invoke("RotateObject", rotationTime); // 指定秒数後繰り返す
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,7 +44,8 @@ public class LeafFish : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Dissappear() //オブジェクトを破壊
+
+    private void Dissappear() // オブジェクトを破壊
     {
         Destroy(gameObject);
     }
