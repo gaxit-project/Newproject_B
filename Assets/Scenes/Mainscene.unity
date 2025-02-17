@@ -3838,11 +3838,11 @@ PrefabInstance:
     - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: fishPrefab
       value: 
-      objectReference: {fileID: 7214076394174812922, guid: 3ad5d072edc0aaf4282cf08c3d028261, type: 3}
+      objectReference: {fileID: 2206852426022253465, guid: c8ba4ca4ff5eaf34f94ef1a8c3e1edf3, type: 3}
     - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: rockPrefab
       value: 
-      objectReference: {fileID: 6145079710935764678, guid: 47c823ccaba76ff429c1c13a6d35624d, type: 3}
+      objectReference: {fileID: 1000011949594382, guid: b3124cb0e41156948b04ea8edf5574e0, type: 3}
     - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: chargeSpeed
       value: 100

@@ -20,6 +20,11 @@ public class MoveTowardsPlayer : MonoBehaviour
         {
             targetPosition = player.transform.position;
             moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+
+            transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+            // 初期向きが右（X+方向）になるため、Y軸を90度回転
+            transform.Rotate(0, 90, 0);
+
         }
         else
         {
