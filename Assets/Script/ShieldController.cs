@@ -22,6 +22,21 @@ public class ShieldController : MonoBehaviour
     private bool isBossDamageCooldown = false; // ボス攻撃無効フラグ
     private float bossDamageCooldownDuration = 3f; // 無効時間
 
+    public float bossShieldCollisionCooldown = 2f; // 2秒以内にボスがシールドと衝突していなければプレイヤーがダメージを受ける
+    private float lastBossShieldCollisionTime = -10f; // ボスが最後にシールドと衝突した時間
+
+    // **ボスとシールドの衝突時間を更新**
+    public void RegisterBossShieldCollision()
+    {
+        lastBossShieldCollisionTime = Time.time;
+    }
+
+    // **ボスの最後の衝突時間を取得**
+    public float GetLastBossShieldCollisionTime()
+    {
+        return lastBossShieldCollisionTime;
+    }
+
 
     void Start()
     {

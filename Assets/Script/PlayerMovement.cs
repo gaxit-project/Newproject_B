@@ -93,7 +93,8 @@ public class PlayerMovement : MonoBehaviour
         isDodging = false; // 回避終了
     }
 
-    public void TakeDamage()
+
+    public void TakeDamage(int damage = 1) // デフォルトダメージ1
     {
         if (isInvincible)
         {
@@ -101,8 +102,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        playerHP--;
-        Debug.Log("Player HP: " + playerHP);
+        playerHP -= damage;
+        Debug.Log($"Player HP: {playerHP}");
 
         if (playerHP <= 0)
         {
@@ -114,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(StartInvincibility()); // ダメージを受けた後に無敵状態を開始
         }
     }
+
 
     private IEnumerator StartInvincibility()
     {
@@ -133,7 +135,6 @@ public class PlayerMovement : MonoBehaviour
         playerRenderer.enabled = true; // 最後に表示を確実にオンにする
         isInvincible = false;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         // Fish または Rubble タグを持つオブジェクトに当たった場合、HPを減らす
@@ -142,6 +143,22 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log(other.tag + " に当たりました！");
             TakeDamage(); // HPを減少させる
         }
+        else if (other.CompareTag("Boss"))
+        {
+            // **ボスが最後にシールドと衝突した時間を取得**
+            if (Time.time - shieldController.GetLastBossShieldCollisionTime() > shieldController.bossShieldCollisionCooldown)
+            {
+                Debug.Log("ボスがプレイヤーに直接衝突！ HP -3 & ノックバック");
+                TakeDamage(3); // HPを3減らす
+                ApplyKnockback((transform.position - other.transform.position).normalized, 20f, 0.5f);
+            }
+            else
+            {
+                Debug.Log("ボスは最近シールドに当たったため、プレイヤーに影響なし");
+            }
+        }
+
+
     }
     public void ApplyKnockback(Vector3 direction, float distance, float duration)
     {
@@ -151,26 +168,26 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private IEnumerator KnockbackCoroutine(Vector3 direction, float distance, float duration)
+{
+    isKnockback = true; // ノックバック開始
+    float elapsedTime = 0f;
+
+    Vector3 knockbackVelocity = direction.normalized * (distance / duration); // ノックバック速度
+    knockbackVelocity.y = 0; // Y軸の移動を防ぐ
+
+    // **ノックバック中は敵の方向を向く**
+    Quaternion knockbackRotation = Quaternion.LookRotation(-direction);
+    transform.rotation = Quaternion.Lerp(transform.rotation, knockbackRotation, 10f * Time.deltaTime);
+
+    while (elapsedTime < duration)
     {
-        isKnockback = true; // ノックバック開始
-        float elapsedTime = 0f;
-
-        Vector3 knockbackVelocity = direction.normalized * (distance / duration); // ノックバック速度
-        knockbackVelocity.y = 0; // Y軸の移動を防ぐ
-
-        // **ノックバック中は敵の方向を向く**
-        Quaternion knockbackRotation = Quaternion.LookRotation(-direction);
-        transform.rotation = Quaternion.Lerp(transform.rotation, knockbackRotation, 10f * Time.deltaTime);
-
-        while (elapsedTime < duration)
-        {
-            characterController.Move(knockbackVelocity * Time.deltaTime); // **毎フレーム移動**
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        isKnockback = false; // ノックバック終了
+        characterController.Move(knockbackVelocity * Time.deltaTime); // **毎フレーム移動**
+        elapsedTime += Time.deltaTime;
+        yield return null;
     }
+
+    isKnockback = false; // ノックバック終了
+}
 
 
 

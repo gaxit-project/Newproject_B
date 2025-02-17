@@ -20,7 +20,8 @@ public class ShieldCollision : MonoBehaviour
         {
             if (!shieldController.IsReflecting()) // 反射中でない場合のみ
             {
-                Debug.Log("Boss の攻撃を受けた！");
+                Debug.Log("ボスがシールドに衝突！");
+                shieldController.RegisterBossShieldCollision(); // シールドがボスと衝突したことを記録
                 shieldController.ApplyBossDamage(); // HP -5
                 shieldController.ApplyKnockbackToPlayer(other.transform.position); // **プレイヤーをノックバック**
             }
@@ -29,7 +30,6 @@ public class ShieldCollision : MonoBehaviour
                 Debug.Log("反射モード中のため、Boss の攻撃を無効化！");
             }
         }
-
         else
         {
             Debug.Log($"対応しないオブジェクトがトリガーに入りました: {other.gameObject.tag}");
