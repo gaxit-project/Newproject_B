@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float fixedY; // 初期の Y 座標を保持
 
+    private bool isKnockback = false; // ノックバック中かどうかのフラグ
+
     void Start()
     {
         animator = GetComponent<Animator>(); // Animator を取得
@@ -42,25 +44,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (isDodging) return; // 回避中は移動を無効化
+        if (isDodging || isKnockback) return; // 回避中 or ノックバック中は移動を無効化
 
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
         Vector3 inputDirection = new Vector3(moveX, 0, moveZ).normalized;
 
-        // 移動処理（CharacterController 使用）
+        // 通常移動処理
         if (inputDirection.magnitude > 0)
         {
-            // 現在の速度を加速
             currentVelocity = Vector3.Lerp(currentVelocity, inputDirection * maxSpeed, acceleration * Time.deltaTime);
-
-            // プレイヤーを進行方向に向ける
             Quaternion targetRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
         else
         {
-            // 停止時に減速
             currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
 
@@ -73,12 +71,13 @@ public class PlayerMovement : MonoBehaviour
         // アニメーションパラメーターを更新
         animator.SetFloat("Speed", currentVelocity.magnitude);
 
-        // 回避処理
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0"))
         {
             StartCoroutine(Dodge());
         }
     }
+
+
 
     private IEnumerator Dodge()
     {
@@ -144,4 +143,36 @@ public class PlayerMovement : MonoBehaviour
             TakeDamage(); // HPを減少させる
         }
     }
+    public void ApplyKnockback(Vector3 direction, float distance, float duration)
+    {
+        if (isKnockback) return; // すでにノックバック中なら処理しない
+
+        StartCoroutine(KnockbackCoroutine(direction, distance, duration));
+    }
+
+    private IEnumerator KnockbackCoroutine(Vector3 direction, float distance, float duration)
+    {
+        isKnockback = true; // ノックバック開始
+        float elapsedTime = 0f;
+
+        Vector3 knockbackVelocity = direction.normalized * (distance / duration); // ノックバック速度
+        knockbackVelocity.y = 0; // Y軸の移動を防ぐ
+
+        // **ノックバック中は敵の方向を向く**
+        Quaternion knockbackRotation = Quaternion.LookRotation(-direction);
+        transform.rotation = Quaternion.Lerp(transform.rotation, knockbackRotation, 10f * Time.deltaTime);
+
+        while (elapsedTime < duration)
+        {
+            characterController.Move(knockbackVelocity * Time.deltaTime); // **毎フレーム移動**
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        isKnockback = false; // ノックバック終了
+    }
+
+
+
+
 }
