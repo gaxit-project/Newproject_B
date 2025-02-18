@@ -9,6 +9,11 @@ public class ESpawner : MonoBehaviour
     public GameObject LkeySpawnA; //Lキーで生成するプレハブその1
     public GameObject LkeySpawnB; //Lキーで生成するプレハブその2
     public GameObject IkeySpawn; //Iキーで生成するプレハブ
+    public GameObject KkeySpawn; //Kキーで生成するプレハブ
+    public GameObject JkeySpawnA; //Jキーで生成するプレハブその1
+    public GameObject JkeySpawnB; //Jキーで生成するプレハブその2
+
+
 
     void Update()
     {
@@ -28,9 +33,21 @@ public class ESpawner : MonoBehaviour
             SpawnPrefab(LkeySpawnA, Vector3.zero); // 生成位置を (0, 0, 0) に設定
             SpawnPrefab(LkeySpawnB, Vector3.zero); // 生成位置を (0, 0, 0) に設定
         }
+        //Iキーを押したときにプレハブを生成
         if (Input.GetKeyDown(KeyCode.I))
         {
             SpawnPrefab(IkeySpawn, Vector3.zero); // 生成位置を (0, 0, 0) に設定
+        }
+        //Kキーを押したときにプレハブを生成
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            SpawnPrefab(KkeySpawn, Vector3.zero); // 生成位置を (0, 0, 0) に設定
+        }
+        //Jキーを押したときにプレハブを生成
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            SpawnPrefab(JkeySpawnA, Vector3.zero); // 生成位置を (0, 0, 0) に設定
+            SpawnPrefab(JkeySpawnB, Vector3.zero); // 生成位置を (0, 0, 0) に設定
         }
     }
 

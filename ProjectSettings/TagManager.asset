@@ -11,6 +11,9 @@ TagManager:
   - Boss
   - TargetA
   - TargetB
+  - TargetC
+  - TargetD
+  - TargetE
   layers:
   - Default
   - TransparentFX
