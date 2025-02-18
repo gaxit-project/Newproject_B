@@ -104,6 +104,6 @@ public class test : MonoBehaviour
     public void Title()
     {
         Time.timeScale = 1.0f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("title");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Titlescene");
     }
 }
