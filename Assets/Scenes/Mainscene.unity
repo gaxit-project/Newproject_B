@@ -1731,6 +1731,7 @@ RectTransform:
   - {fileID: 827643934}
   - {fileID: 1984164164}
   - {fileID: 107001124}
+  - {fileID: 1062136920}
   m_Father: {fileID: 2133116182}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
@@ -3593,17 +3594,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062136919}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 3.2, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00006968583}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 206080328}
-  m_Father: {fileID: 2133116182}
+  m_Father: {fileID: 441785570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -692, y: -0.00390625}
+  m_AnchoredPosition: {x: -160, y: 0.00027490035}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1062136921
@@ -3674,7 +3675,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1022694339}
   m_HandleRect: {fileID: 0}
@@ -6639,7 +6640,6 @@ RectTransform:
   m_Children:
   - {fileID: 1014651151}
   - {fileID: 441785570}
-  - {fileID: 1062136920}
   - {fileID: 942665714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
