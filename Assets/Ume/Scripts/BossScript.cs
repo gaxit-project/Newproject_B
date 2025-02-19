@@ -212,6 +212,13 @@ public class BossScript : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Rubble") && isCharging)
         {
+            
+            Destroy(collision.gameObject); //岩を消す用，エフェクトを追加してそれっぽく見せるように
+
+            isCharging = false; // 突進を終了
+
+            
+        }else if(collision.gameObject.CompareTag("Wall") && isCharging){
             // 突進のMoveTo()だけを止める
             if (chargeMoveCoroutine != null)
             {
@@ -219,10 +226,11 @@ public class BossScript : MonoBehaviour
                 chargeMoveCoroutine = null;
             }
 
-            isCharging = false; // 突進を終了
+            bossHpSlider.value -= 15;
 
             // 元の位置に戻る
-            StartCoroutine(MoveTo(originalPosition, chargeSpeed));
+            StartCoroutine(MoveTo(originalPosition, chargeSpeed * 0.1f));
+            isCharging = false; // 突進を終了
         }
     }
 
