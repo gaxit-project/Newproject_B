@@ -745,6 +745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound_bgm:
   - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
+  - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
   audioSource: {fileID: 81893184}
 --- !u!4 &81893186
 Transform:
@@ -3990,6 +3991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound_se:
+  - {fileID: 8300000, guid: 1d13c237098bc0d439e78fb263cc9b3b, type: 3}
   - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
   audioSource: {fileID: 1238026846}
 --- !u!4 &1238026848
