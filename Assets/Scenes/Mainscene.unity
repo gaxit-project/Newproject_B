@@ -268,6 +268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_04
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
       propertyPath: m_LocalScale.x
       value: 4
@@ -323,7 +327,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 203564262}
   m_SourcePrefab: {fileID: 100100000, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
 --- !u!1 &44982187
 GameObject:
@@ -1033,6 +1040,32 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1281161362}
   m_SourcePrefab: {fileID: 100100000, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+--- !u!1 &203564259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
+  m_PrefabInstance: {fileID: 33060181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &203564262
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203564259}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.53, y: 1.93, z: 5.91}
+  m_Center: {x: -0.21, y: 0.06, z: 0}
 --- !u!1 &226721503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1715,32 @@ MonoBehaviour:
   hpSliderdel: {fileID: 441785572}
   PlayerMovement: {fileID: 1281161359}
   delayTime: 1.5
+--- !u!1 &483208709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 05e04fedc78047c48af519e94c595e13, type: 3}
+  m_PrefabInstance: {fileID: 1263347826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &483208712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483208709}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.17, y: 1.45, z: 2.76}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &526205864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1927,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1115653901878671827, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706766519459923211, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682567633282081905, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
+      objectReference: {fileID: 0}
     - target: {fileID: 3821554206743588132, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       propertyPath: m_Name
       value: Steage
@@ -1911,6 +1982,10 @@ PrefabInstance:
     - target: {fileID: 6850004786285816162, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6951040080983323635, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -2499,6 +2574,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &803154949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 476d7e24f53ccf641805646d05f61bde, type: 3}
+  m_PrefabInstance: {fileID: 1342500241}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &803154952
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803154949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.13, y: 4.15, z: 2.46}
+  m_Center: {x: 0, y: 0, z: 1.05}
 --- !u!1 &827643933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3309,6 +3410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_02
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 05e04fedc78047c48af519e94c595e13, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 05e04fedc78047c48af519e94c595e13, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -3364,7 +3469,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 05e04fedc78047c48af519e94c595e13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 483208712}
   m_SourcePrefab: {fileID: 100100000, guid: 05e04fedc78047c48af519e94c595e13, type: 3}
 --- !u!1001 &1266894286
 PrefabInstance:
@@ -3433,7 +3541,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1285868431}
   m_SourcePrefab: {fileID: 100100000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
 --- !u!114 &1281161359 stripped
 MonoBehaviour:
@@ -3472,6 +3583,32 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1285868428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
+  m_PrefabInstance: {fileID: 1266894286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1285868431
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285868428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4, y: 6.76, z: 2.68}
+  m_Center: {x: 0, y: 0, z: 0.3}
 --- !u!1 &1288935049
 GameObject:
   m_ObjectHideFlags: 0
@@ -3684,6 +3821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_06
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 476d7e24f53ccf641805646d05f61bde, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 476d7e24f53ccf641805646d05f61bde, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -3698,7 +3839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 476d7e24f53ccf641805646d05f61bde, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.7
+      value: 28.59
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 476d7e24f53ccf641805646d05f61bde, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3739,7 +3880,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 476d7e24f53ccf641805646d05f61bde, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 803154952}
   m_SourcePrefab: {fileID: 100100000, guid: 476d7e24f53ccf641805646d05f61bde, type: 3}
 --- !u!1001 &1365720400
 PrefabInstance:
@@ -3883,6 +4027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_05
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
+      propertyPath: m_TagString
+      value: Rubble
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -3938,7 +4086,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1667335265}
   m_SourcePrefab: {fileID: 100100000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
 --- !u!1 &1458214892
 GameObject:
@@ -4425,6 +4576,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1667335262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: d27239c9a7de0f243876d949bb27027b, type: 3}
+  m_PrefabInstance: {fileID: 1400864897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1667335265
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667335262}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3, y: 5.83, z: 3.61}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1680457526
 GameObject:
   m_ObjectHideFlags: 0
