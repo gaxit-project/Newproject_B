@@ -1367,8 +1367,8 @@ MonoBehaviour:
   minHeight: 30
   maxHeight: 120
   zoomSpeed: 40
-  stageMin: {x: 0, y: 0}
-  stageMax: {x: 100, y: 100}
+  stageMin: {x: -10, y: 40}
+  stageMax: {x: 10, y: 40}
 --- !u!114 &255311960
 MonoBehaviour:
   m_ObjectHideFlags: 0

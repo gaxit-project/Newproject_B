@@ -904,6 +904,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1238026847}
+        m_TargetAssemblyTypeName: SoundSE, Assembly-CSharp
+        m_MethodName: Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &129910571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,7 +1271,6 @@ GameObject:
   - component: {fileID: 255311961}
   - component: {fileID: 255311960}
   - component: {fileID: 255311959}
-  - component: {fileID: 255311964}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1375,18 +1386,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &255311964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255311958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e90249349f0e3814fbd4f27a541e9dbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &289204563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3296,7 +3295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound_se:
-  - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
+  - {fileID: 8300000, guid: 1d13c237098bc0d439e78fb263cc9b3b, type: 3}
   - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
   audioSource: {fileID: 1238026846}
 --- !u!4 &1238026848

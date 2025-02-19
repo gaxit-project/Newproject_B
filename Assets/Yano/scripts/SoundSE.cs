@@ -21,7 +21,7 @@ public class SoundSE : MonoBehaviour
         sound[1] = sound_se[1];
     }
 
-    public static void Hidan()
+    public static void Button()
     {
         audioSource_tmp.PlayOneShot(sound[0]);
     }
