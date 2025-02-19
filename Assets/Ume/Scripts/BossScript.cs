@@ -6,15 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
-    [SerializeField] private GameObject fishPrefab;
+    [SerializeField] private GameObject normalFishPrefab;
+    [SerializeField] private GameObject chaseFishPrefab;
+    [SerializeField] private GameObject dashFishPrefab;
+    [SerializeField] private GameObject towWayFishPrefabA;
+    [SerializeField] private GameObject towWayFishPrefabB;
+    [SerializeField] private GameObject leafFishPrefab;
+    [SerializeField] private GameObject panetratingFishPrefab;
+
+
+
+
+
+
     [SerializeField] private GameObject rockPrefab;
-    [SerializeField] private GameObject chargePrefab; // 突進用
+
     [SerializeField] private Transform spawnPoint; //ボスのトランスフォーム
     [SerializeField] private float attackInterval = 2f;
     [SerializeField] private Slider bossHpSlider;
     [SerializeField] private float chargeDistance = 10f;
     [SerializeField] private float chargeSpeed = 10f;
-    [SerializeField] private float rotationSpeed = 2f;
+    //[SerializeField] private float rotationSpeed = 2f;
 
     private Transform player;
     private int currentAttackIndex = 0;
@@ -65,16 +77,31 @@ public class BossScript : MonoBehaviour
 
         switch (attackPattern[currentAttackIndex])
         {
-            case 1: // さかな
-                currentAttack = fishPrefab;
+            case 1: // 時期狙いさかな
+                currentAttack = normalFishPrefab;
                 break;
             case 2: // 岩
                 currentAttack = rockPrefab;
                 break;
-            case 3: // 突進
+            case 3: //追跡さかな
+                currentAttack = chaseFishPrefab;
+                break;
+            case 4: //突進さかな
+                currentAttack = dashFishPrefab;
+                break;
+            case 5: //2方向時期さかな
+                currentAttack = towWayFishPrefabA;
+                break;
+            case 6: //木の葉さかな
+                currentAttack = leafFishPrefab;
+                break;
+            case 7: //盾貫通さかな
+                currentAttack = panetratingFishPrefab;
+                break;
+            case 50: // 突進
                 StartCoroutine(ChargeAttack());
                 break;
-            case 4: // 特殊行動（盾破壊）
+            case 99: // 特殊行動（盾破壊）
                 StartCoroutine(SpecialAction());
                 break; // 特殊行動は通常攻撃と別処理なのでここで終了
         }
@@ -161,8 +188,14 @@ public class BossScript : MonoBehaviour
         {
             bossHpSlider.value -= 10;
             Debug.Log(bossHpSlider.value);
-            Destroy(collision.gameObject);
-            UpdateAttackPattern(); // HPが減ったら攻撃パターンを更新
+            // Destroy(collision.gameObject);
+
+            bool lastAttack = false;
+            if (bossHpSlider.value <= 50 && lastAttack == false)
+            {
+                UpdateAttackPattern(); // HPが減ったら攻撃パターンを更新
+                lastAttack = true;
+            }
         }
     }
 
@@ -172,12 +205,13 @@ public class BossScript : MonoBehaviour
 
         if (bossHpSlider.value > 50) // HP 10~6
         {
-            attackPattern.AddRange(new List<int> { 2, 1, 2, 1, 1, 3, 2 }); // 岩⇒さかな⇒岩⇒さかな⇒さかな⇒突進⇒岩
+            attackPattern.AddRange(new List<int> { 2, 1, 2, 50, 3, 4, 2, 3, 4, 50 }); // 岩⇒ノーマルさかな(青)⇒岩⇒突進⇒追尾さかな(赤)⇒突進さかな(黄)⇒岩⇒赤さかな+青さかな⇒突進
         }
         else // HP 5~
         {
-            attackPattern.Add(4); // 特殊行動
-            attackPattern.AddRange(new List<int> { 2, 1, 3, 3, 1, 2, 3 }); // 盾復活後のパターン
+            attackPattern.Add(99); // 特殊行動
+            attackPattern.AddRange(new List<int> { 5, 2, 6, 6, 6, 50, 7, 1, 5, 2, 3, 4, 5, 50, 50, 7, 3, 4, 5 }); // 2方向突進さかな(緑)⇒岩⇒木の葉さかな(橙)*3⇒突進⇒盾貫通さかな(紫)⇒青さかな+緑さかな
+                                                                                                                  //  ⇒岩⇒赤さかな+黄さかな⇒2方向に紫さかな⇒突進⇒突進⇒2方向に紫さかな+赤さかな⇒黄さかな+緑さかな
         }
 
         currentAttackIndex = 0; // パターンを最初から開始
