@@ -31,8 +31,6 @@ public class SoundSE : MonoBehaviour
     }
 
     void Update(){
-        if(Input.GetKeyDown("n")){
-            audioSource_tmp.PlayOneShot(sound[0]);
-        }
+        
     }
 }

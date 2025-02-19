@@ -1,3 +1,4 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class testcamera : MonoBehaviour
@@ -8,6 +9,8 @@ public class testcamera : MonoBehaviour
     public float minHeight = 5f; // 最小高さ（ズームイン）
     public float maxHeight = 15f; // 最大高さ（ズームアウト）
     public float zoomSpeed = 5f; // ズーム速度
+    public Vector2 stageMin = new Vector2(0,0);
+    public Vector2 stageMax = new Vector2(100,100);
 
     void LateUpdate()
     {
@@ -27,6 +30,10 @@ public class testcamera : MonoBehaviour
         // 距離に応じたY座標の計算
         float targetHeight = Mathf.Clamp(distance, minHeight, maxHeight);
         
+        //ステージの範囲内にカメラの位置を制限
+        targetX = Mathf.Clamp(targetX,stageMin.x,stageMax.x);
+        targetZ = Mathf.Clamp(targetZ,stageMin.y,stageMax.y);
+
         // カメラの位置をスムーズに補間
         Vector3 newPosition = new Vector3(targetX, Mathf.Lerp(transform.position.y, targetHeight, Time.deltaTime * zoomSpeed), targetZ);
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * smoothSpeed);
