@@ -188,7 +188,7 @@ public class BossScript : MonoBehaviour
         {
             bossHpSlider.value -= 10;
             Debug.Log(bossHpSlider.value);
-            // Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
 
             bool lastAttack = false;
             if (bossHpSlider.value <= 50 && lastAttack == false)

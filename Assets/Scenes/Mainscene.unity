@@ -3833,6 +3833,34 @@ PrefabInstance:
       propertyPath: chargeDistance
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: dashFishPrefab
+      value: 
+      objectReference: {fileID: 4950696374092839699, guid: 87d9f086632c91a46b936da9b0c126c0, type: 3}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: leafFishPrefab
+      value: 
+      objectReference: {fileID: 4465108233878841132, guid: 9db1a4095eda49641b8e1546b0b1bae8, type: 3}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: chaseFishPrefab
+      value: 
+      objectReference: {fileID: 1948922169427064682, guid: 75bdc0b9f86157e41889431862e52d54, type: 3}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: normalFishPrefab
+      value: 
+      objectReference: {fileID: 2206852426022253465, guid: c8ba4ca4ff5eaf34f94ef1a8c3e1edf3, type: 3}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: towWayFishPrefabA
+      value: 
+      objectReference: {fileID: 5895742975438914780, guid: 8f0f7f126e5d0ea4b94be601c6f8559e, type: 3}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: towWayFishPrefabB
+      value: 
+      objectReference: {fileID: 5895742975438914780, guid: 66fdcdd25f12a654fb8a1715edec416f, type: 3}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: panetratingFishPrefab
+      value: 
+      objectReference: {fileID: 7214076394174812922, guid: b54e0a720fab909409eccdaa26a02947, type: 3}
     - target: {fileID: 5027518780747640518, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: m_IsTrigger
       value: 1
