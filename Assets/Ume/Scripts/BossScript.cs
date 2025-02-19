@@ -116,14 +116,14 @@ public class BossScript : MonoBehaviour
         currentAttackIndex = (currentAttackIndex + 1) % attackPattern.Count;
     }
 
+    private Coroutine chargeMoveCoroutine; // 突進のMoveTo用のコルーチンを管理
+
     IEnumerator ChargeAttack()
     {
         isCharging = true;
-
-        // 1. プレイヤーを見るのをやめる
         Quaternion originalRotation = transform.rotation;
+        chargeDistance = Vector3.Distance(transform.position, player.position);
 
-        // 2. 左右に30度ずつ揺らす
         float angle = 30f;
         float duration = 0.5f;
         Quaternion leftRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y - angle, transform.eulerAngles.z);
@@ -133,16 +133,17 @@ public class BossScript : MonoBehaviour
         yield return RotateTo(rightRotation, duration);
         yield return RotateTo(originalRotation, duration);
 
-        // 3. 突進する（回転なしで現在の向きのまま）
+        // 突進を開始し、コルーチンを管理
         Vector3 chargeDirection = transform.forward;
         Vector3 targetPosition = transform.position + chargeDirection * chargeDistance;
-        yield return MoveTo(targetPosition, chargeSpeed);
+        chargeMoveCoroutine = StartCoroutine(MoveTo(targetPosition, chargeSpeed));
 
-        // 4. 元の位置に戻る
-        yield return MoveTo(originalPosition, chargeSpeed);
+        yield return chargeMoveCoroutine; // 突進が終わるのを待つ
 
         isCharging = false;
     }
+
+
 
     IEnumerator RotateTo(Quaternion targetRotation, float duration)
     {
@@ -159,12 +160,24 @@ public class BossScript : MonoBehaviour
 
     IEnumerator MoveTo(Vector3 targetPosition, float speed)
     {
+        float time = 0f;
+        float maxDuration = 3f; // 3秒経過したら強制終了
+
         while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            time += Time.deltaTime;
+
+            if (time >= maxDuration)
+            {
+                break;
+            }
             yield return null;
         }
+
+        transform.position = targetPosition; // 最後に確実に目標地点へ
     }
+
 
     IEnumerator SpecialAction()
     {
@@ -184,7 +197,7 @@ public class BossScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Rubble"))
+        if (collision.gameObject.CompareTag("Rubble") && !isCharging)
         {
             bossHpSlider.value -= 10;
             Debug.Log(bossHpSlider.value);
@@ -197,7 +210,22 @@ public class BossScript : MonoBehaviour
                 lastAttack = true;
             }
         }
+        else if (collision.gameObject.CompareTag("Rubble") && isCharging)
+        {
+            // 突進のMoveTo()だけを止める
+            if (chargeMoveCoroutine != null)
+            {
+                StopCoroutine(chargeMoveCoroutine);
+                chargeMoveCoroutine = null;
+            }
+
+            isCharging = false; // 突進を終了
+
+            // 元の位置に戻る
+            StartCoroutine(MoveTo(originalPosition, chargeSpeed));
+        }
     }
+
 
     void UpdateAttackPattern()
     {
