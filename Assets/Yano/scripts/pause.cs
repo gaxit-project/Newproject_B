@@ -36,13 +36,15 @@ public class test : MonoBehaviour
 
     }
 
-    
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown("joystick button 6"))
         {
             Debug.Log("押されました");
             pause.SetActive(!pause.activeSelf);
+            
 
             if (Time.timeScale == 0.0f)
             {
@@ -50,12 +52,12 @@ public class test : MonoBehaviour
                 pause.SetActive(false);
                 soundsetting.SetActive(false);
                 backtitle.SetActive(false);
-
             }
             else
             {
                 Time.timeScale = 0.0f;
                 pausemenu.Select();
+                //sound.Select();
             }
 
         }
