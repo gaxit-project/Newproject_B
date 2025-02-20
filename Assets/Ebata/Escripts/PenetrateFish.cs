@@ -21,8 +21,16 @@ public class Penetratefish : MonoBehaviour
 
         if (target != null)
         {
-            targetPosition = target.transform.position;
-            moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+            if(TargetTag == "Player")
+            {
+                targetPosition = target.transform.position;
+                moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+            }
+            else
+            {
+                targetPosition = new Vector3(target.transform.position.x, target.transform.position.y - 5.0f, target.transform.position.z);
+                moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+            }
         }
         else
         {
@@ -61,7 +69,7 @@ public class Penetratefish : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Playerタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Rubble"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);

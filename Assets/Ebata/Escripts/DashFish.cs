@@ -83,7 +83,7 @@ public class DashFish : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // ShieldタグまたはPlayerタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Shield") || other.CompareTag("Player"))
+        if (other.CompareTag("Shield") || other.CompareTag("Player") || other.CompareTag("Rubble"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);
