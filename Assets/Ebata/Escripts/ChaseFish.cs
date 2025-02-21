@@ -13,11 +13,14 @@ public class ChaseFish : MonoBehaviour
     void Start()
     {
         Invoke("Dissappear", disappearTime); // 指定秒後にオブジェクトを破壊
+
     }
 
     void Update()
     {
         Invoke("DefinePlayerPosition", 0); // 目標位置を更新
+        transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+        transform.Rotate(0, 90, 0);
         // 目標位置に向かって進む
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
@@ -47,7 +50,7 @@ public class ChaseFish : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // ShieldタグまたはPlayerタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Shield") || other.CompareTag("Player"))
+        if (other.CompareTag("Shield") || other.CompareTag("Player") || other.CompareTag("Rubble"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);

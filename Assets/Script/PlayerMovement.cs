@@ -18,62 +18,66 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;                      // Animator コンポーネント
     private Renderer playerRenderer;               // プレイヤーのRenderer
-
+    private CharacterController characterController; // CharacterController 追加
     private ShieldController shieldController;
+
+    private float fixedY; // 初期の Y 座標を保持
+
+    private bool isKnockback = false; // ノックバック中かどうかのフラグ
 
     void Start()
     {
         animator = GetComponent<Animator>(); // Animator を取得
         playerRenderer = GetComponentInChildren<Renderer>(); // Renderer を取得
-        // ShieldControllerをシーン内から取得
+        characterController = GetComponent<CharacterController>(); // CharacterController を取得
         shieldController = FindObjectOfType<ShieldController>();
 
         // シールドの反射時間と同期
         if (shieldController != null)
         {
-        invincibilityDuration = shieldController.reflectDuration; // 無敵時間を統一
+            invincibilityDuration = shieldController.reflectDuration; // 無敵時間を統一
         }
+
+        // **初期 Y 座標を固定**
+        fixedY = transform.position.y;
     }
 
     void Update()
     {
-        // 回避中は移動を無効化
-        if (isDodging)
-        {
-            return;
-        }
+        if (isDodging || isKnockback) return; // 回避中 or ノックバック中は移動を無効化
 
-        // 入力を取得
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
         Vector3 inputDirection = new Vector3(moveX, 0, moveZ).normalized;
 
-        // 入力がある場合は加速、ない場合は減速
+        // 通常移動処理
         if (inputDirection.magnitude > 0)
         {
             currentVelocity = Vector3.Lerp(currentVelocity, inputDirection * maxSpeed, acceleration * Time.deltaTime);
-
-            // プレイヤーを進行方向に向ける
             Quaternion targetRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10f * Time.deltaTime); // 10fは回転速度
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
         else
         {
             currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
 
+        // **Y 座標を固定して移動**
+        Vector3 newPosition = transform.position + (currentVelocity * Time.deltaTime);
+        newPosition.y = fixedY; // Y座標を初期値に固定
+
+        characterController.Move(newPosition - transform.position); // 移動処理
+
         // アニメーションパラメーターを更新
         animator.SetFloat("Speed", currentVelocity.magnitude);
 
-        // プレイヤーを移動
-        transform.Translate(currentVelocity * Time.deltaTime, Space.World);
-
-        // 回避処理
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0"))
         {
             StartCoroutine(Dodge());
         }
     }
+
+
 
     private IEnumerator Dodge()
     {
@@ -89,7 +93,8 @@ public class PlayerMovement : MonoBehaviour
         isDodging = false; // 回避終了
     }
 
-    public void TakeDamage()
+
+    public void TakeDamage(int damage = 1) // デフォルトダメージ1
     {
         if (isInvincible)
         {
@@ -97,13 +102,12 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        playerHP--;
-        Debug.Log("Player HP: " + playerHP);
+        playerHP -= damage;
+        Debug.Log($"Player HP: {playerHP}");
 
         if (playerHP <= 0)
         {
             Debug.Log("Game Over");
-            // プレイヤーのゲームオーバー処理をここに記述
             SceneManager.LoadScene("Gameoverscene");
         }
         else
@@ -111,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(StartInvincibility()); // ダメージを受けた後に無敵状態を開始
         }
     }
+
 
     private IEnumerator StartInvincibility()
     {
@@ -130,15 +135,61 @@ public class PlayerMovement : MonoBehaviour
         playerRenderer.enabled = true; // 最後に表示を確実にオンにする
         isInvincible = false;
     }
-
     private void OnTriggerEnter(Collider other)
     {
-    // Fish または Rubble タグを持つオブジェクトに当たった場合、HPを減らす
-    if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
+        // Fish または Rubble タグを持つオブジェクトに当たった場合、HPを減らす
+        if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
         {
             Debug.Log(other.tag + " に当たりました！");
             TakeDamage(); // HPを減少させる
         }
+        else if (other.CompareTag("Boss"))
+        {
+            // **ボスが最後にシールドと衝突した時間を取得**
+            if (Time.time - shieldController.GetLastBossShieldCollisionTime() > shieldController.bossShieldCollisionCooldown)
+            {
+                Debug.Log("ボスがプレイヤーに直接衝突！ HP -3 & ノックバック");
+                TakeDamage(3); // HPを3減らす
+                ApplyKnockback((transform.position - other.transform.position).normalized, 20f, 0.5f);
+            }
+            else
+            {
+                Debug.Log("ボスは最近シールドに当たったため、プレイヤーに影響なし");
+            }
+        }
+
+
     }
+    public void ApplyKnockback(Vector3 direction, float distance, float duration)
+    {
+        if (isKnockback) return; // すでにノックバック中なら処理しない
+
+        StartCoroutine(KnockbackCoroutine(direction, distance, duration));
+    }
+
+    private IEnumerator KnockbackCoroutine(Vector3 direction, float distance, float duration)
+{
+    isKnockback = true; // ノックバック開始
+    float elapsedTime = 0f;
+
+    Vector3 knockbackVelocity = direction.normalized * (distance / duration); // ノックバック速度
+    knockbackVelocity.y = 0; // Y軸の移動を防ぐ
+
+    // **ノックバック中は敵の方向を向く**
+    Quaternion knockbackRotation = Quaternion.LookRotation(-direction);
+    transform.rotation = Quaternion.Lerp(transform.rotation, knockbackRotation, 10f * Time.deltaTime);
+
+    while (elapsedTime < duration)
+    {
+        characterController.Move(knockbackVelocity * Time.deltaTime); // **毎フレーム移動**
+        elapsedTime += Time.deltaTime;
+        yield return null;
+    }
+
+    isKnockback = false; // ノックバック終了
+}
+
+
+
 
 }

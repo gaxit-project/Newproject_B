@@ -81,7 +81,7 @@ public class TestRubble : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") || other.CompareTag("Shield"))
+        if (other.CompareTag("Player") || other.CompareTag("Shield") || other.CompareTag("Rubble"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);

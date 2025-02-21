@@ -20,6 +20,11 @@ public class MoveTowardsPlayer : MonoBehaviour
         {
             targetPosition = player.transform.position;
             moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+
+            transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+            // 初期向きが右（X+方向）になるため、Y軸を90度回転
+            transform.Rotate(0, 90, 0);
+
         }
         else
         {
@@ -58,7 +63,7 @@ public class MoveTowardsPlayer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // ShieldタグまたはPlayerタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Shield") || other.CompareTag("Player"))
+        if (other.CompareTag("Shield") || other.CompareTag("Player") || other.CompareTag("Rubble"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);

@@ -5,11 +5,11 @@ using UnityEngine;
 public class RockScript : MonoBehaviour
 {
     [SerializeField] private float speed = 10f; // 移動速度
-    [SerializeField] private float lifeTime = 5f; // 存在時間
+    [SerializeField] private float lifeTime = 50f; // 存在時間
     // Start is called before the first frame update
     void Start()
     {
-        //Destroy(gameObject, lifeTime); // 一定時間後に消滅
+        Destroy(gameObject, lifeTime); // 一定時間後に消滅
     }
 
     // Update is called once per frame

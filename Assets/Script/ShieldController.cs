@@ -19,6 +19,25 @@ public class ShieldController : MonoBehaviour
     private int currentShieldHP; // 現在の盾のHP
     private bool isReflecting = false; // 反射モード中かどうかのフラグ
 
+    private bool isBossDamageCooldown = false; // ボス攻撃無効フラグ
+    private float bossDamageCooldownDuration = 3f; // 無効時間
+
+    public float bossShieldCollisionCooldown = 2f; // 2秒以内にボスがシールドと衝突していなければプレイヤーがダメージを受ける
+    private float lastBossShieldCollisionTime = -10f; // ボスが最後にシールドと衝突した時間
+
+    // **ボスとシールドの衝突時間を更新**
+    public void RegisterBossShieldCollision()
+    {
+        lastBossShieldCollisionTime = Time.time;
+    }
+
+    // **ボスの最後の衝突時間を取得**
+    public float GetLastBossShieldCollisionTime()
+    {
+        return lastBossShieldCollisionTime;
+    }
+
+
     void Start()
     {
         if (shieldPrefabs.Count > 0)
@@ -220,4 +239,50 @@ public class ShieldController : MonoBehaviour
     {
         Debug.Log($"[ShieldController] {message}");
     }
+    //Bossの突進関連
+    public void ApplyBossDamage()
+    {
+        if (isBossDamageCooldown) // 無効時間中ならダメージを受けない
+        {
+            return;
+        }
+
+        currentShieldHP -= 5; // HPを5減少
+        LogInfo($"ボスの攻撃を受けた！盾 {currentShieldIndex + 1} のHPが 5 減少しました。現在のHP: {currentShieldHP}");
+
+        if (currentShieldHP <= 0)
+        {
+            LogInfo($"盾 {currentShieldIndex + 1} が破壊されました。次の盾に切り替えます。");
+            ReplaceShield();
+        }
+
+        // ボス攻撃のクールダウン開始
+        StartCoroutine(BossDamageCooldown());
+    }
+    private IEnumerator BossDamageCooldown()
+    {
+        isBossDamageCooldown = true;
+        LogInfo("ボスの攻撃が 3 秒間無効化されました！");
+        yield return new WaitForSeconds(bossDamageCooldownDuration);
+        isBossDamageCooldown = false;
+        LogInfo("ボスの攻撃が再び有効になりました！");
+    }
+
+    public void ApplyKnockbackToPlayer(Vector3 bossPosition)
+    {
+        if (playerTransform == null) return;
+
+        PlayerMovement playerMovement = playerTransform.GetComponent<PlayerMovement>();
+        if (playerMovement != null)
+        {
+            Vector3 knockbackDirection = (playerTransform.position - bossPosition).normalized; // ボスの反対方向
+            float knockbackDistance = 20f; // ノックバックの距離
+            float knockbackDuration = 2f; // ノックバックの時間
+
+            playerMovement.ApplyKnockback(knockbackDirection, knockbackDistance, knockbackDuration);
+        }
+
+        LogInfo("プレイヤーがボスの攻撃でノックバックしました！");
+    }
+
 }
