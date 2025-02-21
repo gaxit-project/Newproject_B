@@ -1091,6 +1091,60 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1281161362}
   m_SourcePrefab: {fileID: 100100000, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+--- !u!1 &179721108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 179721109}
+  - component: {fileID: 179721110}
+  m_Layer: 0
+  m_Name: FishManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &179721109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179721108}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.79853183, y: 25.2, z: -21.450874}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &179721110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179721108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30b171e123ce824288b09e0283a8b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rubble: {fileID: 1000011949594382, guid: b3124cb0e41156948b04ea8edf5574e0, type: 3}
+  NormalFish: {fileID: 2206852426022253465, guid: c8ba4ca4ff5eaf34f94ef1a8c3e1edf3, type: 3}
+  ChaseFish: {fileID: 1948922169427064682, guid: 75bdc0b9f86157e41889431862e52d54, type: 3}
+  DashFish: {fileID: 4950696374092839699, guid: 87d9f086632c91a46b936da9b0c126c0, type: 3}
+  CoDFishA: {fileID: 5895742975438914780, guid: 8f0f7f126e5d0ea4b94be601c6f8559e, type: 3}
+  CoDFishB: {fileID: 5895742975438914780, guid: 66fdcdd25f12a654fb8a1715edec416f, type: 3}
+  LeafFish: {fileID: 4465108233878841132, guid: 9db1a4095eda49641b8e1546b0b1bae8, type: 3}
+  PenetrateFish: {fileID: 7214076394174812922, guid: b54e0a720fab909409eccdaa26a02947, type: 3}
+  PenetrateFishA: {fileID: 7214076394174812922, guid: 31a0890f11611f340a654a90b8110be8, type: 3}
+  PenetrateFishB: {fileID: 7214076394174812922, guid: 35564ffcc6ba62d4bbb1a6da5d54f1b8, type: 3}
 --- !u!1 &203564259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
@@ -2532,7 +2586,7 @@ Transform:
   m_GameObject: {fileID: 671337070}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 4}
+  m_LocalPosition: {x: 1, y: 5, z: 4}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2642,7 +2696,7 @@ Transform:
   m_GameObject: {fileID: 720941840}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 4}
+  m_LocalPosition: {x: 2, y: 5, z: 4}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4453,7 +4507,7 @@ Transform:
   m_GameObject: {fileID: 1309314169}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 4}
+  m_LocalPosition: {x: -2, y: 5, z: 4}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4648,7 +4702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4102261646755271002, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4102261646755271002, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6321,7 +6375,7 @@ Transform:
   m_GameObject: {fileID: 1997693064}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 4}
+  m_LocalPosition: {x: -1, y: 5, z: 4}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6673,3 +6727,4 @@ SceneRoots:
   - {fileID: 1263347826}
   - {fileID: 1400864897}
   - {fileID: 1266894286}
+  - {fileID: 179721109}
