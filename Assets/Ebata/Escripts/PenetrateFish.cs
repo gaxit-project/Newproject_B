@@ -28,7 +28,7 @@ public class Penetratefish : MonoBehaviour
             }
             else
             {
-                targetPosition = new Vector3(target.transform.position.x, target.transform.position.y - 5.0f, target.transform.position.z);
+                targetPosition = new Vector3(target.transform.position.x, 0f, target.transform.position.z);
                 moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
             }
         }

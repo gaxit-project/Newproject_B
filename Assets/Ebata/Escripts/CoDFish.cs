@@ -31,7 +31,7 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
 
         if (tar != null)
         {
-            targetPosition = new Vector3 (tar.transform.position.x, tar.transform.position.y - 5.0f, tar.transform.position.z);
+            targetPosition = new Vector3 (tar.transform.position.x, 0f, tar.transform.position.z);
             moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
 
             // ★ ターゲットの方を向く（90度回転補正）
