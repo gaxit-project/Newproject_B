@@ -21,10 +21,12 @@ public class SoundBGM : MonoBehaviour
         sound[1] = sound_bgm[1];
     }
 
-    public static void Hidan()
+    public static void MainBGM()
     {
-        audioSource_tmp.PlayOneShot(sound[0]);
+        audioSource_tmp.clip = sound[0]; // ƒNƒŠƒbƒv‚ğİ’è
+        audioSource_tmp.Play();          // Ä¶
     }
+
     public static void Omake()
     {
         audioSource_tmp.PlayOneShot(sound[1]);

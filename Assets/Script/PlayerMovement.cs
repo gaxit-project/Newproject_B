@@ -40,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
 
         // **初期 Y 座標を固定**
         fixedY = transform.position.y;
+
+        SoundBGM.MainBGM();
+
     }
 
     void Update()
