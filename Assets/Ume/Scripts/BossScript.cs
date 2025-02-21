@@ -6,20 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
-    [SerializeField] private GameObject normalFishPrefab;
-    [SerializeField] private GameObject chaseFishPrefab;
-    [SerializeField] private GameObject dashFishPrefab;
-    [SerializeField] private GameObject towWayFishPrefabA;
-    [SerializeField] private GameObject towWayFishPrefabB;
-    [SerializeField] private GameObject leafFishPrefab;
-    [SerializeField] private GameObject panetratingFishPrefab;
-
-
-
-
-
-
-    [SerializeField] private GameObject rockPrefab;
+    [SerializeField] private FishContoller fishContoller;
 
     [SerializeField] private Transform spawnPoint; //ボスのトランスフォーム
     [SerializeField] private float attackInterval = 2f;
@@ -34,6 +21,9 @@ public class BossScript : MonoBehaviour
     private bool IsSpecialATC = false;
     private bool isCharging = false;
     private Vector3 originalPosition;
+
+    private Queue<Vector3> playerPositions = new Queue<Vector3>();
+    [SerializeField] private float lookDelay = 1f; // 1秒遅らせる
 
     void Awake()
     {
@@ -50,7 +40,8 @@ public class BossScript : MonoBehaviour
     {
         if (!isCharging)
         {
-            LookAtPlayer();
+            UpdatePlayerPosition();
+            LookAtDelayedPlayer();
         }
         if (bossHpSlider.value <= 0)
         {
@@ -58,11 +49,32 @@ public class BossScript : MonoBehaviour
         }
     }
 
-    private void LookAtPlayer()
+    private void UpdatePlayerPosition()
     {
-        if (player != null)
+        if (player == null) return;
+
+        playerPositions.Enqueue(player.position);
+
+        // 1秒分のデータを保持（フレームレート60FPSなら約60個）
+        if (playerPositions.Count > Mathf.CeilToInt(lookDelay / Time.deltaTime))
         {
-            transform.LookAt(player);
+            playerPositions.Dequeue();
+        }
+    }
+
+    private void LookAtDelayedPlayer()
+    {
+        if (playerPositions.Count > 0)
+        {
+            Vector3 delayedPosition = playerPositions.Peek(); // 1秒前の位置を取得
+
+            // 現在の向き
+            Quaternion currentRotation = transform.rotation;
+            // 目標の向き
+            Quaternion targetRotation = Quaternion.LookRotation(delayedPosition - transform.position);
+            // ゆっくり回転（数値を小さくするとさらに遅くなる）
+            float rotationSpeed = 1.5f; // 数値を小さくすると回転が遅くなる
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -78,25 +90,48 @@ public class BossScript : MonoBehaviour
         switch (attackPattern[currentAttackIndex])
         {
             case 1: // 時期狙いさかな
-                currentAttack = normalFishPrefab;
+                fishContoller.spawnNormalFish();
                 break;
             case 2: // 岩
-                currentAttack = rockPrefab;
+                fishContoller.spawnRubble();
                 break;
             case 3: //追跡さかな
-                currentAttack = chaseFishPrefab;
+                fishContoller.spawnChaseFish();
                 break;
             case 4: //突進さかな
-                currentAttack = dashFishPrefab;
+                fishContoller.spawnDashFish();
                 break;
             case 5: //2方向時期さかな
-                currentAttack = towWayFishPrefabA;
+                fishContoller.spawnCoDFish();
                 break;
             case 6: //木の葉さかな
-                currentAttack = leafFishPrefab;
+                fishContoller.spawnLeafFish();
                 break;
             case 7: //盾貫通さかな
-                currentAttack = panetratingFishPrefab;
+                fishContoller.spawnPenetrateFish();
+                break;
+            case 8: //2方向盾貫通さかな
+                fishContoller.spawnTwoWayPenetrateFish();
+                break;
+            case 9: //追跡さかな＋突進さかな
+                fishContoller.spawnChaseFish();
+                fishContoller.spawnDashFish();
+                break;
+            case 10: //時期狙いさかな＋2方向さかな
+                fishContoller.spawnNormalFish();
+                fishContoller.spawnCoDFish();
+                break;
+            case 11: //追尾さかな+突進さかな(11)
+                fishContoller.spawnChaseFish();
+                fishContoller.spawnDashFish();
+                break;
+            case 12: //2方向盾貫通さかな+追尾さかな(12)
+                fishContoller.spawnTwoWayPenetrateFish();
+                fishContoller.spawnChaseFish();
+                break;
+            case 13: //突進さかな + 2方向さかな(13)
+                fishContoller.spawnDashFish();
+                fishContoller.spawnCoDFish();
                 break;
             case 50: // 突進
                 StartCoroutine(ChargeAttack());
@@ -212,13 +247,15 @@ public class BossScript : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Rubble") && isCharging)
         {
-            
+
             Destroy(collision.gameObject); //岩を消す用，エフェクトを追加してそれっぽく見せるように
 
             isCharging = false; // 突進を終了
 
-            
-        }else if(collision.gameObject.CompareTag("Wall") && isCharging){
+
+        }
+        else if (collision.gameObject.CompareTag("Wall") && isCharging)
+        {
             // 突進のMoveTo()だけを止める
             if (chargeMoveCoroutine != null)
             {
@@ -241,13 +278,13 @@ public class BossScript : MonoBehaviour
 
         if (bossHpSlider.value > 50) // HP 10~6
         {
-            attackPattern.AddRange(new List<int> { 2, 1, 2, 50, 3, 4, 2, 3, 4, 50 }); // 岩⇒ノーマルさかな(青)⇒岩⇒突進⇒追尾さかな(赤)⇒突進さかな(黄)⇒岩⇒赤さかな+青さかな⇒突進
+            attackPattern.AddRange(new List<int> { 2, 1, 2, 50, 3, 4, 2, 9, 50 }); // 岩⇒ノーマルさかな(青)⇒岩⇒突進⇒追尾さかな(赤)⇒突進さかな(黄)⇒岩⇒追尾さかな+ノーマルさかな⇒突進
         }
         else // HP 5~
         {
             attackPattern.Add(99); // 特殊行動
-            attackPattern.AddRange(new List<int> { 5, 2, 6, 6, 6, 50, 7, 1, 5, 2, 3, 4, 5, 50, 50, 7, 3, 4, 5 }); // 2方向突進さかな(緑)⇒岩⇒木の葉さかな(橙)*3⇒突進⇒盾貫通さかな(紫)⇒青さかな+緑さかな
-                                                                                                                  //  ⇒岩⇒赤さかな+黄さかな⇒2方向に紫さかな⇒突進⇒突進⇒2方向に紫さかな+赤さかな⇒黄さかな+緑さかな
+            attackPattern.AddRange(new List<int> { 5, 2, 6, 6, 6, 50, 7, 10, 2, 11, 8, 50, 50, 12, 13 }); // 2方向突進さかな(緑)⇒岩⇒木の葉さかな(橙)*3⇒突進⇒盾貫通さかな(紫)⇒ノーマルさかな+2方向突進さかな
+                                                                                                          //  ⇒岩⇒追尾さかな+突進さかな(11)⇒2方向盾貫通さかな⇒突進⇒突進⇒2方向盾貫通さかな+追尾さかな(12)⇒突進さかな+2方向さかな(13)
         }
 
         currentAttackIndex = 0; // パターンを最初から開始
