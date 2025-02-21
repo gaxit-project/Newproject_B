@@ -117,7 +117,7 @@ public class ShieldController : MonoBehaviour
     {
         isReflecting = true;
 
-        ChangeShieldColor(Color.green);
+        ChangeShieldColor(Color.red); // 反射モードの色を赤に変更
         LogInfo("反射モードが開始されました。");
 
         yield return new WaitForSeconds(reflectDuration);
@@ -128,11 +128,12 @@ public class ShieldController : MonoBehaviour
         yield return new WaitForSeconds(disableDuration);
 
         SetShieldActive(true);
-        ChangeShieldColor(Color.blue);
+        ChangeShieldColor(Color.blue); // 通常時の色に戻す
         LogInfo("盾が再有効化されました。");
 
         isReflecting = false;
     }
+
 
     public bool IsReflecting()
     {
@@ -180,7 +181,9 @@ public class ShieldController : MonoBehaviour
             return;
         }
 
-        Quaternion shieldRotation = playerTransform.rotation;
+        // 盾の回転をプレイヤーの回転 + Y軸90度に設定
+        Quaternion shieldRotation = playerTransform.rotation * Quaternion.Euler(0, 90, 0);
+
         currentShield = Instantiate(shieldPrefabs[currentShieldIndex], shieldSpawnPoint.position, shieldRotation, shieldSpawnPoint);
         currentShield.name = $"Shield_{currentShieldIndex}";
 
@@ -203,6 +206,7 @@ public class ShieldController : MonoBehaviour
         LogInfo($"現在の盾 (Shield_{currentShieldIndex}) のHP: {currentShieldHP}");
     }
 
+
     private void DestroyCurrentShield()
 {
     if (currentShield != null)
@@ -213,14 +217,50 @@ public class ShieldController : MonoBehaviour
     }
 }
 
-
     private void ChangeShieldColor(Color color)
     {
-        if (shieldRenderer != null)
+        if (currentShield == null)
         {
-            shieldRenderer.material.color = color;
+            LogError("現在の盾が見つかりません。");
+            return;
+        }
+
+        // 子オブジェクトの Renderer を取得
+        Renderer[] childRenderers = currentShield.GetComponentsInChildren<Renderer>();
+
+        if (childRenderers.Length == 0)
+        {
+            LogError("盾の子オブジェクトに Renderer が見つかりません。");
+            return;
+        }
+
+        foreach (Renderer renderer in childRenderers)
+        {
+            if (renderer.material.HasProperty("_EmissionColor"))
+            {
+                // Emission（HDRカラー）を変更
+                renderer.material.SetColor("_EmissionColor", color * 2.0f); // 明るさ調整
+                renderer.material.EnableKeyword("_EMISSION"); // Emissionを有効化
+            }
+            else if (renderer.material.HasProperty("_BaseColor"))
+            {
+                // URP / HDRP の場合
+                renderer.material.SetColor("_BaseColor", color);
+            }
+            else if (renderer.material.HasProperty("_Color"))
+            {
+                // Standard Shader の場合
+                renderer.material.SetColor("_Color", color);
+            }
+            else
+            {
+                LogError("シェーダーに適切なカラープロパティが見つかりません。");
+            }
         }
     }
+
+
+
 
     private void SetShieldActive(bool isActive)
     {
