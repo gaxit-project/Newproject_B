@@ -101,6 +101,9 @@ public class TestRubble : MonoBehaviour
 
             Debug.Log($"{gameObject.name} が反射しました。新しい方向: {moveDirection}");
 
+            //ここに反射音SE
+            SoundSE.Reflect();
+
             // 2秒から3秒の間でランダムな遅延時間を生成
             float randomDelay = Random.Range(2f, 3f);
 

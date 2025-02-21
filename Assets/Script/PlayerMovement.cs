@@ -103,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerHP -= damage;
+        //SE
+        SoundSE.PlayerDamage();
         Debug.Log($"Player HP: {playerHP}");
 
         if (playerHP <= 0)

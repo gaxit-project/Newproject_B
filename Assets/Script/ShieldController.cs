@@ -97,6 +97,8 @@ public class ShieldController : MonoBehaviour
                     currentShieldIndex--; // 前のシールドに切り替え
                     SpawnShield(); // 新しいシールドを生成
                     currentShieldHP = 1; // 戻ったシールドのHPを1に設定
+                    //前のたてに戻るSE
+                    SoundSE.RepairShield();
                     LogInfo($"盾 {currentShieldIndex + 1} に切り替わりました。現在の盾のHPは {currentShieldHP} です。");
                 }
             }
@@ -118,17 +120,23 @@ public class ShieldController : MonoBehaviour
         isReflecting = true;
 
         ChangeShieldColor(Color.red); // 反射モードの色を赤に変更
+        //ここに構える音
+        SoundSE.StartReflection();
         LogInfo("反射モードが開始されました。");
 
         yield return new WaitForSeconds(reflectDuration);
 
         SetShieldActive(false);
+        //ここに盾消滅音
+        SoundSE.BrakeReflection();
         LogInfo("盾が一時的に無効化されました。");
 
         yield return new WaitForSeconds(disableDuration);
 
         SetShieldActive(true);
         ChangeShieldColor(Color.blue); // 通常時の色に戻す
+        //ここに戻る音
+        SoundSE.RepairReflection();
         LogInfo("盾が再有効化されました。");
 
         isReflecting = false;
@@ -149,6 +157,9 @@ public class ShieldController : MonoBehaviour
         }
 
         currentShieldHP--;
+        //被弾SE
+        SoundSE.DamageShield();
+
 
         LogInfo($"盾 {currentShieldIndex + 1} がダメージを受けました。残りHP: {currentShieldHP}");
 
@@ -156,6 +167,9 @@ public class ShieldController : MonoBehaviour
         {
             LogInfo($"盾 {currentShieldIndex + 1} が破壊されました。次の盾に切り替えます。");
             ReplaceShield();
+            //壊れる盾SE
+            SoundSE.BreakShield();
+
         }
     }
 
@@ -288,6 +302,9 @@ public class ShieldController : MonoBehaviour
         }
 
         currentShieldHP -= 5; // HPを5減少
+        //Se
+        SoundSE.ShieldBossDamage();
+
         LogInfo($"ボスの攻撃を受けた！盾 {currentShieldIndex + 1} のHPが 5 減少しました。現在のHP: {currentShieldHP}");
 
         if (currentShieldHP <= 0)

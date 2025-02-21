@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -645,7 +645,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 26a21c464392b7c409be811ee4139eb7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1039,6 +1039,18 @@ PrefabInstance:
       propertyPath: hpRecoveryInterval
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: shieldPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3759638573840156334, guid: 0569d8eab046f3a45844e81daa31e379, type: 3}
+    - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: shieldPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1744239570580250885, guid: f3884f87e3092b241a87aec7dae2888f, type: 3}
+    - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: shieldPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 47038802707938309, guid: 89583ff0363e60b4ab60639fe2de3beb, type: 3}
     - target: {fileID: 5966172021845739901, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3
@@ -4048,6 +4060,15 @@ MonoBehaviour:
   sound_se:
   - {fileID: 8300000, guid: 1d13c237098bc0d439e78fb263cc9b3b, type: 3}
   - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
+  - {fileID: 8300000, guid: ab07145188dbc434db3a326d8f45305c, type: 3}
+  - {fileID: 8300000, guid: 9437378e70cb3c2409875fb89a425375, type: 3}
+  - {fileID: 8300000, guid: 14655b92928eb764e8086a2dac132c90, type: 3}
+  - {fileID: 8300000, guid: 74eae7e9dfee0e54cb698b10de05ac8f, type: 3}
+  - {fileID: 8300000, guid: 3ac07f635922b14438d9eefbe8db4dea, type: 3}
+  - {fileID: 8300000, guid: 84a41e49e8875a64da2fc3d423fd9dd5, type: 3}
+  - {fileID: 8300000, guid: 84a41e49e8875a64da2fc3d423fd9dd5, type: 3}
+  - {fileID: 8300000, guid: f0a544c2fe8d289439e23614f56d06bf, type: 3}
+  - {fileID: 8300000, guid: 39f36214ca4313d44a56d242e30e248a, type: 3}
   audioSource: {fileID: 1238026846}
 --- !u!4 &1238026848
 Transform:
