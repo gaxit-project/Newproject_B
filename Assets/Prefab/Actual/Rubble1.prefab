@@ -388,11 +388,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 90
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2471273714587822246, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: m_LocalPosition.x
