@@ -5099,8 +5099,8 @@ MonoBehaviour:
   pause: {fileID: 1723169385}
   soundsetting: {fileID: 318782370}
   backtitle: {fileID: 1458214892}
-  sound: {fileID: 129910570}
-  pausemenu: {fileID: 12236539}
+  sound: {fileID: 12236539}
+  pausemenu: {fileID: 129910570}
   titleback: {fileID: 1688329965}
 --- !u!224 &1527068599
 RectTransform:
