@@ -23,6 +23,7 @@ public class BossScript : MonoBehaviour
     private bool isCharging = false;
     private Vector3 originalPosition;
     private bool lastAttack = false; //攻撃パターンを変更する用
+    private Vector3 chargedPosition; //突進攻撃する前のポジションを入れる
 
     private Queue<Vector3> playerPositions = new Queue<Vector3>();
     [SerializeField] private float lookDelay = 1f; // 1秒遅らせる
@@ -87,7 +88,7 @@ public class BossScript : MonoBehaviour
             return;
         }
 
-        GameObject currentAttack = null;
+        //GameObject currentAttack = null;
 
         switch (attackPattern[currentAttackIndex])
         {
@@ -143,11 +144,11 @@ public class BossScript : MonoBehaviour
                 break; // 特殊行動は通常攻撃と別処理なのでここで終了
         }
 
-        if (currentAttack != null)
+        /*if (currentAttack != null)
         {
             Vector3 spawnPosition = spawnPoint.position + spawnPoint.forward * 10f;
             Instantiate(currentAttack, spawnPosition, spawnPoint.rotation);
-        }
+        }*/
 
         // 次の攻撃へ
         currentAttackIndex = (currentAttackIndex + 1) % attackPattern.Count;
@@ -158,6 +159,7 @@ public class BossScript : MonoBehaviour
     IEnumerator ChargeAttack()
     {
         isCharging = true;
+        chargedPosition = transform.position;
         Quaternion originalRotation = transform.rotation;
         chargeDistance = Vector3.Distance(transform.position, player.position);
 
@@ -262,19 +264,18 @@ public class BossScript : MonoBehaviour
         else if (collision.gameObject.CompareTag("Wall") && isCharging)
         {
             // 突進のMoveTo()だけを止める
-            if (chargeMoveCoroutine != null)
+            /*if (chargeMoveCoroutine != null)
             {
                 StopCoroutine(chargeMoveCoroutine);
                 chargeMoveCoroutine = null;
-            }
+            }*/
 
-            bossHpSlider.value -= 15;
 
             // 元の位置に戻る
-            StartCoroutine(MoveTo(originalPosition, chargeSpeed * 0.1f));
+            //StartCoroutine(MoveTo(originalPosition, chargeSpeed * 0.1f));
             isCharging = false; // 突進を終了
         }
-        else if(collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting()){
+        else if(collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting()){ 
             // 突進のMoveTo()だけを止める
             if (chargeMoveCoroutine != null)
             {
@@ -284,8 +285,14 @@ public class BossScript : MonoBehaviour
 
             bossHpSlider.value -= 10;
 
+            // ボスが攻撃を受けているように見せる
+
+            
+            //RotateTo()
+
             // 元の位置に戻る
-            StartCoroutine(MoveTo(originalPosition, chargeSpeed *0.5f));
+            StartCoroutine(MoveTo(transform.position - transform.forward * 50f, chargeSpeed * 0.4f));
+
             isCharging = false; // 突進を終了
         }
     }
