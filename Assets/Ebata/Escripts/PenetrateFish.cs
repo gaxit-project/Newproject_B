@@ -20,22 +20,17 @@ public class Penetratefish : MonoBehaviour
         GameObject target = GameObject.FindWithTag(TargetTag); // 目標のオブジェクトをタグで検索
 
         if (target != null)
-        {
-            if(TargetTag == "Player")
-            {
-                targetPosition = target.transform.position;
-                moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
-            }
-            else
-            {
-                targetPosition = new Vector3(target.transform.position.x, 0f, target.transform.position.z);
-                moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
-            }
+        {        
+            targetPosition = new Vector3(target.transform.position.x, 9f, target.transform.position.z);
+            moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+            transform.LookAt(new Vector3(targetPosition.x, 0f, targetPosition.z));
+            transform.Rotate(-130, 0, 0);
         }
         else
         {
             Debug.LogError("TargetTagに書かれたタグを持つオブジェクトが見つかりません！");
         }
+        
     }
 
     void Update()

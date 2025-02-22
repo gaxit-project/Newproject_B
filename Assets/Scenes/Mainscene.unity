@@ -1159,8 +1159,9 @@ MonoBehaviour:
   CoDFishB: {fileID: 5895742975438914780, guid: 66fdcdd25f12a654fb8a1715edec416f, type: 3}
   LeafFish: {fileID: 4465108233878841132, guid: 9db1a4095eda49641b8e1546b0b1bae8, type: 3}
   PenetrateFish: {fileID: 7214076394174812922, guid: b54e0a720fab909409eccdaa26a02947, type: 3}
-  PenetrateFishA: {fileID: 7214076394174812922, guid: 31a0890f11611f340a654a90b8110be8, type: 3}
-  PenetrateFishB: {fileID: 7214076394174812922, guid: 35564ffcc6ba62d4bbb1a6da5d54f1b8, type: 3}
+  PenetrateFishA: {fileID: 7214076394174812922, guid: 561362f3037c3bb48a3c95d59ecf6121, type: 3}
+  PenetrateFishB: {fileID: 7214076394174812922, guid: 70d6a993f00068a4daeea5ecad93dfea, type: 3}
+  bossHP: {fileID: 942665715}
 --- !u!1 &203564259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 6013a9231cbf28447817bbf406307ad6, type: 3}
@@ -4470,6 +4471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1305638718}
   - component: {fileID: 1305638717}
+  - component: {fileID: 1305638719}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -4506,6 +4508,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1305638719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305638716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 043e92ca7502b8948807a1f125e19bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FishManager: {fileID: 179721108}
 --- !u!1 &1309314169
 GameObject:
   m_ObjectHideFlags: 0

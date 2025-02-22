@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FishContoller : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class FishContoller : MonoBehaviour
 
     private GameObject spawnPoint; //ボスがいる位置
     private Vector3 spawnPosition; //prefabをスポーンさせる場所
+    [SerializeField] private Slider bossHP; //ボスHPスライダーを入れる
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +33,10 @@ public class FishContoller : MonoBehaviour
         //ボスの位置からprefabをスポーンさせる場所を決定する
         spawnPosition = spawnPoint.transform.position + spawnPoint.transform.forward * 10f; 
 
-        //テスト用　岩をボスの位置にスポーンさせてボスの体力を減らすもの
+        //デバッグ用　直接ボスの体力を10減らす
         if(Input.GetKeyDown(KeyCode.K))
         {
-            Instantiate(Rubble, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            bossHP.value -= 10;    
         }
     }
 
@@ -69,11 +71,11 @@ public class FishContoller : MonoBehaviour
     }
     public void spawnPenetrateFish() //盾貫通さかな
     {
-        Instantiate(PenetrateFish, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(PenetrateFish, new Vector3(spawnPosition.x, 9f, spawnPosition.z), spawnPoint.transform.rotation);
     }
     public void spawnTwoWayPenetrateFish() //2方向盾貫通さかな
     {
-        Instantiate(PenetrateFishA, spawnPosition, spawnPoint.transform.rotation);
-        Instantiate(PenetrateFishB, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(PenetrateFishA, new Vector3(spawnPosition.x, 9f, spawnPosition.z), spawnPoint.transform.rotation);
+        Instantiate(PenetrateFishB, new Vector3(spawnPosition.x, 9f, spawnPosition.z), spawnPoint.transform.rotation);
     }
 }
