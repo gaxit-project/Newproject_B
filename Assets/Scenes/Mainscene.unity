@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4770,6 +4770,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1000011949594382, guid: b3124cb0e41156948b04ea8edf5574e0, type: 3}
     - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: testRubble
+      value: 
+      objectReference: {fileID: 2570149906951012078, guid: b3124cb0e41156948b04ea8edf5574e0, type: 3}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: chargeSpeed
       value: 100
       objectReference: {fileID: 0}
@@ -4802,6 +4806,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2206852426022253465, guid: c8ba4ca4ff5eaf34f94ef1a8c3e1edf3, type: 3}
     - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: shieldController
+      value: 
+      objectReference: {fileID: 1695582935}
+    - target: {fileID: 4332814559943197487, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: towWayFishPrefabA
       value: 
       objectReference: {fileID: 5895742975438914780, guid: 8f0f7f126e5d0ea4b94be601c6f8559e, type: 3}
@@ -4813,6 +4821,10 @@ PrefabInstance:
       propertyPath: panetratingFishPrefab
       value: 
       objectReference: {fileID: 7214076394174812922, guid: b54e0a720fab909409eccdaa26a02947, type: 3}
+    - target: {fileID: 5027518780747640518, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: m_Center.z
+      value: 2.23
+      objectReference: {fileID: 0}
     - target: {fileID: 5027518780747640518, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -5800,6 +5812,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690204583}
   m_CullTransparentMesh: 1
+--- !u!114 &1695582935 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+  m_PrefabInstance: {fileID: 169930787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fea507136cfeb4680c309468daeb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1723169385
 GameObject:
   m_ObjectHideFlags: 0

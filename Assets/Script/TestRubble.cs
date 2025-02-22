@@ -10,7 +10,7 @@ public class TestRubble : MonoBehaviour
     private Vector3 targetPosition; // 目標位置
     private bool reachedTarget = false; // 目標位置に到達したかどうか
     private Vector3 moveDirection; // 目標位置への移動方向
-    private bool isReflected = false; // 反射中かどうかのフラグ
+    public bool isReflected = false; // 反射中かどうかのフラグ
 
     void Start()
     {

@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
-    [SerializeField] private FishContoller fishContoller;
+    [SerializeField] private FishContoller fishContoller; // FishManagerにアタッチされたFishControllerを参照
+    [SerializeField] private ShieldController shieldController; // ShieldManagerにアタッチされたShieldControllerを参照
 
     [SerializeField] private Transform spawnPoint; //ボスのトランスフォーム
     [SerializeField] private float attackInterval = 2f;
@@ -235,16 +236,19 @@ public class BossScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Rubble") && !isCharging)
         {
-            bossHpSlider.value -= 10;
-            Debug.Log(bossHpSlider.value);
+            TestRubble rubble = collision.gameObject.GetComponent<TestRubble>();
+            if (rubble != null && rubble.isReflected)
+        {
+            bossHpSlider.value -= 5;
+            Debug.Log($"Boss HP: {bossHpSlider.value}");
             Destroy(collision.gameObject);
 
-            
-            if (bossHpSlider.value <= 50 && lastAttack == false)
+            if (bossHpSlider.value <= 50 && !lastAttack)
             {
-                UpdateAttackPattern(); // HPが減ったら攻撃パターンを更新
+                UpdateAttackPattern();
                 lastAttack = true;
             }
+        }
         }
         else if (collision.gameObject.CompareTag("Rubble") && isCharging)
         {
@@ -268,6 +272,20 @@ public class BossScript : MonoBehaviour
 
             // 元の位置に戻る
             StartCoroutine(MoveTo(originalPosition, chargeSpeed * 0.1f));
+            isCharging = false; // 突進を終了
+        }
+        else if(collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting()){
+            // 突進のMoveTo()だけを止める
+            if (chargeMoveCoroutine != null)
+            {
+                StopCoroutine(chargeMoveCoroutine);
+                chargeMoveCoroutine = null;
+            }
+
+            bossHpSlider.value -= 10;
+
+            // 元の位置に戻る
+            StartCoroutine(MoveTo(originalPosition, chargeSpeed *0.5f));
             isCharging = false; // 突進を終了
         }
     }
