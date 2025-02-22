@@ -39,6 +39,10 @@ public class BossScript : MonoBehaviour
         InvokeRepeating("Attack", attackInterval, attackInterval);
     }
 
+    public bool GetisCharging(){
+        return isCharging;
+    }
+
     void Update()
     {
         if (!isCharging)
