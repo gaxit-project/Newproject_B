@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6783,6 +6783,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3550196484966148671, guid: 61d98f2f51c1aa345ba81a0c082db3b9, type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8923963294124262320, guid: 61d98f2f51c1aa345ba81a0c082db3b9, type: 3}
       propertyPath: m_Name
       value: EFF sakana
@@ -6857,6 +6861,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2471273714587822246, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.2773075
