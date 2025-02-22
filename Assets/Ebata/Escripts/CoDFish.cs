@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)の略
 {
-    public float firstSpeed = 6f; // 最初の移動速度
+    public float firstSpeed = 8f; // 最初の移動速度
     public float secondSpeed = 24f; // 方向転換後の移動速度
     public float continueStraightDuration = 2f; // プレイヤー位置到達後に真っ直ぐ進む時間
     public float startChangingTime = 2f; // 方向転換するまでの時間
@@ -48,12 +48,21 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
 
     void Update()
     {
-        if (!startMovingTowardPlayer)
+        if (!startMovingTowardPlayer && !reachedTarget)
         {
             // 目標位置に向かって進む
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, firstSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                reachedTarget = true;
+            }
         }
-        else if (!reachedTarget)
+        else if(!startMovingTowardPlayer && reachedTarget)
+        {
+            // 到達後、真っ直ぐ進む
+            transform.position += moveDirection * firstSpeed * Time.deltaTime;
+        }
+        else if (startMovingTowardPlayer && !reachedTarget)
         {
             // 目標位置に向かって進む（方向転換後）
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, secondSpeed * Time.deltaTime);
@@ -74,6 +83,7 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
 
     private void MoveTowardPlayer()
     {
+        reachedTarget = false;
         startMovingTowardPlayer = true;
 
         player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
