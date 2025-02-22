@@ -21,6 +21,7 @@ public class BossScript : MonoBehaviour
     private bool IsSpecialATC = false;
     private bool isCharging = false;
     private Vector3 originalPosition;
+    private bool lastAttack = false; //攻撃パターンを変更する用
 
     private Queue<Vector3> playerPositions = new Queue<Vector3>();
     [SerializeField] private float lookDelay = 1f; // 1秒遅らせる
@@ -238,7 +239,7 @@ public class BossScript : MonoBehaviour
             Debug.Log(bossHpSlider.value);
             Destroy(collision.gameObject);
 
-            bool lastAttack = false;
+            
             if (bossHpSlider.value <= 50 && lastAttack == false)
             {
                 UpdateAttackPattern(); // HPが減ったら攻撃パターンを更新
