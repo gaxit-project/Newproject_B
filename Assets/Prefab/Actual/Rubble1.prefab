@@ -119,7 +119,7 @@ Transform:
   - {fileID: 4000011255812436}
   - {fileID: 4000014131611552}
   - {fileID: 4000013739457460}
-  - {fileID: 7974539812376817656}
+  - {fileID: 4121042987075504436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!205 &205000011883594630
@@ -378,7 +378,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1001 &5539704536038000478
+--- !u!1001 &1980273882426532242
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -387,24 +387,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 4000013308252972}
     m_Modifications:
     - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
-      propertyPath: ShapeModule.type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
-      propertyPath: ShapeModule.radiusThickness
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: InitialModule.maxNumParticles
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 2
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2471273714587822246, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: m_LocalPosition.x
@@ -450,21 +438,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: EFF iwa
       objectReference: {fileID: 0}
-    - target: {fileID: 6015372564124415720, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
-      propertyPath: m_MaxParticleSize
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6015372564124415720, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
-      propertyPath: m_MinParticleSize
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
---- !u!4 &7974539812376817656 stripped
+--- !u!4 &4121042987075504436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2471273714587822246, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
-  m_PrefabInstance: {fileID: 5539704536038000478}
+  m_PrefabInstance: {fileID: 1980273882426532242}
   m_PrefabAsset: {fileID: 0}
