@@ -1033,7 +1033,7 @@ PrefabInstance:
       objectReference: {fileID: 913058203}
     - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: reflectDuration
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: hpRecoveryInterval
@@ -1051,6 +1051,10 @@ PrefabInstance:
       propertyPath: shieldPrefabs.Array.data[2]
       value: 
       objectReference: {fileID: 47038802707938309, guid: 89583ff0363e60b4ab60639fe2de3beb, type: 3}
+    - target: {fileID: 5573764412990026564, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: maxSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5966172021845739901, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3
