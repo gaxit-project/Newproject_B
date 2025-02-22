@@ -392,11 +392,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 1.4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 174442384537164753, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2471273714587822246, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: m_LocalPosition.x
@@ -441,6 +449,14 @@ PrefabInstance:
     - target: {fileID: 4041070984080202892, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: m_Name
       value: EFF iwa
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015372564124415720, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
+      propertyPath: m_MaxParticleSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015372564124415720, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
+      propertyPath: m_MinParticleSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
