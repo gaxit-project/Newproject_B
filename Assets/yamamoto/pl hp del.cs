@@ -4,9 +4,13 @@ using System.Collections;
 
 public class PLHPBardel : MonoBehaviour
 {
-    public Slider hpSliderdel; // スライダーの参照
+    public Slider hpSliderdel;          // スライダーの参照
     public PlayerMovement PlayerMovement; // PlayerMovementスクリプトの参照
-    public float delayTime = 1f; // 遅延時間
+    public float delayTime = 1f;        // 補間時間
+    public float waitTime = 1f;         // ダメージ後の待機時間
+
+    private float targetHP;             // 目標のHP
+    private Coroutine updateCoroutine;  // 現在動作中の補間コルーチン
 
     private void Start()
     {
@@ -14,37 +18,40 @@ public class PLHPBardel : MonoBehaviour
         {
             hpSliderdel.maxValue = 10;
             hpSliderdel.value = PlayerMovement.playerHP;
-            StartCoroutine(UpdateHPBarWithDelay());
+            targetHP = PlayerMovement.playerHP;
         }
     }
 
     private void Update()
     {
-        if (PlayerMovement != null)
+        // HPに変化があった場合
+        if (PlayerMovement != null && targetHP != PlayerMovement.playerHP)
         {
-            // HPが変わった時に遅延して更新する
-            if (hpSliderdel.value != PlayerMovement.playerHP)
+            targetHP = PlayerMovement.playerHP;
+            // 既存の補間処理があれば停止
+            if (updateCoroutine != null)
             {
-                StartCoroutine(UpdateHPBarWithDelay());
+                StopCoroutine(updateCoroutine);
             }
+            updateCoroutine = StartCoroutine(WaitAndUpdateHP());
         }
     }
 
-    private IEnumerator UpdateHPBarWithDelay()
+    private IEnumerator WaitAndUpdateHP()
     {
-        float targetHP = PlayerMovement.playerHP; // 目標のHP
-        float currentHP = hpSliderdel.value; // 現在のHP
-        float elapsedTime = 0f; // 経過時間
+        // まずwaitTime秒待機（ダメージ後の待機）
+        yield return new WaitForSeconds(waitTime);
 
-        // 遅延時間内にスライダーを補間で動かす
+        float startHP = hpSliderdel.value;
+        float elapsedTime = 0f;
+
+        // delayTime秒かけてHPを補間する
         while (elapsedTime < delayTime)
         {
-            hpSliderdel.value = Mathf.Lerp(currentHP, targetHP, elapsedTime / delayTime);
-            elapsedTime += Time.deltaTime; // 経過時間を増加させる
-            yield return null; // 次のフレームまで待機
+            hpSliderdel.value = Mathf.Lerp(startHP, targetHP, elapsedTime / delayTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
-
-        // 最終的に目標HPに設定
         hpSliderdel.value = targetHP;
     }
 }
