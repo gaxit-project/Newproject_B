@@ -6,6 +6,7 @@ public class ShieldController : MonoBehaviour
 {
     public List<GameObject> shieldPrefabs; // 盾のプレハブリスト
     public List<int> shieldHP; // 各盾のHP（上限）
+    public List<float> shieldSpeeds; // 盾ごとのプレイヤー速度
     public Transform shieldSpawnPoint; // 盾を生成する位置
     public Transform playerTransform; // プレイヤーのTransform
     public float reflectDuration = 2f; // 反射モードの継続時間
@@ -43,6 +44,7 @@ public class ShieldController : MonoBehaviour
         if (shieldPrefabs.Count > 0)
         {
             ValidateShieldHPList(); // HPリストの検証
+            ValidateShieldSpeedList(); // 盾の速度リストを検証
             SpawnShield(); // 最初の盾を生成
             StartCoroutine(RecoverShieldHP()); // HP回復開始
         }
@@ -72,6 +74,24 @@ public class ShieldController : MonoBehaviour
         for (int i = 0; i < shieldHP.Count; i++)
         {
             LogInfo($"盾 {i + 1} のHP: {shieldHP[i]}");
+        }
+    }
+
+    private void ValidateShieldSpeedList()
+    {
+        if (shieldSpeeds.Count < shieldPrefabs.Count)
+        {
+            int difference = shieldPrefabs.Count - shieldSpeeds.Count;
+            for (int i = 0; i < difference; i++)
+            {
+                shieldSpeeds.Add(10f); // デフォルト速度（10）を追加
+            }
+            Debug.Log("盾の速度リストが不足していたため、デフォルト値(10)を補いました。");
+        }
+        else if (shieldSpeeds.Count > shieldPrefabs.Count)
+        {
+            shieldSpeeds = shieldSpeeds.GetRange(0, shieldPrefabs.Count); // 過剰分を削除
+            Debug.Log("盾の速度リストが多すぎたため、プレハブリストと一致するように調整しました。");
         }
     }
 
@@ -340,6 +360,16 @@ public class ShieldController : MonoBehaviour
         }
 
         LogInfo("プレイヤーがボスの攻撃でノックバックしました！");
+    }
+
+    public float GetCurrentShieldSpeed()
+    {
+        return shieldSpeeds[currentShieldIndex];
+    }
+
+    public int GetCurrentShieldIndex()
+    {
+        return currentShieldIndex;
     }
 
 }

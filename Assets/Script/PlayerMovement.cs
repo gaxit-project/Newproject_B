@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDodging || isKnockback) return; // 回避中 or ノックバック中は移動を無効化
 
+        UpdateSpeedBasedOnShield(); // 盾の状態に応じた速度調整
+
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
         Vector3 inputDirection = new Vector3(moveX, 0, moveZ).normalized;
@@ -192,6 +194,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     isKnockback = false; // ノックバック終了
+}
+
+        private void UpdateSpeedBasedOnShield()
+{
+    if (shieldController == null) return;
+    maxSpeed = shieldController.GetCurrentShieldSpeed(); // 現在の盾の速度を取得
 }
 
 

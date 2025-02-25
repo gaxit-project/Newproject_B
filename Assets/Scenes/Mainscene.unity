@@ -1040,6 +1040,22 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: shieldSpeeds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: shieldSpeeds.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: shieldSpeeds.Array.data[1]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
+      propertyPath: shieldSpeeds.Array.data[2]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5275330965216608695, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: shieldPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 3759638573840156334, guid: 0569d8eab046f3a45844e81daa31e379, type: 3}
