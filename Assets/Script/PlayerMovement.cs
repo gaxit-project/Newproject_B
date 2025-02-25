@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerHP <= 0)
         {
             Debug.Log("Game Over");
-            SceneManager.LoadScene("Gameoverscene");
+            SceneManager.LoadScene("Gameoverscene_HP");
         }
         else
         {

@@ -37,6 +37,6 @@ public class TimeDecreasingGauge : MonoBehaviour
     private void OnGaugeDepleted()
     {
         Debug.Log("ゲージが空になりました！ ゲームオーバーシーンに遷移します。");
-        SceneManager.LoadScene("GameOverScene"); // "GameOverScene" はゲームオーバーシーンの名前
+        SceneManager.LoadScene("GameOverScene_O2"); // "GameOverScene" はゲームオーバーシーンの名前
     }
 }

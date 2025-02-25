@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Mainscene.unity
     guid: 8fe7a686e62093d41ac60fddb4fb002a
   - enabled: 1
-    path: Assets/Scenes/Gameoverscene.unity
+    path: Assets/Scenes/Gameoverscene_HP.unity
     guid: 25b1f7e42f369d24b995437f363f20d5
+  - enabled: 1
+    path: Assets/Scenes/Gameoverscene_O2.unity
+    guid: 5e93f83195d356744afedf7b91c96236
   - enabled: 1
     path: Assets/Scenes/Clearscene.unity
     guid: 74561f54c7b91b94ba7c7f113eef6126
