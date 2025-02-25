@@ -17,7 +17,7 @@ public class ESpawner : MonoBehaviour
         // Oキーを押したときにプレハブを生成
         if (Input.GetKeyDown(KeyCode.O))
         {
-            FishManager.SendMessage("spawnLeafFish");
+            FishManager.SendMessage("spawnChaseFish");
         }
         //Lキーを押したときにプレハブを生成
         if (Input.GetKeyDown(KeyCode.L))

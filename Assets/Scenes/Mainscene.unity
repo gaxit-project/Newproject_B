@@ -4719,6 +4719,10 @@ PrefabInstance:
       value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 1926685280287401854, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926685280287401854, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: m_TagString
       value: Boss
       objectReference: {fileID: 0}
@@ -4844,6 +4848,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5027518780747640518, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525086429747444514, guid: dcb86778839aaa349bbaf5e1fe878409, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

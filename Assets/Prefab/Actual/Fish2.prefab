@@ -170,4 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  disappearTime: 7
+  chasingTime: 7
+  meshRenderer: {fileID: 8782482881019387548}
+  boxCollider: {fileID: 2778977958685016148}
+  meshCollider: {fileID: 6856514226864020430}
