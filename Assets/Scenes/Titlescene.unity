@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadd1079fe5dc9b4b94e0aeb0be0e3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadScene: Mainscene
+  _loadScene: OPscene
 --- !u!1 &1267537429
 GameObject:
   m_ObjectHideFlags: 0

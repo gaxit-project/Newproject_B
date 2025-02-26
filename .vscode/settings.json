@@ -52,5 +52,5 @@
         "Temp/": true
     },
     "dotnet.preferCSharpExtension": true,
-    "dotnet.defaultSolution": "gcp-B.sln"
+    "dotnet.defaultSolution": "Project_TeamB.sln"
 }

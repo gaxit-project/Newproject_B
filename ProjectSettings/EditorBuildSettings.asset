@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Clearscene.unity
     guid: 74561f54c7b91b94ba7c7f113eef6126
+  - enabled: 1
+    path: Assets/Yano/scene/OPscene.unity
+    guid: 5aa4c8d80deab6d4f96cfcc3c1d99fb8
   m_configObjects: {}
