@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
-    private Renderer bossRenderer;
+    private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private float blinkDuration = 0.2f; // 点滅の長さ
     [SerializeField] private int blinkCount = 3;        // 点滅の回数
 
@@ -39,7 +39,7 @@ public class BossScript : MonoBehaviour
         bossHpSlider.maxValue = 100;
         originalPosition = transform.position;
 
-        bossRenderer = GetComponent<Renderer>();
+        skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
         UpdateAttackPattern();
         InvokeRepeating("Attack", attackInterval, attackInterval);
@@ -316,9 +316,9 @@ public class BossScript : MonoBehaviour
     {
         for (int i = 0; i < blinkCount; i++)
         {
-            bossRenderer.enabled = false; // ボスを非表示にする
+            skinnedMeshRenderer.enabled = false; // SkinnedMeshRenderer を非表示
             yield return new WaitForSeconds(blinkDuration);
-            bossRenderer.enabled = true; // ボスを表示する
+            skinnedMeshRenderer.enabled = true; // SkinnedMeshRenderer を表示
             yield return new WaitForSeconds(blinkDuration);
         }
     }
