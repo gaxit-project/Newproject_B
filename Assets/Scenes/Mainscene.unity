@@ -2619,7 +2619,7 @@ RectTransform:
   m_GameObject: {fileID: 631380286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 11, z: 1}
+  m_LocalScale: {x: 20, y: 12, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2133116182}
@@ -6269,8 +6269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 1281161359}
-  thresholdHP: 50
-  warningImage: {fileID: 0}
+  thresholdHP: 5
+  warningImage: {fileID: 631380286}
+  fadeDuration: 5
 --- !u!1 &1803049335
 GameObject:
   m_ObjectHideFlags: 0
