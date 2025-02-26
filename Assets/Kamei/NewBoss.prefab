@@ -517,6 +517,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: d50522998ffa326428d32a75167a4028, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4328806949985489468}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: d50522998ffa326428d32a75167a4028, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5163101314574831133}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: d50522998ffa326428d32a75167a4028, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3758774561405942140}
   m_SourcePrefab: {fileID: 100100000, guid: d50522998ffa326428d32a75167a4028, type: 3}
 --- !u!4 &2007662431226116305 stripped
 Transform:
@@ -540,6 +546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c595d4d258e3d5f4e9562c20cbf93dcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkDuration: 0.2
+  blinkCount: 3
   fishContoller: {fileID: 0}
   shieldController: {fileID: 0}
   spawnPoint: {fileID: 0}
@@ -596,3 +604,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.86, y: 3.1986732, z: 0.87}
   m_Center: {x: 0, y: 0, z: 2.23}
+--- !u!114 &5163101314574831133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007662431226471665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e56d4e5f62cfe46b6e135caf34f197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3758774561405942140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007662431226471665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac06da7de8e8d2c4d9a8b21b65c54c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

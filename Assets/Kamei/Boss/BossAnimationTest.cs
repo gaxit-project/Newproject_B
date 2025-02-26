@@ -20,19 +20,19 @@ public class BossAnimationTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I)) // 突進のON/OFF
+        if (Input.GetKeyDown(KeyCode.I)) // 突進(Run)のON/OFF
         {
             isCharging = !isCharging;
             bossAnimation.SetChargeState(isCharging);
         }
 
-        if (Input.GetKeyDown(KeyCode.O)) // 後退のON/OFF
+        if (Input.GetKeyDown(KeyCode.O)) // 後退(HitBasic)のON/OFF
         {
             isRetreating = !isRetreating;
             bossAnimation.SetRetreatState(isRetreating);
         }
 
-        if (Input.GetKeyDown(KeyCode.P)) // 攻撃のON/OFF
+        if (Input.GetKeyDown(KeyCode.P)) // 攻撃(AttackBite)のON/OFF
         {
             isAttacking = !isAttacking;
             bossAnimation.SetAttackState(isAttacking);
