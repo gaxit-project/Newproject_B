@@ -1,34 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BossHPWarning : MonoBehaviour
+public class SliderTextColorChanger : MonoBehaviour
 {
-    public BossScript bossScript; // BossScript をアタッチ
-    public Text warningText; // 変更するテキスト
-    public float warningThreshold = 50f; // 50以下で赤くする
+    public Slider targetSlider; // 監視するスライダー
+    public Text targetText; // 色を変えるテキスト
+    public float threshold = 30f; // しきい値
 
-    private Color defaultColor; // 元のテキストの色を保存
+    private Color defaultColor;
 
-    private void Start()
+    void Start()
     {
-        if (warningText != null)
+        if (targetText != null)
         {
-            defaultColor = warningText.color; // 初期カラーを保存
+            defaultColor = targetText.color; // 初期の色を記憶
+        }
+
+        if (targetSlider != null)
+        {
+            targetSlider.onValueChanged.AddListener(UpdateTextColor);
+            UpdateTextColor(targetSlider.value); // 初期値チェック
         }
     }
 
-    private void Update()
+    void UpdateTextColor(float value)
     {
-        if (bossScript != null && warningText != null)
+        if (targetText != null)
         {
-            if (bossScript.bossHpSlider.value <= warningThreshold)
-            {
-                warningText.color = Color.red; // HP が一定以下なら赤色
-            }
-            else
-            {
-                warningText.color = defaultColor; // それ以外は元の色
-            }
+            targetText.color = value <= threshold ? Color.red : defaultColor;
         }
     }
 }
