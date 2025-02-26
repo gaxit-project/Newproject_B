@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
+    private Renderer bossRenderer;
+    [SerializeField] private float blinkDuration = 0.2f; // 点滅の長さ
+    [SerializeField] private int blinkCount = 3;        // 点滅の回数
+
     [SerializeField] private FishContoller fishContoller; // FishManagerにアタッチされたFishControllerを参照
     [SerializeField] private ShieldController shieldController; // ShieldManagerにアタッチされたShieldControllerを参照
 
@@ -35,11 +39,14 @@ public class BossScript : MonoBehaviour
         bossHpSlider.maxValue = 100;
         originalPosition = transform.position;
 
+        bossRenderer = GetComponent<Renderer>();
+
         UpdateAttackPattern();
         InvokeRepeating("Attack", attackInterval, attackInterval);
     }
 
-    public bool GetisCharging(){
+    public bool GetisCharging()
+    {
         return isCharging;
     }
 
@@ -244,17 +251,19 @@ public class BossScript : MonoBehaviour
         {
             TestRubble rubble = collision.gameObject.GetComponent<TestRubble>();
             if (rubble != null && rubble.isReflected)
-        {
-            bossHpSlider.value -= 5;
-            Debug.Log($"Boss HP: {bossHpSlider.value}");
-            Destroy(collision.gameObject);
-
-            if (bossHpSlider.value <= 50 && !lastAttack)
             {
-                UpdateAttackPattern();
-                lastAttack = true;
+                bossHpSlider.value -= 5;
+                StartCoroutine(BlinkEffect());
+
+                Debug.Log($"Boss HP: {bossHpSlider.value}");
+                Destroy(collision.gameObject);
+
+                if (bossHpSlider.value <= 50 && !lastAttack)
+                {
+                    UpdateAttackPattern();
+                    lastAttack = true;
+                }
             }
-        }
         }
         else if (collision.gameObject.CompareTag("Rubble") && isCharging)
         {
@@ -279,7 +288,8 @@ public class BossScript : MonoBehaviour
             //StartCoroutine(MoveTo(originalPosition, chargeSpeed * 0.1f));
             isCharging = false; // 突進を終了
         }
-        else if(collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting()){ 
+        else if (collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting())
+        {
             // 突進のMoveTo()だけを止める
             if (chargeMoveCoroutine != null)
             {
@@ -288,16 +298,28 @@ public class BossScript : MonoBehaviour
             }
 
             bossHpSlider.value -= 10;
+            StartCoroutine(BlinkEffect());
 
             // ボスが攻撃を受けているように見せる
 
-            
+
             //RotateTo()
 
             // 元の位置に戻る
             StartCoroutine(MoveTo(transform.position - transform.forward * 50f, chargeSpeed * 0.4f));
 
             isCharging = false; // 突進を終了
+        }
+    }
+
+    IEnumerator BlinkEffect()
+    {
+        for (int i = 0; i < blinkCount; i++)
+        {
+            bossRenderer.enabled = false; // ボスを非表示にする
+            yield return new WaitForSeconds(blinkDuration);
+            bossRenderer.enabled = true; // ボスを表示する
+            yield return new WaitForSeconds(blinkDuration);
         }
     }
 
