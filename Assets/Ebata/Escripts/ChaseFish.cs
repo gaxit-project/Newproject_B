@@ -6,7 +6,6 @@ public class ChaseFish : MonoBehaviour
 {
     public float speed = 5f; // 移動速度
     public float chasingTime = 7f; //プレイヤーを追跡する秒数
-    public float disappearTime = 5f; //攻撃または追跡終了後消滅するまでの時間
 
     private Vector3 targetPosition; // 目標位置
     private Vector3 moveDirection; // 目標位置への移動方向
@@ -64,7 +63,6 @@ public class ChaseFish : MonoBehaviour
             isChasing = false;
             gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
             Invoke("Blink", 0);
-            Invoke("Disappear", disappearTime);
         }
     }
     private void Blink() //点滅させる
@@ -79,15 +77,11 @@ public class ChaseFish : MonoBehaviour
         }
         Invoke("Blink", 0.1f);
     }
-    private void Disappear() //オブジェクトを破壊
-    {
-        Destroy(gameObject);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Rubbleタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Rubble"))
+        // RubbleタグまたはWallタグと衝突した場合にオブジェクトを破壊
+        if (other.CompareTag("Rubble") || other.CompareTag("Wall"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);
@@ -99,8 +93,6 @@ public class ChaseFish : MonoBehaviour
             isAttacking = true;
             gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
             Invoke("Blink", 0);
-            Invoke("Disappear", disappearTime);
-
         }
     }
 }

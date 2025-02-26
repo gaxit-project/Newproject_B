@@ -9,7 +9,6 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
     public float continueStraightDuration = 2f; // プレイヤー位置到達後に真っ直ぐ進む時間
     public float startChangingTime = 2f; // 方向転換するまでの時間
     public bool changePosition = false; // falseならTargetAに、trueならTargetBに向かう
-    public float disappearTime = 5f; //攻撃後消滅するまでの時間
 
     [SerializeField] private MeshRenderer meshRenderer; //点滅させる用
     private bool isAttacking = false; //攻撃した(=ShieldまたはPlayerに触れた)かどうか
@@ -115,8 +114,8 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
 
     private void OnTriggerEnter(Collider other)
     {
-        // Rubbleタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Rubble"))
+        // RubbleタグまたはWallタグと衝突した場合にオブジェクトを破壊
+        if (other.CompareTag("Rubble") || other.CompareTag("Wall"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);
@@ -128,8 +127,6 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
             isAttacking = true;
             gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
             Invoke("Blink", 0);
-            Invoke("Disappear", disappearTime);
-
         }
     }
     private void Blink() //点滅させる
@@ -144,12 +141,7 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
         }
         Invoke("Blink", 0.1f);
     }
-    private void Disappear() //オブジェクトを破壊
-    {
-        Destroy(gameObject);
-    }
     
-
     // ★ 新しく追加したメソッド: 移動方向を向く処理
     private void LookAtDirection(Vector3 target)
     {

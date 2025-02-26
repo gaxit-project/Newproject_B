@@ -8,7 +8,6 @@ public class DashFish : MonoBehaviour
     public float speed = 30f; // 移動速度
     public float continueStraightDuration = 2f; // プレイヤー位置到達後に真っ直ぐ進む時間
     public float startDashingTime = 3f; // 進み始めるまでの時間
-    public float disappearTime = 5f; //攻撃後消滅するまでの時間
 
     [SerializeField] private MeshRenderer meshRenderer; //点滅させる用
     private bool isAttacking = false; //攻撃した(=ShieldまたはPlayerに触れた)かどうか
@@ -85,8 +84,8 @@ public class DashFish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Rubbleタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Rubble"))
+        // RubbleタグまたはWallタグと衝突した場合にオブジェクトを破壊
+        if (other.CompareTag("Rubble") || other.CompareTag("Wall"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);
@@ -98,8 +97,6 @@ public class DashFish : MonoBehaviour
             isAttacking = true;
             gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
             Invoke("Blink", 0);
-            Invoke("Disappear", disappearTime);
-
         }
     }
     private void Blink() //点滅させる
@@ -113,9 +110,5 @@ public class DashFish : MonoBehaviour
             meshRenderer.enabled = true;
         }
         Invoke("Blink", 0.1f);
-    }
-    private void Disappear() //オブジェクトを破壊
-    {
-        Destroy(gameObject);
     }
 }

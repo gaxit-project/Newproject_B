@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000013739457460}
   - component: {fileID: 33000011005273530}
   - component: {fileID: 23000012150228588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rock_03_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2570149906951012078}
   - component: {fileID: 6726422873532128048}
   - component: {fileID: 5302637193728948075}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rubble1
   m_TagString: Rubble
   m_Icon: {fileID: 0}
@@ -164,6 +164,7 @@ MonoBehaviour:
   shieldController: {fileID: 0}
   speed: 15
   continueStraightDuration: 2
+  isReflected: 0
 --- !u!54 &6726422873532128048
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -223,7 +224,7 @@ GameObject:
   - component: {fileID: 4000014131611552}
   - component: {fileID: 33000010916069652}
   - component: {fileID: 23000014287857050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rock_03_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +307,7 @@ GameObject:
   - component: {fileID: 4000011255812436}
   - component: {fileID: 33000010629808600}
   - component: {fileID: 23000012513637330}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rock_03_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,6 +438,10 @@ PrefabInstance:
     - target: {fileID: 4041070984080202892, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
       propertyPath: m_Name
       value: EFF iwa
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041070984080202892, guid: 0137c10c35a2ac3428877a0bc46bed49, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
