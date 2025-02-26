@@ -174,3 +174,5 @@ MonoBehaviour:
   continueStraightDuration: 2
   startChangingTime: 3
   changePosition: 0
+  disappearTime: 5
+  meshRenderer: {fileID: 2210625729639798250}

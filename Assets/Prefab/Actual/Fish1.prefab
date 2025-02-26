@@ -123,6 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   continueStraightDuration: 2
+  disappearTime: 5
+  meshRenderer: {fileID: 405514074507203148}
 --- !u!54 &5669005547825016802
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,10 +6,12 @@ public class ChaseFish : MonoBehaviour
 {
     public float speed = 5f; // 移動速度
     public float chasingTime = 7f; //プレイヤーを追跡する秒数
+    public float disappearTime = 5f; //攻撃または追跡終了後消滅するまでの時間
 
     private Vector3 targetPosition; // 目標位置
     private Vector3 moveDirection; // 目標位置への移動方向
     private bool isChasing = true; //追跡をするかどうか
+    private bool isAttacking = false; //攻撃した(=ShieldまたはPlayerに触れた)かどうか
     [SerializeField] private MeshRenderer meshRenderer; //点滅させる用
 
     void Start()
@@ -20,7 +22,7 @@ public class ChaseFish : MonoBehaviour
 
     void Update()
     {
-        if(isChasing)
+        if(isChasing && !isAttacking)
         {
             Invoke("DefinePlayerPosition", 0); // 目標位置を更新
             transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
@@ -28,10 +30,14 @@ public class ChaseFish : MonoBehaviour
             // 目標位置に向かって進む
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
-        else
+        else if(!isChasing)
         {
             //まっすぐ進む
-            transform.position += moveDirection * 0.5f * Time.deltaTime;
+            transform.position += moveDirection * speed * 0.2f * Time.deltaTime;
+        }
+        else
+        {
+            transform.position += moveDirection * speed * Time.deltaTime;
         }
     }
 
@@ -53,10 +59,13 @@ public class ChaseFish : MonoBehaviour
 
     private void StartBlinking() //オブジェクトの当たり判定を消す
     {
-        isChasing = false;
-        gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
-        Invoke("Blink", 0);
-        Invoke("Disappear", 5f);
+        if(!isAttacking)
+        {
+            isChasing = false;
+            gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
+            Invoke("Blink", 0);
+            Invoke("Disappear", disappearTime);
+        }
     }
     private void Blink() //点滅させる
     {
@@ -77,11 +86,21 @@ public class ChaseFish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // ShieldタグまたはPlayerタグまたはRubbleタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Shield") || other.CompareTag("Player") || other.CompareTag("Rubble"))
+        // Rubbleタグと衝突した場合にオブジェクトを破壊
+        if (other.CompareTag("Rubble"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);
+        }
+        // ShieldタグまたはPlayerタグと衝突した場合にオブジェクトを点滅
+         else if((other.CompareTag("Player") || other.CompareTag("Shield")) && !isAttacking)
+        {
+            Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突しました。");
+            isAttacking = true;
+            gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
+            Invoke("Blink", 0);
+            Invoke("Disappear", disappearTime);
+
         }
     }
 }

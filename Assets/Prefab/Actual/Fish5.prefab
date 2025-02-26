@@ -86,6 +86,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7333054886168770894}
   m_SourcePrefab: {fileID: 100100000, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
+--- !u!23 &2807919841974585081 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
+  m_PrefabInstance: {fileID: 3546067497734642301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4465108233878841132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ea93ead513f04c9478f78e3f40ba5b11, type: 3}
@@ -153,4 +158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.01
   rotationTime: 10
-  dissappearTime: 30
+  naturalDisappearTime: 30
+  disappearTime: 5
+  meshRenderer: {fileID: 2807919841974585081}

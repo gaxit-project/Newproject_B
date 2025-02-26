@@ -150,6 +150,8 @@ MonoBehaviour:
   speed: 15
   continueStraightDuration: 4
   TargetTag: Player
+  disappearTime: 5
+  meshRenderer: {fileID: 7516394152508392341}
 --- !u!1001 &2708072253766791044
 PrefabInstance:
   m_ObjectHideFlags: 0

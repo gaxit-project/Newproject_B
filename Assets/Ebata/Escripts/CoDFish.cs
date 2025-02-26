@@ -8,9 +8,11 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
     public float secondSpeed = 24f; // 方向転換後の移動速度
     public float continueStraightDuration = 2f; // プレイヤー位置到達後に真っ直ぐ進む時間
     public float startChangingTime = 2f; // 方向転換するまでの時間
-
     public bool changePosition = false; // falseならTargetAに、trueならTargetBに向かう
+    public float disappearTime = 5f; //攻撃後消滅するまでの時間
 
+    [SerializeField] private MeshRenderer meshRenderer; //点滅させる用
+    private bool isAttacking = false; //攻撃した(=ShieldまたはPlayerに触れた)かどうか
     private Vector3 targetPosition; // 目標位置
     private bool reachedTarget = false; // 目標位置に到達したかどうか
     private Vector3 moveDirection; // 目標位置への移動方向
@@ -48,7 +50,7 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
 
     void Update()
     {
-        if (!startMovingTowardPlayer && !reachedTarget)
+        if (!startMovingTowardPlayer && !reachedTarget && !isAttacking)
         {
             // 目標位置に向かって進む
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, firstSpeed * Time.deltaTime);
@@ -57,12 +59,12 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
                 reachedTarget = true;
             }
         }
-        else if(!startMovingTowardPlayer && reachedTarget)
+        else if((!startMovingTowardPlayer && reachedTarget && !isAttacking) || (!startMovingTowardPlayer && isAttacking))
         {
             // 到達後、真っ直ぐ進む
             transform.position += moveDirection * firstSpeed * Time.deltaTime;
         }
-        else if (startMovingTowardPlayer && !reachedTarget)
+        else if (startMovingTowardPlayer && !reachedTarget && !isAttacking)
         {
             // 目標位置に向かって進む（方向転換後）
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, secondSpeed * Time.deltaTime);
@@ -83,21 +85,24 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
 
     private void MoveTowardPlayer()
     {
-        reachedTarget = false;
-        startMovingTowardPlayer = true;
+        if(!isAttacking)
+        {  
+            reachedTarget = false;
+            startMovingTowardPlayer = true;
 
-        player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
-        if (player != null)
-        {
-            targetPosition = player.transform.position;
-            moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+            player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
+            if (player != null)
+            {
+                targetPosition = player.transform.position;
+                moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
 
-            // ★ 方向転換してプレイヤーの方向を向く（修正ポイント）
-            LookAtDirection(targetPosition);
-        }
-        else
-        {
-            Debug.LogError("Playerタグを持つオブジェクトが見つかりません！");
+                // ★ 方向転換してプレイヤーの方向を向く（修正ポイント）
+                LookAtDirection(targetPosition);
+            }
+            else
+            {
+                Debug.LogError("Playerタグを持つオブジェクトが見つかりません！");
+            }
         }
     }
 
@@ -110,13 +115,40 @@ public class CoDFish : MonoBehaviour // CoDはChange of Direction(方向転換)�
 
     private void OnTriggerEnter(Collider other)
     {
-        // ShieldタグまたはPlayerタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Shield") || other.CompareTag("Player") || other.CompareTag("Rubble"))
+        // Rubbleタグと衝突した場合にオブジェクトを破壊
+        if (other.CompareTag("Rubble"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);
         }
+        // ShieldタグまたはPlayerタグと衝突した場合にオブジェクトを点滅
+        else if((other.CompareTag("Player") || other.CompareTag("Shield")) && !isAttacking)
+        {
+            Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突しました。");
+            isAttacking = true;
+            gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
+            Invoke("Blink", 0);
+            Invoke("Disappear", disappearTime);
+
+        }
     }
+    private void Blink() //点滅させる
+    {
+        if(meshRenderer.enabled)
+        {
+            meshRenderer.enabled = false;
+        }
+        else
+        {
+            meshRenderer.enabled = true;
+        }
+        Invoke("Blink", 0.1f);
+    }
+    private void Disappear() //オブジェクトを破壊
+    {
+        Destroy(gameObject);
+    }
+    
 
     // ★ 新しく追加したメソッド: 移動方向を向く処理
     private void LookAtDirection(Vector3 target)

@@ -172,3 +172,5 @@ MonoBehaviour:
   speed: 30
   continueStraightDuration: 2
   startDashingTime: 3
+  disappearTime: 5
+  meshRenderer: {fileID: 8522603027771026085}
