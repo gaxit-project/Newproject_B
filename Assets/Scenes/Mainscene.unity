@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound_bgm:
-  - {fileID: 8300000, guid: 26a21c464392b7c409be811ee4139eb7, type: 3}
+  - {fileID: 8300000, guid: 3d14f51e23c933c4fb3b37a04e28eb7c, type: 3}
   - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
   audioSource: {fileID: 81893184}
 --- !u!4 &81893186
@@ -5679,7 +5679,7 @@ GameObject:
   - component: {fileID: 1550505110}
   - component: {fileID: 1550505109}
   m_Layer: 0
-  m_Name: BGMPitchManager
+  m_Name: BGMChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5699,6 +5699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 81893184}
   bossHP: {fileID: 942665715}
+  audioClip: {fileID: 8300000, guid: 26a21c464392b7c409be811ee4139eb7, type: 3}
 --- !u!4 &1550505110
 Transform:
   m_ObjectHideFlags: 0

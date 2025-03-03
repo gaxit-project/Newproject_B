@@ -156,8 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148ca8f1643130e4dbd891bf3f10a23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.01
+  speed: 3
   rotationTime: 10
   naturalDisappearTime: 30
-  disappearTime: 5
   meshRenderer: {fileID: 2807919841974585081}

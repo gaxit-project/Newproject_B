@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LeafFish : MonoBehaviour
 {
-    public float speed = 0.01f; // 移動速度
+    public float speed = 3f; // 移動速度
     public float rotationTime = 10f; // 方向転換するまでの間隔
     public float naturalDisappearTime = 30f; // 自然消滅までの時間
 
@@ -21,14 +21,14 @@ public class LeafFish : MonoBehaviour
 
     void Update()
     {
-        var velocity = new Vector3(0f, 0f, speed); // 速度の設定
+        var velocity = new Vector3(0f, 0f, speed * Time.deltaTime); // 速度の設定
 
         // ★ 常に +90度 の回転補正を適用
         transform.rotation = Quaternion.Euler(0f, additionalAngle + Mathf.PingPong(Time.time * 15f, 60f) - 30f, 0f)
                            * Quaternion.Euler(0, 90, 0); // +90度回転を適用
 
         // ★ 向いている方向に移動 (現在の回転を考慮)
-        transform.position += transform.rotation * Vector3.forward * speed;
+        transform.position += transform.rotation * Vector3.forward * speed * Time.deltaTime;
     }
 
     private void RotateObject()
