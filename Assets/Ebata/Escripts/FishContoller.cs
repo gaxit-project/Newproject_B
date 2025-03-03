@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class FishContoller : MonoBehaviour
 {
-    public GameObject Rubble; //岩のprefab
-    public GameObject NormalFish; //普通のさかなのprefab
-    public GameObject ChaseFish; //追跡するさかなのprefab
-    public GameObject DashFish; //一定時間経過後突進するさかなのprefab
-    public GameObject CoDFishA; //途中で方向転換するさかなのprefabその1
-    public GameObject CoDFishB; //途中で方向転換するさかなのprefabその2
-    public GameObject LeafFish; //葉っぱが舞うように動くさかなのprefab
-    public GameObject PenetrateFish; //盾を貫通するさかなのprefabその1
-    public GameObject PenetrateFishA; //盾を貫通するさかなのprefabその2
-    public GameObject PenetrateFishB; //盾を貫通するさかなのprefabその3
 
     private GameObject spawnPoint; //ボスがいる位置
     private Vector3 spawnPosition; //prefabをスポーンさせる場所
+    [SerializeField] private GameObject Rubble; //岩のprefab
+    [SerializeField] private GameObject NormalFish; //普通のさかなのprefab
+    [SerializeField] private GameObject ChaseFish; //追跡するさかなのprefab
+    [SerializeField] private GameObject DashFish; //一定時間経過後突進するさかなのprefab
+    [SerializeField] private GameObject CoDFishA; //途中で方向転換するさかなのprefabその1
+    [SerializeField] private GameObject CoDFishB; //途中で方向転換するさかなのprefabその2
+    [SerializeField] private GameObject LeafFish; //葉っぱが舞うように動くさかなのprefab
+    [SerializeField] private GameObject PenetrateFish; //盾を貫通するさかなのprefabその1
+    [SerializeField] private GameObject PenetrateFishA; //盾を貫通するさかなのprefabその2
+    [SerializeField] private GameObject PenetrateFishB; //盾を貫通するさかなのprefabその3
     [SerializeField] private Slider bossHP; //ボスHPスライダーを入れる
 
     // Start is called before the first frame update
