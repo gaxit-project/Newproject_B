@@ -11,6 +11,9 @@ public class TestRubble : MonoBehaviour
     private bool reachedTarget = false; // 目標位置に到達したかどうか
     private Vector3 moveDirection; // 目標位置への移動方向
     public bool isReflected = false; // 反射中かどうかのフラグ
+    public GameObject rubblePrefab; // 小さい破片のプレハブ
+public float explosionForce = 1f; // 破片が飛び散る力
+
 
     void Start()
     {
@@ -81,9 +84,10 @@ public class TestRubble : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Player") || other.CompareTag("Shield") || other.CompareTag("Rubble"))
+        if (other.CompareTag("Player") || other.CompareTag("Shield") || other.CompareTag("Rubble")|| other.CompareTag("Wall"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
+            SpawnRubble();
             Destroy(gameObject);
         }
     }
@@ -118,4 +122,45 @@ public class TestRubble : MonoBehaviour
         moveDirection = Vector3.zero; // オブジェクトの移動を停止
         Debug.Log($"{gameObject.name} は {delay} 秒後に移動を停止しました。");
     }
+
+    private void SpawnRubble()
+{
+    if (rubblePrefab == null)
+    {
+        Debug.LogError("RubblePrefabが設定されていません！");
+        return;
+    }
+
+    // 5方向に飛ばすため、360度を5分割 (72度ごと)
+    for (int i = 0; i < 5; i++)
+    {
+        GameObject rubble = Instantiate(rubblePrefab, transform.position, Quaternion.identity);
+        MiniRubble miniRubbleScript = rubble.GetComponent<MiniRubble>();
+
+        if (miniRubbleScript != null)
+        {
+            // `TestRubble` の進行方向をベースに72度ずつ回転した方向を生成
+            Vector3 newDirection = Quaternion.Euler(0, i * 72, 0) * moveDirection;
+            newDirection += new Vector3(Random.Range(-0.3f, 0.3f), 0, Random.Range(-0.3f, 0.3f)); // 乱数で少しずらす
+            newDirection.Normalize();
+
+            // `MiniRubble` に移動方向と速度を適用 (飛び散る強さを少し弱める)
+            miniRubbleScript.Initialize(newDirection * (speed * 0.4f), isReflected);
+        }
+    }
+}
+
+
+
+private IEnumerator EnableTriggerAfterDelay(Collider rubbleCollider, float delay)
+{
+    yield return new WaitForSeconds(delay);
+    if (rubbleCollider != null)
+    {
+        rubbleCollider.isTrigger = true; // 1秒後にトリガーを有効化
+    }
+}
+
+
+
 }
