@@ -31,11 +31,10 @@ public class MainBGMChangingController : MonoBehaviour
     {
         if(audioSource.volume <= 0.001f)
         {
-            audioSource.enabled = false;
             await Task.Delay(1000);
             audioSource.clip = audioClip;
             audioSource.volume = PlayerPrefs.GetFloat("VolumeBGM");
-            audioSource.enabled = true;
+            audioSource.Play();
         }
         else
         {

@@ -64,7 +64,7 @@ public class FishContoller : MonoBehaviour
     }
     public void spawnLeafFish() //木の葉さかな
     {
-        Instantiate(LeafFish, spawnPosition, spawnPoint.transform.rotation);   
+        Instantiate(LeafFish, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);   
     }
     public void spawnPenetrateFish() //盾貫通さかな
     {
