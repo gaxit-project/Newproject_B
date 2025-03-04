@@ -1,171 +1,909 @@
 fileFormatVersion: 2
 guid: 6f012b33467426c43a1c019d350c0a03
-timeCreated: 1483490523
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: WhaleRig01_Back
-    100004: WhaleRig01_Back1
-    100006: WhaleRig01_Back2
-    100008: WhaleRig01_Head1
-    100010: WhaleRig01_Hips1
-    100012: WhaleRig01_Jaw1
-    100014: WhaleRig01_joint12
-    100016: WhaleRig01_joint26
-    100018: WhaleRig01_joint31
-    100020: WhaleRig01_joint32
-    100022: WhaleRig01_joint5
-    100024: WhaleRig01_LFrontLimb1
-    100026: WhaleRig01_LFrontLimb3
-    100028: WhaleRig01_LFrontLimb4
-    100030: WhaleRig01_LFrontLimb5
-    100032: WhaleRig01_LFrontLimb6
-    100034: WhaleRig01_LFrontLimb7
-    100036: WhaleRig01_LFrontLimb8
-    100038: WhaleRig01_LFrontLimb9
-    100040: WhaleRig01_LLegb1
-    100042: WhaleRig01_LLegb2
-    100044: WhaleRig01_LLegb3
-    100046: WhaleRig01_LLegb4
-    100048: WhaleRig01_LLegb5
-    100050: WhaleRig01_MainCntrl
-    100052: WhaleRig01_RFrontLimb1
-    100054: WhaleRig01_RFrontLimb11
-    100056: WhaleRig01_RFrontLimb2
-    100058: WhaleRig01_RFrontLimb3
-    100060: WhaleRig01_RFrontLimb4
-    100062: WhaleRig01_RFrontLimb5
-    100064: WhaleRig01_RFrontLimb6
-    100066: WhaleRig01_RFrontLimb7
-    100068: WhaleRig01_RFrontLimb8
-    100070: WhaleRig01_RFrontLimb9
-    100072: WhaleRig01_RLegb1
-    100074: WhaleRig01_RLegb2
-    100076: WhaleRig01_RLegb3
-    100078: WhaleRig01_RLegb4
-    100080: WhaleRig01_RLegb5
-    100082: WhaleRig01_RootCntrl1
-    100084: WhaleRig01_Tail1
-    100086: WhaleRig01_Tail2
-    100088: WhaleRig01_Tail3
-    100090: WhaleRig01_Tail4
-    100092: WhaleRig01_TailProng1
-    100094: WhaleRig01_transform27
-    100096: WhaleRig01_Whale3DCLo_Group17209
-    100098: WhaleRig01_WhaleTeeth_Group23368
-    400000: //RootNode
-    400002: WhaleRig01_Back
-    400004: WhaleRig01_Back1
-    400006: WhaleRig01_Back2
-    400008: WhaleRig01_Head1
-    400010: WhaleRig01_Hips1
-    400012: WhaleRig01_Jaw1
-    400014: WhaleRig01_joint12
-    400016: WhaleRig01_joint26
-    400018: WhaleRig01_joint31
-    400020: WhaleRig01_joint32
-    400022: WhaleRig01_joint5
-    400024: WhaleRig01_LFrontLimb1
-    400026: WhaleRig01_LFrontLimb3
-    400028: WhaleRig01_LFrontLimb4
-    400030: WhaleRig01_LFrontLimb5
-    400032: WhaleRig01_LFrontLimb6
-    400034: WhaleRig01_LFrontLimb7
-    400036: WhaleRig01_LFrontLimb8
-    400038: WhaleRig01_LFrontLimb9
-    400040: WhaleRig01_LLegb1
-    400042: WhaleRig01_LLegb2
-    400044: WhaleRig01_LLegb3
-    400046: WhaleRig01_LLegb4
-    400048: WhaleRig01_LLegb5
-    400050: WhaleRig01_MainCntrl
-    400052: WhaleRig01_RFrontLimb1
-    400054: WhaleRig01_RFrontLimb11
-    400056: WhaleRig01_RFrontLimb2
-    400058: WhaleRig01_RFrontLimb3
-    400060: WhaleRig01_RFrontLimb4
-    400062: WhaleRig01_RFrontLimb5
-    400064: WhaleRig01_RFrontLimb6
-    400066: WhaleRig01_RFrontLimb7
-    400068: WhaleRig01_RFrontLimb8
-    400070: WhaleRig01_RFrontLimb9
-    400072: WhaleRig01_RLegb1
-    400074: WhaleRig01_RLegb2
-    400076: WhaleRig01_RLegb3
-    400078: WhaleRig01_RLegb4
-    400080: WhaleRig01_RLegb5
-    400082: WhaleRig01_RootCntrl1
-    400084: WhaleRig01_Tail1
-    400086: WhaleRig01_Tail2
-    400088: WhaleRig01_Tail3
-    400090: WhaleRig01_Tail4
-    400092: WhaleRig01_TailProng1
-    400094: WhaleRig01_transform27
-    400096: WhaleRig01_Whale3DCLo_Group17209
-    400098: WhaleRig01_WhaleTeeth_Group23368
-    4300000: WhaleRig01_Whale3DCLo_Group17209
-    4300002: WhaleRig01_WhaleTeeth_Group23368
-    7400000: Idle
-    7400002: JumpStationary
-    7400004: AttackTail
-    7400006: HitBasic
-    7400008: DeathHit
-    7400010: AttackBite
-    7400012: Run
-    7400014: DeathKnockback
-    9500000: //RootNode
-    13700000: WhaleRig01_Whale3DCLo_Group17209
-    13700002: WhaleRig01_WhaleTeeth_Group23368
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: WhaleRig01_Back
+  - first:
+      1: 100004
+    second: WhaleRig01_Back1
+  - first:
+      1: 100006
+    second: WhaleRig01_Back2
+  - first:
+      1: 100008
+    second: WhaleRig01_Head1
+  - first:
+      1: 100010
+    second: WhaleRig01_Hips1
+  - first:
+      1: 100012
+    second: WhaleRig01_Jaw1
+  - first:
+      1: 100014
+    second: WhaleRig01_joint12
+  - first:
+      1: 100016
+    second: WhaleRig01_joint26
+  - first:
+      1: 100018
+    second: WhaleRig01_joint31
+  - first:
+      1: 100020
+    second: WhaleRig01_joint32
+  - first:
+      1: 100022
+    second: WhaleRig01_joint5
+  - first:
+      1: 100024
+    second: WhaleRig01_LFrontLimb1
+  - first:
+      1: 100026
+    second: WhaleRig01_LFrontLimb3
+  - first:
+      1: 100028
+    second: WhaleRig01_LFrontLimb4
+  - first:
+      1: 100030
+    second: WhaleRig01_LFrontLimb5
+  - first:
+      1: 100032
+    second: WhaleRig01_LFrontLimb6
+  - first:
+      1: 100034
+    second: WhaleRig01_LFrontLimb7
+  - first:
+      1: 100036
+    second: WhaleRig01_LFrontLimb8
+  - first:
+      1: 100038
+    second: WhaleRig01_LFrontLimb9
+  - first:
+      1: 100040
+    second: WhaleRig01_LLegb1
+  - first:
+      1: 100042
+    second: WhaleRig01_LLegb2
+  - first:
+      1: 100044
+    second: WhaleRig01_LLegb3
+  - first:
+      1: 100046
+    second: WhaleRig01_LLegb4
+  - first:
+      1: 100048
+    second: WhaleRig01_LLegb5
+  - first:
+      1: 100050
+    second: WhaleRig01_MainCntrl
+  - first:
+      1: 100052
+    second: WhaleRig01_RFrontLimb1
+  - first:
+      1: 100054
+    second: WhaleRig01_RFrontLimb11
+  - first:
+      1: 100056
+    second: WhaleRig01_RFrontLimb2
+  - first:
+      1: 100058
+    second: WhaleRig01_RFrontLimb3
+  - first:
+      1: 100060
+    second: WhaleRig01_RFrontLimb4
+  - first:
+      1: 100062
+    second: WhaleRig01_RFrontLimb5
+  - first:
+      1: 100064
+    second: WhaleRig01_RFrontLimb6
+  - first:
+      1: 100066
+    second: WhaleRig01_RFrontLimb7
+  - first:
+      1: 100068
+    second: WhaleRig01_RFrontLimb8
+  - first:
+      1: 100070
+    second: WhaleRig01_RFrontLimb9
+  - first:
+      1: 100072
+    second: WhaleRig01_RLegb1
+  - first:
+      1: 100074
+    second: WhaleRig01_RLegb2
+  - first:
+      1: 100076
+    second: WhaleRig01_RLegb3
+  - first:
+      1: 100078
+    second: WhaleRig01_RLegb4
+  - first:
+      1: 100080
+    second: WhaleRig01_RLegb5
+  - first:
+      1: 100082
+    second: WhaleRig01_RootCntrl1
+  - first:
+      1: 100084
+    second: WhaleRig01_Tail1
+  - first:
+      1: 100086
+    second: WhaleRig01_Tail2
+  - first:
+      1: 100088
+    second: WhaleRig01_Tail3
+  - first:
+      1: 100090
+    second: WhaleRig01_Tail4
+  - first:
+      1: 100092
+    second: WhaleRig01_TailProng1
+  - first:
+      1: 100094
+    second: WhaleRig01_transform27
+  - first:
+      1: 100096
+    second: WhaleRig01_Whale3DCLo_Group17209
+  - first:
+      1: 100098
+    second: WhaleRig01_WhaleTeeth_Group23368
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: WhaleRig01_Back
+  - first:
+      4: 400004
+    second: WhaleRig01_Back1
+  - first:
+      4: 400006
+    second: WhaleRig01_Back2
+  - first:
+      4: 400008
+    second: WhaleRig01_Head1
+  - first:
+      4: 400010
+    second: WhaleRig01_Hips1
+  - first:
+      4: 400012
+    second: WhaleRig01_Jaw1
+  - first:
+      4: 400014
+    second: WhaleRig01_joint12
+  - first:
+      4: 400016
+    second: WhaleRig01_joint26
+  - first:
+      4: 400018
+    second: WhaleRig01_joint31
+  - first:
+      4: 400020
+    second: WhaleRig01_joint32
+  - first:
+      4: 400022
+    second: WhaleRig01_joint5
+  - first:
+      4: 400024
+    second: WhaleRig01_LFrontLimb1
+  - first:
+      4: 400026
+    second: WhaleRig01_LFrontLimb3
+  - first:
+      4: 400028
+    second: WhaleRig01_LFrontLimb4
+  - first:
+      4: 400030
+    second: WhaleRig01_LFrontLimb5
+  - first:
+      4: 400032
+    second: WhaleRig01_LFrontLimb6
+  - first:
+      4: 400034
+    second: WhaleRig01_LFrontLimb7
+  - first:
+      4: 400036
+    second: WhaleRig01_LFrontLimb8
+  - first:
+      4: 400038
+    second: WhaleRig01_LFrontLimb9
+  - first:
+      4: 400040
+    second: WhaleRig01_LLegb1
+  - first:
+      4: 400042
+    second: WhaleRig01_LLegb2
+  - first:
+      4: 400044
+    second: WhaleRig01_LLegb3
+  - first:
+      4: 400046
+    second: WhaleRig01_LLegb4
+  - first:
+      4: 400048
+    second: WhaleRig01_LLegb5
+  - first:
+      4: 400050
+    second: WhaleRig01_MainCntrl
+  - first:
+      4: 400052
+    second: WhaleRig01_RFrontLimb1
+  - first:
+      4: 400054
+    second: WhaleRig01_RFrontLimb11
+  - first:
+      4: 400056
+    second: WhaleRig01_RFrontLimb2
+  - first:
+      4: 400058
+    second: WhaleRig01_RFrontLimb3
+  - first:
+      4: 400060
+    second: WhaleRig01_RFrontLimb4
+  - first:
+      4: 400062
+    second: WhaleRig01_RFrontLimb5
+  - first:
+      4: 400064
+    second: WhaleRig01_RFrontLimb6
+  - first:
+      4: 400066
+    second: WhaleRig01_RFrontLimb7
+  - first:
+      4: 400068
+    second: WhaleRig01_RFrontLimb8
+  - first:
+      4: 400070
+    second: WhaleRig01_RFrontLimb9
+  - first:
+      4: 400072
+    second: WhaleRig01_RLegb1
+  - first:
+      4: 400074
+    second: WhaleRig01_RLegb2
+  - first:
+      4: 400076
+    second: WhaleRig01_RLegb3
+  - first:
+      4: 400078
+    second: WhaleRig01_RLegb4
+  - first:
+      4: 400080
+    second: WhaleRig01_RLegb5
+  - first:
+      4: 400082
+    second: WhaleRig01_RootCntrl1
+  - first:
+      4: 400084
+    second: WhaleRig01_Tail1
+  - first:
+      4: 400086
+    second: WhaleRig01_Tail2
+  - first:
+      4: 400088
+    second: WhaleRig01_Tail3
+  - first:
+      4: 400090
+    second: WhaleRig01_Tail4
+  - first:
+      4: 400092
+    second: WhaleRig01_TailProng1
+  - first:
+      4: 400094
+    second: WhaleRig01_transform27
+  - first:
+      4: 400096
+    second: WhaleRig01_Whale3DCLo_Group17209
+  - first:
+      4: 400098
+    second: WhaleRig01_WhaleTeeth_Group23368
+  - first:
+      43: 4300000
+    second: WhaleRig01_Whale3DCLo_Group17209
+  - first:
+      43: 4300002
+    second: WhaleRig01_WhaleTeeth_Group23368
+  - first:
+      74: 7400000
+    second: Idle
+  - first:
+      74: 7400002
+    second: JumpStationary
+  - first:
+      74: 7400004
+    second: AttackTail
+  - first:
+      74: 7400006
+    second: HitBasic
+  - first:
+      74: 7400008
+    second: DeathHit
+  - first:
+      74: 7400010
+    second: AttackBite
+  - first:
+      74: 7400012
+    second: Run
+  - first:
+      74: 7400014
+    second: DeathKnockback
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: WhaleRig01_Whale3DCLo_Group17209
+  - first:
+      137: 13700002
+    second: WhaleRig01_WhaleTeeth_Group23368
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      internalID: 7400000
+      firstFrame: 10
+      lastFrame: 129
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 9.900001
+    - serializedVersion: 16
+      name: JumpStationary
+      takeName: JumpStationary
+      internalID: 7400002
+      firstFrame: 130
+      lastFrame: 180
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: AttackTail
+      takeName: AttackTail
+      internalID: 7400004
+      firstFrame: 270
+      lastFrame: 340
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: HitBasic
+      takeName: HitBasic
+      internalID: 7400006
+      firstFrame: 340
+      lastFrame: 355
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathHit
+      takeName: DeathHit
+      internalID: 7400008
+      firstFrame: 360
+      lastFrame: 449
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: AttackBite
+      takeName: AttackBite
+      internalID: 7400010
+      firstFrame: 450
+      lastFrame: 493
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Run
+      internalID: 7400012
+      firstFrame: 245
+      lastFrame: 264
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 244.79999
+    - serializedVersion: 16
+      name: DeathKnockback
+      takeName: DeathKnockback
+      internalID: 7400014
+      firstFrame: 180
+      lastFrame: 234
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Whale.fbx(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_MainCntrl
+      parentName: Whale.fbx(Clone)
+      position: {x: -0, y: -0.000637207, z: -0.2917999}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_RootCntrl1
+      parentName: WhaleRig01_MainCntrl
+      position: {x: 0.10698618, y: 1.6183578, z: -0.2898888}
+      rotation: {x: 0.5454948, y: -0, z: -0, w: 0.8381142}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_Back
+      parentName: WhaleRig01_RootCntrl1
+      position: {x: -0.106986344, y: 0.11123979, z: 0.6000851}
+      rotation: {x: -0.6972873, y: 0.11743289, z: -0.69728726, w: 0.11743283}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
+    - name: WhaleRig01_Back1
+      parentName: WhaleRig01_Back
+      position: {x: -0.5497504, y: -3.5527136e-17, z: 6.1034554e-17}
+      rotation: {x: -0, y: -0, z: -0.098687395, w: 0.9951185}
+      scale: {x: 0.9999998, y: 1, z: 0.9999999}
+    - name: WhaleRig01_Back2
+      parentName: WhaleRig01_Back1
+      position: {x: -0.49416414, y: 2.1316282e-16, z: 4.571278e-17}
+      rotation: {x: -0.014129318, y: -0.57243925, z: 0.24659106, w: 0.781861}
+      scale: {x: 1, y: 0.9999999, z: 0.9999999}
+    - name: WhaleRig01_transform27
+      parentName: WhaleRig01_Back2
+      position: {x: 0.122474305, y: -0.2836837, z: -0.5668758}
+      rotation: {x: -0.028728805, y: -0.17242822, z: -0.16181715, w: 0.9712149}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_RFrontLimb1
+      parentName: WhaleRig01_transform27
+      position: {x: -0.17941591, y: 0.099110164, z: 0.8085717}
+      rotation: {x: -0.000000011175871, y: -0.000000029802322, z: 0.000000009778887, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: WhaleRig01_RFrontLimb2
+      parentName: WhaleRig01_RFrontLimb1
+      position: {x: 0.17941591, y: 0.1295395, z: -0.20479697}
+      rotation: {x: -0.19196625, y: 0.67490196, z: -0.183302, w: 0.68851775}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_RFrontLimb3
+      parentName: WhaleRig01_RFrontLimb2
+      position: {x: -0.09309047, y: -0.30688265, z: -0.6207278}
+      rotation: {x: -0.19445151, y: -0.3693295, z: 0.05483296, w: 0.90707093}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000002}
+    - name: WhaleRig01_RFrontLimb4
+      parentName: WhaleRig01_RFrontLimb3
+      position: {x: -0.299916, y: 0.17952664, z: -0.28876087}
+      rotation: {x: 0.5426249, y: 0.17309652, z: 0.27519247, w: -0.77450955}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000004}
+    - name: WhaleRig01_RFrontLimb5
+      parentName: WhaleRig01_RFrontLimb4
+      position: {x: -0.31043196, y: 0.048950452, z: 0.024210474}
+      rotation: {x: -0.049332768, y: -0.04584858, z: -0.18252958, w: 0.98089105}
+      scale: {x: 1.0000006, y: 1.0000005, z: 1.0000004}
+    - name: WhaleRig01_RFrontLimb6
+      parentName: WhaleRig01_RFrontLimb5
+      position: {x: -0.16400886, y: -0.04170355, z: -0.03651172}
+      rotation: {x: 0.14588974, y: 0.12189832, z: 0.23026165, w: 0.95437765}
+      scale: {x: 1.0000001, y: 1.0000006, z: 0.99999994}
+    - name: WhaleRig01_RFrontLimb7
+      parentName: WhaleRig01_RFrontLimb6
+      position: {x: -0.11037605, y: 0.043650407, z: 0.0028428053}
+      rotation: {x: 0.5227069, y: 0.84166193, z: 0.071530566, w: -0.11517841}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_RFrontLimb8
+      parentName: WhaleRig01_RFrontLimb5
+      position: {x: -0.12162378, y: -0.019900246, z: 0.10920825}
+      rotation: {x: 0.06444561, y: 0.06588141, z: 0.13537419, w: 0.986499}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: WhaleRig01_RFrontLimb9
+      parentName: WhaleRig01_RFrontLimb8
+      position: {x: -0.13310164, y: 0.0136766415, z: -0.0063588223}
+      rotation: {x: 0.42771524, y: 0.87341267, z: 0.10239939, w: -0.2091039}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_LFrontLimb1
+      parentName: WhaleRig01_transform27
+      position: {x: 0.179416, y: 0.09911019, z: 0.808572}
+      rotation: {x: 1, y: 0.000000022817405, z: 0.000000018626453, w: 0.000000016763808}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: WhaleRig01_RFrontLimb11
+      parentName: WhaleRig01_LFrontLimb1
+      position: {x: -0.179416, y: -0.1295398, z: 0.204797}
+      rotation: {x: 0.6770138, y: 0.19242276, z: 0.68548125, w: 0.18639028}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_LFrontLimb3
+      parentName: WhaleRig01_RFrontLimb11
+      position: {x: -0.08651649, y: -0.3083402, z: 0.62095654}
+      rotation: {x: 0.68496513, y: 0.53350556, z: -0.13520345, w: 0.4774041}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000002}
+    - name: WhaleRig01_LFrontLimb4
+      parentName: WhaleRig01_LFrontLimb3
+      position: {x: -0.31630203, y: 0.2267371, z: -0.23260581}
+      rotation: {x: 0.6935514, y: 0.41548678, z: 0.2638077, w: -0.5260824}
+      scale: {x: 1.0000001, y: 1.0000002, z: 0.99999994}
+    - name: WhaleRig01_LFrontLimb5
+      parentName: WhaleRig01_LFrontLimb4
+      position: {x: -0.19224961, y: -0.13636997, z: 0.20927036}
+      rotation: {x: -0.049332708, y: -0.04584849, z: -0.18252957, w: 0.98089105}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000007}
+    - name: WhaleRig01_LFrontLimb6
+      parentName: WhaleRig01_LFrontLimb5
+      position: {x: -0.014793702, y: -0.15231866, z: 0.0809393}
+      rotation: {x: 0.14588971, y: 0.12189831, z: 0.2302615, w: 0.9543776}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000005}
+    - name: WhaleRig01_LFrontLimb7
+      parentName: WhaleRig01_LFrontLimb6
+      position: {x: -0.084540054, y: -0.007853902, z: 0.08299144}
+      rotation: {x: 0.5227069, y: 0.84166193, z: 0.071530566, w: -0.11517841}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_LFrontLimb8
+      parentName: WhaleRig01_LFrontLimb5
+      position: {x: -0.10157889, y: -0.033890996, z: 0.12509039}
+      rotation: {x: 0.06444576, y: 0.065881625, z: 0.13537405, w: 0.986499}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000002}
+    - name: WhaleRig01_LFrontLimb9
+      parentName: WhaleRig01_LFrontLimb8
+      position: {x: -0.06809694, y: -0.06971076, z: 0.09190585}
+      rotation: {x: 0.42771524, y: 0.87341267, z: 0.10239939, w: -0.2091039}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_joint31
+      parentName: WhaleRig01_Back2
+      position: {x: -0.044725183, y: 0.22240321, z: 0.3120771}
+      rotation: {x: -0.07823476, y: 0.56724393, z: -0.36927575, w: 0.7319489}
+      scale: {x: 0.9999999, y: 1.0000001, z: 1}
+    - name: WhaleRig01_Head1
+      parentName: WhaleRig01_joint31
+      position: {x: -0.29180807, y: -0.034354243, z: -1.907199e-15}
+      rotation: {x: 0.0000000074505797, y: -0, z: 0.29757616, w: 0.9546981}
+      scale: {x: 1.0000007, y: 1, z: 1.0000007}
+    - name: WhaleRig01_joint5
+      parentName: WhaleRig01_Head1
+      position: {x: -1.022656, y: -7.105427e-17, z: 1.418616e-16}
+      rotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_Jaw1
+      parentName: WhaleRig01_Head1
+      position: {x: -0.009323356, y: -0.08895027, z: -2.7716923e-15}
+      rotation: {x: -0, y: -0, z: -0.000000029802319, w: 1}
+      scale: {x: 1.0000005, y: 1, z: 1.0000002}
+    - name: WhaleRig01_joint26
+      parentName: WhaleRig01_Jaw1
+      position: {x: -0.8918134, y: 7.105427e-17, z: 2.1689764e-16}
+      rotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_Hips1
+      parentName: WhaleRig01_Back
+      position: {x: -3.5527135e-16, y: -1.7763568e-17, z: 3.1319152e-17}
+      rotation: {x: 0.09161138, y: -0.99579483, z: -0, w: 0.000000029802326}
+      scale: {x: 0.99999976, y: 0.99999976, z: 0.9999998}
+    - name: WhaleRig01_RLegb1
+      parentName: WhaleRig01_Hips1
+      position: {x: 0.0699048, y: -0.23117706, z: 0.60705566}
+      rotation: {x: 0.9951688, y: 0.08549137, z: -0.007162736, w: -0.04773956}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000001}
+    - name: WhaleRig01_RLegb2
+      parentName: WhaleRig01_RLegb1
+      position: {x: -0.8146736, y: 0.07631214, z: -0.055867426}
+      rotation: {x: 0.02803668, y: -0.09043691, z: -0.32882518, w: 0.9396324}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000004}
+    - name: WhaleRig01_RLegb3
+      parentName: WhaleRig01_RLegb2
+      position: {x: -0.18770798, y: -0.48065382, z: 0.11618986}
+      rotation: {x: -0.14670856, y: -0.04604974, z: -0.5321231, w: 0.83258694}
+      scale: {x: 1.0000001, y: 1, z: 0.99999994}
+    - name: WhaleRig01_RLegb4
+      parentName: WhaleRig01_RLegb3
+      position: {x: -0.49439675, y: 0.0007191626, z: 0.000021983364}
+      rotation: {x: 0.000000029802319, y: 0.000000111758695, z: 0.10411075, w: 0.9945657}
+      scale: {x: 1.0000004, y: 1, z: 1.0000002}
+    - name: WhaleRig01_RLegb5
+      parentName: WhaleRig01_RLegb4
+      position: {x: -0.16886146, y: 0.00024563065, z: 0.0000125741835}
+      rotation: {x: 0.12651375, y: 0.019965831, z: -0.013156782, w: 0.9916766}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_LLegb1
+      parentName: WhaleRig01_Hips1
+      position: {x: 0.069904715, y: -0.23117751, z: -0.607056}
+      rotation: {x: 0.12609774, y: -0.9901844, z: -0.060279734, w: 0.0007617426}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000005}
+    - name: WhaleRig01_LLegb2
+      parentName: WhaleRig01_LLegb1
+      position: {x: 0.81892407, y: -0.020235103, z: 0.039882865}
+      rotation: {x: 0.002536589, y: -0.03882893, z: -0.463838, w: 0.8850651}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: WhaleRig01_LLegb3
+      parentName: WhaleRig01_LLegb2
+      position: {x: 0.0072232215, y: 0.5288617, z: 0.0036779435}
+      rotation: {x: -0.058647953, y: 0.04148334, z: -0.37707844, w: 0.9233913}
+      scale: {x: 1.0000002, y: 0.9999998, z: 1}
+    - name: WhaleRig01_LLegb4
+      parentName: WhaleRig01_LLegb3
+      position: {x: 0.49440405, y: -0.0007161487, z: -0.000022663227}
+      rotation: {x: 0.000000062398605, y: 0.000000013271345, z: 0.104110725, w: 0.9945658}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: WhaleRig01_LLegb5
+      parentName: WhaleRig01_LLegb4
+      position: {x: 0.16885303, y: -0.00024665624, z: -0.00001176584}
+      rotation: {x: 0.12651375, y: 0.019965831, z: -0.013156782, w: 0.9916766}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_joint32
+      parentName: WhaleRig01_Back
+      position: {x: 1.0658141e-16, y: -2.842171e-16, z: -1.0658141e-16}
+      rotation: {x: 0.028995248, y: -0.7065121, z: 0.02899525, w: 0.7065121}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
+    - name: WhaleRig01_Tail1
+      parentName: WhaleRig01_joint32
+      position: {x: 2.6058707e-16, y: 0.06270139, z: -0.5453303}
+      rotation: {x: 0.048576504, y: -0.7054363, z: -0.048576504, w: 0.7054363}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: WhaleRig01_Tail2
+      parentName: WhaleRig01_Tail1
+      position: {x: -0.5116772, y: -0.0027899542, z: -1.4232073e-16}
+      rotation: {x: -0, y: -0.000000059604645, z: -0.008063827, w: 0.9999676}
+      scale: {x: 1.0000004, y: 0.9999999, z: 1.0000004}
+    - name: WhaleRig01_Tail3
+      parentName: WhaleRig01_Tail2
+      position: {x: -0.45955345, y: 0.0035939645, z: -1.4106139e-16}
+      rotation: {x: 0.000000033096264, y: -0.000000029540171, z: -0.0112513015, w: 0.99993676}
+      scale: {x: 0.9999997, y: 1.0000001, z: 0.9999998}
+    - name: WhaleRig01_Tail4
+      parentName: WhaleRig01_Tail3
+      position: {x: -0.41004127, y: 0.005348404, z: -1.3531955e-16}
+      rotation: {x: -0.000000043886505, y: 0.00000008811723, z: -0.013435607, w: 0.99990976}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000004}
+    - name: WhaleRig01_TailProng1
+      parentName: WhaleRig01_Tail4
+      position: {x: -0.39935303, y: -0.0029751207, z: -1.3210023e-16}
+      rotation: {x: 0.000000011950861, y: 0.000000089076615, z: 0.103279516, w: 0.9946524}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_joint12
+      parentName: WhaleRig01_TailProng1
+      position: {x: -0.7945724, y: -0.0059194462, z: -2.6398303e-16}
+      rotation: {x: 0.008126054, y: 0.7070601, z: -0.008126054, w: 0.7070601}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_Whale3DCLo_Group17209
+      parentName: Whale.fbx(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: WhaleRig01_WhaleTeeth_Group23368
+      parentName: Whale.fbx(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -173,11 +911,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

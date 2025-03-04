@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.243
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.243}
+  m_IndirectSpecularColor: {r: 0.22550967, g: 0.2532097, b: 0.294304, a: 0.243}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -264,10 +264,17 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95000012239673052, guid: f85e3056e6d31594d8f370d05da256ff, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b74d20aed317c4340b4860cbc45334d6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1000010746331740, guid: f85e3056e6d31594d8f370d05da256ff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1651011996}
   m_SourcePrefab: {fileID: 100100000, guid: f85e3056e6d31594d8f370d05da256ff, type: 3}
 --- !u!1 &696308103
 GameObject:
@@ -471,6 +478,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 34.571003, y: -116.129005, z: 0}
+--- !u!1 &1651011993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010746331740, guid: f85e3056e6d31594d8f370d05da256ff, type: 3}
+  m_PrefabInstance: {fileID: 270668897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1651011996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651011993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c595d4d258e3d5f4e9562c20cbf93dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkDuration: 0.2
+  blinkCount: 3
+  fishContoller: {fileID: 0}
+  shieldController: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  attackInterval: 2
+  bossHpSlider: {fileID: 0}
+  chargeDistance: 10
+  chargeSpeed: 10
+  lookDelay: 1
 --- !u!1 &1684467587
 GameObject:
   m_ObjectHideFlags: 0

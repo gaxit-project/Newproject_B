@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -763,6 +763,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3d14f51e23c933c4fb3b37a04e28eb7c, type: 3}
   - {fileID: 8300000, guid: 3fb1d92e85c0ae649a8792cea745165d, type: 3}
   audioSource: {fileID: 81893184}
+  bossScript: {fileID: 1245536125}
 --- !u!4 &81893186
 Transform:
   m_ObjectHideFlags: 0
@@ -1093,11 +1094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5966172021845739901, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5966172021845739901, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.82
+      value: -16.8
       objectReference: {fileID: 0}
     - target: {fileID: 5966172021845739901, guid: 4fdc23a23ea4bcc44a6814c51370b92f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4308,6 +4309,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1224305897}
     - target: {fileID: 778462088979639073, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
+      propertyPath: chargeSpeed
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 778462088979639073, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
       propertyPath: bossHpSlider
       value: 
       objectReference: {fileID: 942665715}
@@ -4321,7 +4326,7 @@ PrefabInstance:
       objectReference: {fileID: 1695582935}
     - target: {fileID: 2007662431226116305, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2007662431226116305, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4329,7 +4334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2007662431226116305, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 20.67
       objectReference: {fileID: 0}
     - target: {fileID: 2007662431226116305, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4367,6 +4372,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2007662431235987249, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b74d20aed317c4340b4860cbc45334d6, type: 2}
     - target: {fileID: 2007662431240071665, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -4389,6 +4398,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2007662431226116305, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
   m_PrefabInstance: {fileID: 1245536119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1245536125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 778462088979639073, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
+  m_PrefabInstance: {fileID: 1245536119}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c595d4d258e3d5f4e9562c20cbf93dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1263347826
 PrefabInstance:
   m_ObjectHideFlags: 0

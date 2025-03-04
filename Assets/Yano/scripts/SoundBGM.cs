@@ -13,6 +13,9 @@ public class SoundBGM : MonoBehaviour
     public static AudioSource audioSource_tmp;
     public AudioSource audioSource;
 
+
+    [SerializeField] BossScript bossScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +24,18 @@ public class SoundBGM : MonoBehaviour
         sound[1] = sound_bgm[1];
     }
 
+    void Update()
+    {
+        if (bossScript.GetBossHP() <= 0)
+        {
+            audioSource.Stop();
+        }
+    }
+
     public static void MainBGM()
     {
-        audioSource_tmp.clip = sound[0]; // ƒNƒŠƒbƒv‚ðÝ’è
-        audioSource_tmp.Play();          // Ä¶
+        audioSource_tmp.clip = sound[0]; // ï¿½Nï¿½ï¿½ï¿½bï¿½vï¿½ï¿½Ý’ï¿½
+        audioSource_tmp.Play();          // ï¿½Äï¿½
     }
 
     public static void Omake()

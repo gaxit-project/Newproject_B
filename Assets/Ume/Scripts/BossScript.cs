@@ -32,6 +32,20 @@ public class BossScript : MonoBehaviour
     private Queue<Vector3> playerPositions = new Queue<Vector3>();
     [SerializeField] private float lookDelay = 1f; // 1秒遅らせる
 
+
+
+    //アニメーション関連の変数
+    private Animator bossAnim;
+    string canHit;
+    string chargeAttack;
+    string deathTrigger;
+    string damaged;
+    string attack;
+    string counter;
+    string walk;
+
+    float lastAtkSecond;
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -43,11 +57,25 @@ public class BossScript : MonoBehaviour
 
         UpdateAttackPattern();
         InvokeRepeating("Attack", attackInterval, attackInterval);
+
+        bossAnim = GetComponent<Animator>();
+        canHit = "CanHit";
+        chargeAttack = "ChargingAttack";
+        deathTrigger = "DeathTrigger";
+        damaged = "Damaged";
+        attack = "Attack";
+        counter = "Counter";
+        walk = "Walk";
     }
 
     public bool GetisCharging()
     {
         return isCharging;
+    }
+
+    public float GetBossHP()
+    {
+        return bossHpSlider.value;
     }
 
     void Update()
@@ -57,9 +85,14 @@ public class BossScript : MonoBehaviour
             UpdatePlayerPosition();
             LookAtDelayedPlayer();
         }
-        if (bossHpSlider.value <= 0)
+        if (bossHpSlider.value <= 0 && lastAtkSecond == 0)
         {
-            SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
+            lastAtkSecond += Time.deltaTime;
+            StartCoroutine(LastAttack());
+            if (lastAtkSecond > 10)
+            {
+                //   SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
+            }
         }
     }
 
@@ -89,6 +122,11 @@ public class BossScript : MonoBehaviour
             // ゆっくり回転（数値を小さくするとさらに遅くなる）
             float rotationSpeed = 1.5f; // 数値を小さくすると回転が遅くなる
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
+            bossAnim.SetBool(walk, true);
+        }
+        else
+        {
+            bossAnim.SetBool(walk, false);
         }
     }
 
@@ -173,6 +211,7 @@ public class BossScript : MonoBehaviour
         chargedPosition = transform.position;
         Quaternion originalRotation = transform.rotation;
         chargeDistance = Vector3.Distance(transform.position, player.position);
+        bossAnim.SetTrigger(chargeAttack);
 
         float angle = 30f;
         float duration = 0.5f;
@@ -188,7 +227,11 @@ public class BossScript : MonoBehaviour
         Vector3 targetPosition = transform.position + chargeDirection * chargeDistance;
         chargeMoveCoroutine = StartCoroutine(MoveTo(targetPosition, chargeSpeed));
 
+        //噛みつくアニメーション
+        bossAnim.SetTrigger(canHit);
+
         yield return chargeMoveCoroutine; // 突進が終わるのを待つ
+
 
         isCharging = false;
     }
@@ -225,6 +268,7 @@ public class BossScript : MonoBehaviour
             yield return null;
         }
 
+
         transform.position = targetPosition; // 最後に確実に目標地点へ
     }
 
@@ -253,9 +297,10 @@ public class BossScript : MonoBehaviour
             if (rubble != null && rubble.isReflected)
             {
                 bossHpSlider.value -= 5;
-                StartCoroutine(BlinkEffect());
+                //StartCoroutine(BlinkEffect());
+                bossAnim.SetTrigger(damaged);
 
-                Debug.Log($"Boss HP: {bossHpSlider.value}");
+                //Debug.Log($"Boss HP: {bossHpSlider.value}");
                 Destroy(collision.gameObject);
 
                 if (bossHpSlider.value <= 50 && !lastAttack)
@@ -274,19 +319,21 @@ public class BossScript : MonoBehaviour
 
 
         }
-        else if (collision.gameObject.CompareTag("Wall") && isCharging)
+        else if (collision.gameObject.CompareTag("Wall"))// && !isCharging)
         {
+            Vector3 wallPosition = new Vector3(collision.transform.position.x, 0, collision.transform.position.z);
             // 突進のMoveTo()だけを止める
-            /*if (chargeMoveCoroutine != null)
+            if (chargeMoveCoroutine != null)
             {
                 StopCoroutine(chargeMoveCoroutine);
                 chargeMoveCoroutine = null;
-            }*/
+            }
 
+            transform.position = wallPosition;
 
             // 元の位置に戻る
             //StartCoroutine(MoveTo(originalPosition, chargeSpeed * 0.1f));
-            isCharging = false; // 突進を終了
+            //isCharging = false; // 突進を終了
         }
         else if (collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting())
         {
@@ -298,15 +345,16 @@ public class BossScript : MonoBehaviour
             }
 
             bossHpSlider.value -= 10;
-            StartCoroutine(BlinkEffect());
+            bossAnim.SetTrigger(counter);
+
 
             // ボスが攻撃を受けているように見せる
-
+            //StartCoroutine(BlinkEffect());
 
             //RotateTo()
 
             // 元の位置に戻る
-            StartCoroutine(MoveTo(transform.position - transform.forward * 50f, chargeSpeed * 0.4f));
+            StartCoroutine(MoveTo(transform.position - transform.forward * 30f, chargeSpeed * 0.4f));
 
             isCharging = false; // 突進を終了
         }
@@ -340,5 +388,23 @@ public class BossScript : MonoBehaviour
         }
 
         currentAttackIndex = 0; // パターンを最初から開始
+    }
+
+    IEnumerator LastAttack()
+    {
+        CancelInvoke("Attack");
+        float speed = 10f;
+        Time.timeScale = 0.4f;
+        bossAnim.SetTrigger(deathTrigger);
+        while (Vector3.Distance(transform.position, player.position) > 20f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            yield return null; // 1フレーム待つ
+        }
+
+        //Time.timeScale = 0.25f;
+        bossAnim.SetTrigger(canHit);
+        yield return new WaitForSecondsRealtime(7);
+        SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
     }
 }
