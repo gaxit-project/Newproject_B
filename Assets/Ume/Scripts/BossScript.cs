@@ -405,6 +405,7 @@ public class BossScript : MonoBehaviour
         //Time.timeScale = 0.25f;
         bossAnim.SetTrigger(canHit);
         yield return new WaitForSecondsRealtime(7);
+        Time.timeScale = 1f;
         SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
     }
 }
