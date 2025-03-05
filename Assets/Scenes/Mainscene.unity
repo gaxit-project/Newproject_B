@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2572,6 +2572,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1706766519459923211, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706766519459923211, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
@@ -2580,12 +2584,32 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2682567633282081905, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682567633282081905, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028014390018755223, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3821554206743588132, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       propertyPath: m_Name
       value: Steage
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068127674865572676, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 474.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068127674865572676, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 519.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790353631338116126, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6850004786285816162, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2634,6 +2658,14 @@ PrefabInstance:
     - target: {fileID: 6951040080983323635, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       propertyPath: m_TagString
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6988640394226159081, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041163986119976561, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
