@@ -11,6 +11,8 @@ public class ChaseFish : MonoBehaviour
     private Vector3 moveDirection; // 目標位置への移動方向
     private bool isChasing = true; //追跡をするかどうか
     private bool isAttacking = false; //攻撃した(=ShieldまたはPlayerに触れた)かどうか
+    private GameObject player; //プレイヤーの位置を得る際に使用する
+    private int[] array ={-5, 5}; //攻撃後方向転換する際に利用する
     [SerializeField] private MeshRenderer meshRenderer; //点滅させる用
 
     void Start()
@@ -43,7 +45,7 @@ public class ChaseFish : MonoBehaviour
     private void DefinePlayerPosition()
     {
         // プレイヤーの位置を目標位置として設定
-        GameObject player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
+        player = GameObject.FindWithTag("Player"); // プレイヤーオブジェクトをタグで検索
 
         if (player != null)
         {
@@ -92,6 +94,21 @@ public class ChaseFish : MonoBehaviour
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突しました。");
             isAttacking = true;
             gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
+                        
+            player = GameObject.FindWithTag("Player");
+            if(Mathf.Abs(transform.position.x - player.transform.position.x) <= Mathf.Abs(transform.position.z - player.transform.position.z))
+            {
+                targetPosition = player.transform.position + Vector3.right * array[UnityEngine.Random.Range(0, 2)];
+            }
+            else
+            {
+                targetPosition = player.transform.position + Vector3.forward * array[UnityEngine.Random.Range(0, 2)];
+            }
+            moveDirection = (targetPosition - transform.position).normalized; // 移動方向を計算
+            transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+            // 初期向きが右（X+方向）になるため、Y軸を90度回転
+            transform.Rotate(0, 90, 0);
+
             Invoke("Blink", 0);
         }
     }

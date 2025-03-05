@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.84, y: 0.7, z: -20.96}
-  m_LocalScale: {x: 2.5, y: 4, z: 7}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 7.5, y: 12, z: 21}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -174,5 +174,4 @@ MonoBehaviour:
   continueStraightDuration: 2
   startChangingTime: 3
   changePosition: 1
-  disappearTime: 5
   meshRenderer: {fileID: 2210625729639798250}
