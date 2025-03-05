@@ -347,6 +347,12 @@ public class BossScript : MonoBehaviour
             bossHpSlider.value -= 10;
             bossAnim.SetTrigger(counter);
 
+            if (bossHpSlider.value <= 50 && !lastAttack)
+            {
+                UpdateAttackPattern();
+                lastAttack = true;
+            }
+
 
             // ボスが攻撃を受けているように見せる
             //StartCoroutine(BlinkEffect());
@@ -355,9 +361,13 @@ public class BossScript : MonoBehaviour
 
             // 元の位置に戻る
             StartCoroutine(MoveTo(transform.position - transform.forward * 10f, chargeSpeed * 0.4f));
-
+            //StartCoroutine(WaitTime(20));
             isCharging = false; // 突進を終了
         }
+    }
+
+    IEnumerator WaitTime(int second){
+        yield return new WaitForSeconds(second);
     }
 
     IEnumerator BlinkEffect()
