@@ -354,7 +354,7 @@ public class BossScript : MonoBehaviour
             //RotateTo()
 
             // 元の位置に戻る
-            StartCoroutine(MoveTo(transform.position - transform.forward * 30f, chargeSpeed * 0.4f));
+            StartCoroutine(MoveTo(transform.position - transform.forward * 10f, chargeSpeed * 0.4f));
 
             isCharging = false; // 突進を終了
         }
