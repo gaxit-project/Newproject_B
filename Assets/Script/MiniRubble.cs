@@ -10,6 +10,7 @@ public class MiniRubble : MonoBehaviour
     private float initialY;
     public float speed = 2.5f; // 速度を `TestRubble` の半分に調整
     private bool canTrigger = false; // 衝突判定を一時的に無効化
+    public GameObject explosionEffect; // 爆発エフェクトのプレハブ
 
     void Start()
     {
@@ -66,6 +67,15 @@ public class MiniRubble : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("Shield") || other.CompareTag("Rubble")|| other.CompareTag("Wall")|| other.CompareTag("Boss"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
+            if (explosionEffect != null)
+        {
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("ExplosionEffectが設定されていません！");
+        }
+
             Destroy(gameObject);
         }
     }

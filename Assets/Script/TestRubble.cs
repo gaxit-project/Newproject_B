@@ -12,8 +12,8 @@ public class TestRubble : MonoBehaviour
     private Vector3 moveDirection; // 目標位置への移動方向
     public bool isReflected = false; // 反射中かどうかのフラグ
     public GameObject rubblePrefab; // 小さい破片のプレハブ
-public float explosionForce = 1f; // 破片が飛び散る力
-
+    public float explosionForce = 1f; // 破片が飛び散る力
+    public GameObject explosionEffect;// 爆発エフェクト
 
     void Start()
     {
@@ -88,6 +88,14 @@ public float explosionForce = 1f; // 破片が飛び散る力
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             SpawnRubble();
+            if (explosionEffect != null)
+            {
+                Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.LogWarning("ExplosionEffectが設定されていません！");
+            }
             Destroy(gameObject);
         }
     }

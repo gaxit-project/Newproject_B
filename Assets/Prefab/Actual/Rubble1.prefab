@@ -166,7 +166,8 @@ MonoBehaviour:
   continueStraightDuration: 2
   isReflected: 0
   rubblePrefab: {fileID: 1000011949594382, guid: c92ada64255cc7542956304f8239daa5, type: 3}
-  explosionForce: 3
+  explosionForce: 1
+  explosionEffect: {fileID: 3535306866667297075, guid: 6ca8e460ea2dad149b8c65fae2c77e64, type: 3}
 --- !u!54 &6726422873532128048
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -211,6 +211,7 @@ MonoBehaviour:
   shieldController: {fileID: 0}
   stopDelay: 1
   speed: 3
+  explosionEffect: {fileID: 3535306866667297075, guid: 301091589d8b6f84e8af22a25ae3746a, type: 3}
 --- !u!1 &1000012074862460
 GameObject:
   m_ObjectHideFlags: 0
