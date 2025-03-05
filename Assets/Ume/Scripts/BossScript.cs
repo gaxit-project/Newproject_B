@@ -80,6 +80,11 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
+        if (bossHpSlider.value <= 50 && !lastAttack)
+        {
+            UpdateAttackPattern();
+            lastAttack = true;
+        }        
         if (!isCharging)
         {
             UpdatePlayerPosition();
@@ -303,11 +308,11 @@ public class BossScript : MonoBehaviour
                 //Debug.Log($"Boss HP: {bossHpSlider.value}");
                 //Destroy(collision.gameObject);
 
-                if (bossHpSlider.value <= 50 && !lastAttack)
+                /*if (bossHpSlider.value <= 50 && !lastAttack)
                 {
                     UpdateAttackPattern();
                     lastAttack = true;
-                }
+                }*/
             }
         }
         else if (collision.gameObject.CompareTag("Rubble") && isCharging)
@@ -347,27 +352,22 @@ public class BossScript : MonoBehaviour
             bossHpSlider.value -= 10;
             bossAnim.SetTrigger(counter);
 
-            if (bossHpSlider.value <= 50 && !lastAttack)
-            {
-                UpdateAttackPattern();
-                lastAttack = true;
-            }
+            // 攻撃を停止
+            CancelInvoke("Attack");
 
 
-            // ボスが攻撃を受けているように見せる
-            //StartCoroutine(BlinkEffect());
-
-            //RotateTo()
 
             // 元の位置に戻る
             StartCoroutine(MoveTo(transform.position - transform.forward * 10f, chargeSpeed * 0.4f));
-            //StartCoroutine(WaitTime(20));
+            StartCoroutine(WaitTime(3));
             isCharging = false; // 突進を終了
         }
     }
 
     IEnumerator WaitTime(int second){
         yield return new WaitForSeconds(second);
+        InvokeRepeating("Attack", attackInterval, attackInterval); // 攻撃を再開
+
     }
 
     IEnumerator BlinkEffect()
