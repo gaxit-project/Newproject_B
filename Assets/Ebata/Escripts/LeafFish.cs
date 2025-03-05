@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LeafFish : MonoBehaviour
 {
-    public float rotationPeriod = 3f; // 回転周期
+    public float rotationPeriod = 2.4f; // 回転周期
     public float naturalDisappearTime = 10f; // 自然消滅までの時間
 
     [SerializeField] private MeshRenderer meshRenderer; //点滅させる用
