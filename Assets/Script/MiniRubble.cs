@@ -6,7 +6,7 @@ public class MiniRubble : MonoBehaviour
     public ShieldController shieldController; // ShieldManagerにアタッチされたShieldControllerを参照
     private Vector3 moveDirection;
     private bool isReflected = false;
-    public float stopDelay = 0.5f;
+    public float stopDelay = 2f;
     private float initialY;
     public float speed = 2.5f; // 速度を `TestRubble` の半分に調整
     private bool canTrigger = false; // 衝突判定を一時的に無効化

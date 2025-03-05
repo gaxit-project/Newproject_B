@@ -301,7 +301,7 @@ public class BossScript : MonoBehaviour
                 bossAnim.SetTrigger(damaged);
 
                 //Debug.Log($"Boss HP: {bossHpSlider.value}");
-                Destroy(collision.gameObject);
+                //Destroy(collision.gameObject);
 
                 if (bossHpSlider.value <= 50 && !lastAttack)
                 {
@@ -313,7 +313,7 @@ public class BossScript : MonoBehaviour
         else if (collision.gameObject.CompareTag("Rubble") && isCharging)
         {
 
-            Destroy(collision.gameObject); //岩を消す用，エフェクトを追加してそれっぽく見せるように
+            //Destroy(collision.gameObject); //岩を消す用，エフェクトを追加してそれっぽく見せるように
 
             isCharging = false; // 突進を終了
 

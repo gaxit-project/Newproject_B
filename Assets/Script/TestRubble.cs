@@ -98,6 +98,22 @@ public class TestRubble : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        if (other.CompareTag("Boss"))
+        {
+            if (isReflected == true){
+                SpawnRubble();
+            if (explosionEffect != null)
+            {
+                Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.LogWarning("ExplosionEffectが設定されていません！");
+            }
+            Destroy(gameObject);
+            }
+            
+        }
     }
 
     private void Reflect(Vector3 collisionNormal)
