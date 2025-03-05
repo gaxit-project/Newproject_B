@@ -68,11 +68,11 @@ public class FishContoller : MonoBehaviour
     }
     public void spawnPenetrateFish() //盾貫通さかな
     {
-        Instantiate(PenetrateFish, new Vector3(spawnPosition.x, 9f, spawnPosition.z), spawnPoint.transform.rotation);
+        Instantiate(PenetrateFish, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
     }
     public void spawnTwoWayPenetrateFish() //2方向盾貫通さかな
     {
-        Instantiate(PenetrateFishA, new Vector3(spawnPosition.x, 9f, spawnPosition.z), spawnPoint.transform.rotation);
-        Instantiate(PenetrateFishB, new Vector3(spawnPosition.x, 9f, spawnPosition.z), spawnPoint.transform.rotation);
+        Instantiate(PenetrateFishA, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
+        Instantiate(PenetrateFishB, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
     }
 }
