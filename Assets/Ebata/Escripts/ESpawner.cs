@@ -22,7 +22,7 @@ public class ESpawner : MonoBehaviour
         //Lキーを押したときにプレハブを生成
         if (Input.GetKeyDown(KeyCode.L))
         {
-            FishManager.SendMessage("spawnRubble");
+            FishManager.SendMessage("spawnLeafFish");
         }
         //Iキーを押したときにプレハブを生成
         if (Input.GetKeyDown(KeyCode.I))
