@@ -84,7 +84,7 @@ public class BossScript : MonoBehaviour
         {
             UpdateAttackPattern();
             lastAttack = true;
-        }        
+        }
         if (!isCharging)
         {
             UpdatePlayerPosition();
@@ -94,6 +94,7 @@ public class BossScript : MonoBehaviour
         {
             lastAtkSecond += Time.deltaTime;
             StartCoroutine(LastAttack());
+            SoundBGM.StopBGM();
             if (lastAtkSecond > 10)
             {
                 //   SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
@@ -217,6 +218,7 @@ public class BossScript : MonoBehaviour
         Quaternion originalRotation = transform.rotation;
         chargeDistance = Vector3.Distance(transform.position, player.position);
         bossAnim.SetTrigger(chargeAttack);
+        SoundSE.BossDashAttack();
 
         float angle = 30f;
         float duration = 0.5f;
@@ -302,17 +304,11 @@ public class BossScript : MonoBehaviour
             if (rubble != null && rubble.isReflected)
             {
                 bossHpSlider.value -= 5;
-                //StartCoroutine(BlinkEffect());
                 bossAnim.SetTrigger(damaged);
+                SoundSE.BossRockDamage();
 
                 //Debug.Log($"Boss HP: {bossHpSlider.value}");
                 //Destroy(collision.gameObject);
-
-                /*if (bossHpSlider.value <= 50 && !lastAttack)
-                {
-                    UpdateAttackPattern();
-                    lastAttack = true;
-                }*/
             }
         }
         else if (collision.gameObject.CompareTag("Rubble") && isCharging)
@@ -364,7 +360,8 @@ public class BossScript : MonoBehaviour
         }
     }
 
-    IEnumerator WaitTime(int second){
+    IEnumerator WaitTime(int second)
+    {
         yield return new WaitForSeconds(second);
         InvokeRepeating("Attack", attackInterval, attackInterval); // 攻撃を再開
 

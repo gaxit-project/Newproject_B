@@ -42,4 +42,9 @@ public class SoundBGM : MonoBehaviour
     {
         audioSource_tmp.PlayOneShot(sound[1]);
     }
+
+    public static void StopBGM()
+    {
+        audioSource_tmp.Stop();
+    }
 }

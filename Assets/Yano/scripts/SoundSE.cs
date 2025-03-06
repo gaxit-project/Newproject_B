@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class SoundSE : MonoBehaviour
 {
-    const int N = 100;
-    public static AudioClip[] sound = new AudioClip[N];
+    public static AudioClip[] sound;
     public AudioClip[] sound_se;
 
     public static AudioSource audioSource_tmp;
@@ -16,19 +15,15 @@ public class SoundSE : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource_tmp = audioSource;
-        sound[0] = sound_se[0];
-        sound[1] = sound_se[1];
-        sound[2] = sound_se[2];
-        sound[3] = sound_se[3];
-        sound[4] = sound_se[4];
-        sound[5] = sound_se[5];
-        sound[6] = sound_se[6];
-        sound[7] = sound_se[7];
-        sound[8] = sound_se[8];
-        sound[9] = sound_se[9];
-        sound[10] = sound_se[10];
 
+        audioSource_tmp = audioSource;
+        sound = new AudioClip[sound_se.Length];
+
+
+        for (int i = 0; i < sound_se.Length; i++)
+        {
+            sound[i] = sound_se[i];
+        }
     }
 
     public static void Button()
@@ -40,7 +35,7 @@ public class SoundSE : MonoBehaviour
         audioSource_tmp.PlayOneShot(sound[1]);
     }
 
-    //‚ŠÖ˜A‚ÌSE
+    //ï¿½ï¿½ï¿½Ö˜Aï¿½ï¿½SE
     public static void Reflect()
     {
         audioSource_tmp.PlayOneShot(sound[2]);
@@ -74,13 +69,19 @@ public class SoundSE : MonoBehaviour
         audioSource_tmp.PlayOneShot(sound[9]);
     }
 
-    //PlayerŠÖ˜A‚ÌSE
+    //Playerï¿½Ö˜Aï¿½ï¿½SE
     public static void PlayerDamage()
     {
         audioSource_tmp.PlayOneShot(sound[10]);
     }
 
-    void Update(){
-        
+    public static void BossRockDamage()
+    {
+        audioSource_tmp.PlayOneShot(sound[11]);
+    }
+
+    public static void BossDashAttack()
+    {
+        audioSource_tmp.PlayOneShot(sound[12]);
     }
 }
