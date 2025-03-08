@@ -4267,7 +4267,7 @@ GameObject:
   - component: {fileID: 950765299}
   - component: {fileID: 950765298}
   m_Layer: 0
-  m_Name: EventSystem (1)
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5376,6 +5376,14 @@ PrefabInstance:
     - target: {fileID: 4328806949985489468, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
       propertyPath: m_Size.y
       value: 7.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328806949985489468, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
+      propertyPath: m_Size.z
+      value: 5.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328806949985489468, guid: 3ffd58b517b66a34d876aecf5e379085, type: 3}
+      propertyPath: m_Center.z
+      value: -0.42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6800,7 +6808,7 @@ Transform:
   m_GameObject: {fileID: 1620781666}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 32.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
+    Rigidbody rb;
+
     private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private float blinkDuration = 0.2f; // 点滅の長さ
     [SerializeField] private int blinkCount = 3;        // 点滅の回数
@@ -16,7 +18,6 @@ public class BossScript : MonoBehaviour
     [SerializeField] private Transform spawnPoint; //ボスのトランスフォーム
     [SerializeField] private float attackInterval = 2f;
     [SerializeField] private Slider bossHpSlider;
-    [SerializeField] private float chargeDistance = 10f;
     [SerializeField] private float chargeSpeed = 10f;
     //[SerializeField] private float rotationSpeed = 2f;
 
@@ -25,10 +26,11 @@ public class BossScript : MonoBehaviour
     private List<int> attackPattern;
     private bool IsSpecialATC = false;
     private bool isCharging = false;
+    private bool isCountered = false;
     private Vector3 originalPosition;
     private bool lastAttack = false; //攻撃パターンを変更する用
     private Vector3 chargedPosition; //突進攻撃する前のポジションを入れる
-
+    private float chargeDistance;
     private Queue<Vector3> playerPositions = new Queue<Vector3>();
     [SerializeField] private float lookDelay = 1f; // 1秒遅らせる
 
@@ -48,6 +50,8 @@ public class BossScript : MonoBehaviour
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody>();
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
         bossHpSlider.value = 100;
         bossHpSlider.maxValue = 100;
@@ -138,6 +142,7 @@ public class BossScript : MonoBehaviour
 
     void Attack()
     {
+        isCountered = false;
         if (isCharging || attackPattern == null || attackPattern.Count == 0)
         {
             return;
@@ -214,6 +219,7 @@ public class BossScript : MonoBehaviour
     IEnumerator ChargeAttack()
     {
         isCharging = true;
+        CancelInvoke("Attack");
         chargedPosition = transform.position;
         Quaternion originalRotation = transform.rotation;
         chargeDistance = Vector3.Distance(transform.position, player.position);
@@ -241,6 +247,7 @@ public class BossScript : MonoBehaviour
 
 
         isCharging = false;
+        StartCoroutine(WaitTime(3));
     }
 
 
@@ -320,7 +327,7 @@ public class BossScript : MonoBehaviour
 
 
         }
-        else if (collision.gameObject.CompareTag("Wall"))// && !isCharging)
+        /*else if (collision.gameObject.CompareTag("Wall"))// && !isCharging)
         {
             Vector3 wallPosition = new Vector3(collision.transform.position.x, 0, collision.transform.position.z);
             // 突進のMoveTo()だけを止める
@@ -335,9 +342,17 @@ public class BossScript : MonoBehaviour
             // 元の位置に戻る
             //StartCoroutine(MoveTo(originalPosition, chargeSpeed * 0.1f));
             //isCharging = false; // 突進を終了
-        }
+        }*/
         else if (collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting())
         {
+            if (isCountered) return;
+            isCountered = true;  // ここでフラグを変更
+            rb.velocity = Vector3.zero;  // 速度をリセット
+            Vector3 counteredForce = -transform.forward * 10;
+
+            // 攻撃を停止
+            CancelInvoke("Attack");
+
             // 突進のMoveTo()だけを止める
             if (chargeMoveCoroutine != null)
             {
@@ -345,24 +360,37 @@ public class BossScript : MonoBehaviour
                 chargeMoveCoroutine = null;
             }
 
+            // 体力変更，カウンターアニメーション追加
             bossHpSlider.value -= 10;
             bossAnim.SetTrigger(counter);
 
-            // 攻撃を停止
-            CancelInvoke("Attack");
+            rb.AddForce(counteredForce, ForceMode.Impulse);
 
-
-
-            // 元の位置に戻る
-            StartCoroutine(MoveTo(transform.position - transform.forward * 10f, chargeSpeed * 0.4f));
             StartCoroutine(WaitTime(3));
             isCharging = false; // 突進を終了
         }
     }
+    /*void OnCollisionEnter(Collision collision)
+    {
+        transform.position = new Vector3(0, 0, 0);
+        /*if (collision.gameObject.CompareTag("Wall"))
+        {
+
+        }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            rb.velocity = Vector3.zero;
+
+            transform.position = new Vector3(0, 0, 0);
+            // 元の位置に戻る
+            StartCoroutine(MoveTo(new Vector3(0, 0, 0), chargeSpeed * 10f));
+        }
+    }*/
 
     IEnumerator WaitTime(int second)
     {
         yield return new WaitForSeconds(second);
+        rb.velocity = Vector3.zero;  // 速度をリセット
         InvokeRepeating("Attack", attackInterval, attackInterval); // 攻撃を再開
 
     }
