@@ -143,26 +143,37 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
     {
-        if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
+        if (other.CompareTag("Rubble"))
         {
-            Debug.Log(other.tag + " に当たりました！");
-            TakeDamage(); // HPを減少させる
+            // **シールドが直近0.5秒以内にRubbleと衝突していたらダメージを受けない**
+            if (Time.time - shieldController.GetLastRubbleShieldCollisionTime() < shieldController.rubbleShieldCollisionCooldown)
+            {
+                Debug.Log("Rubbleの衝突クールダウン中のためダメージ無効");
+                return;
+            }
         }
-        else if (other.CompareTag("Boss"))
+
+        Debug.Log(other.tag + " に当たりました！");
+        TakeDamage(); // HPを減少させる
+    }
+    else if (other.CompareTag("Boss"))
+    {
+        if (Time.time - shieldController.GetLastBossShieldCollisionTime() > shieldController.bossShieldCollisionCooldown)
         {
-            if (Time.time - shieldController.GetLastBossShieldCollisionTime() > shieldController.bossShieldCollisionCooldown)
-            {
-                Debug.Log("ボスがプレイヤーに直接衝突！ HP -3 & ノックバック");
-                TakeDamage(3);
-                ApplyKnockback((transform.position - other.transform.position).normalized, 20f, 0.5f);
-            }
-            else
-            {
-                Debug.Log("ボスは最近シールドに当たったため、プレイヤーに影響なし");
-            }
+            Debug.Log("ボスがプレイヤーに直接衝突！ HP -3 & ノックバック");
+            TakeDamage(3);
+            ApplyKnockback((transform.position - other.transform.position).normalized, 20f, 0.5f);
+        }
+        else
+        {
+            Debug.Log("ボスは最近シールドに当たったため、プレイヤーに影響なし");
         }
     }
+}
+
 
     public void ApplyKnockback(Vector3 direction, float distance, float duration)
     {

@@ -16,7 +16,7 @@ public class MiniRubble : MonoBehaviour
     {
         initialY = transform.position.y;
         StartCoroutine(StopMovementAfterDelay(stopDelay));
-        StartCoroutine(EnableTriggerAfterDelay(0.5f)); // 0.5秒後にOnTriggerEnterを有効化
+        StartCoroutine(EnableTriggerAfterDelay(1.5f)); // 0.5秒後にOnTriggerEnterを有効化
     }
 
     void Update()

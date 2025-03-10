@@ -15,6 +15,12 @@ public class ShieldCollision : MonoBehaviour
         {
             shieldController?.ReduceShieldHP(); // HPを減少させる
             Debug.Log($"Shieldが {other.gameObject.tag} とトリガーで接触しました");
+
+            // **Rubble との衝突を記録（プレイヤーのダメージ無効化のため）**
+            if (other.gameObject.CompareTag("Rubble"))
+            {
+                shieldController?.RegisterRubbleShieldCollision();
+            }
         }
         else if (other.gameObject.CompareTag("Boss"))
         {

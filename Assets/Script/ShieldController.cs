@@ -372,4 +372,22 @@ public class ShieldController : MonoBehaviour
         return currentShieldIndex;
     }
 
+//3/11
+private float lastRubbleShieldCollisionTime = -10f; // 最後にRubbleとシールドが衝突した時間
+public float rubbleShieldCollisionCooldown = 0.3f; // 0.5秒以内にRubbleがシールドと衝突していればダメージ無効
+
+// **Rubbleとシールドの衝突時間を更新**
+public void RegisterRubbleShieldCollision()
+{
+    lastRubbleShieldCollisionTime = Time.time;
+}
+
+// **Rubbleの最後の衝突時間を取得**
+public float GetLastRubbleShieldCollisionTime()
+{
+    return lastRubbleShieldCollisionTime;
+}
+
+
+
 }
