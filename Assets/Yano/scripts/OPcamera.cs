@@ -3,7 +3,7 @@ using UnityEngine;
 public class MoveAndRotate : MonoBehaviour
 {
     private Vector3 startPosition = new Vector3(0, 14.6f, -46.8f);
-    private Vector3 targetPosition = new Vector3(0, 25.6f, -21.29f);
+    private Vector3 targetPosition = new Vector3(0, 40f, 1.935f);
     private Quaternion startRotation = Quaternion.Euler(30, 0, 0);
     private Quaternion targetRotation = Quaternion.Euler(90, 0, 0);
     private float duration = 5f;
