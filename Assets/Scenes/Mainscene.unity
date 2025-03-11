@@ -1322,7 +1322,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 547094406}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &179721110
 MonoBehaviour:
@@ -3118,12 +3118,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6850004786285816162, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1266894287}
-    - targetCorrespondingSourceObject: {fileID: 6850004786285816162, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 179721109}
-    - targetCorrespondingSourceObject: {fileID: 6850004786285816162, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1550505110}
     - targetCorrespondingSourceObject: {fileID: 6850004786285816162, guid: 2b9098167ac4ffe4982a2438fa27682c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2017785569}
@@ -5156,6 +5150,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 39f36214ca4313d44a56d242e30e248a, type: 3}
   - {fileID: 8300000, guid: 9726e134ba1dfed4c984565054cb458d, type: 3}
   - {fileID: 8300000, guid: e66c560aa7c41aa47b899db6f5f1b310, type: 3}
+  - {fileID: 8300000, guid: 3b703bf55363f1b4b9834e7ccb194820, type: 3}
+  - {fileID: 8300000, guid: fd30db7c6f27ebb4a95e92f39fa35c35, type: 3}
   audioSource: {fileID: 1238026846}
 --- !u!4 &1238026848
 Transform:
@@ -6495,7 +6491,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 547094406}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1563167046
 GameObject:
@@ -8611,3 +8607,5 @@ SceneRoots:
   - {fileID: 1527068599}
   - {fileID: 950765300}
   - {fileID: 255311963}
+  - {fileID: 179721109}
+  - {fileID: 1550505110}

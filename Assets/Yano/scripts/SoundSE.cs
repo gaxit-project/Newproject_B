@@ -84,4 +84,14 @@ public class SoundSE : MonoBehaviour
     {
         audioSource_tmp.PlayOneShot(sound[12]);
     }
+
+    public static void Sound_SpawnRubble()
+    {
+        audioSource_tmp.PlayOneShot(sound[13]);
+    }
+    
+    public static void Sound_SpawnFish()
+    {
+        audioSource_tmp.PlayOneShot(sound[14]);
+    }
 }
