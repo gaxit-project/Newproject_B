@@ -89,7 +89,7 @@ public class SoundSE : MonoBehaviour
     {
         audioSource_tmp.PlayOneShot(sound[13]);
     }
-    
+
     public static void Sound_SpawnFish()
     {
         audioSource_tmp.PlayOneShot(sound[14]);
@@ -102,5 +102,14 @@ public class SoundSE : MonoBehaviour
     public static void FishPlayer()
     {
         audioSource_tmp.PlayOneShot(sound[16]);
+    }
+
+    public static void BossChargingAttack()
+    {
+        audioSource_tmp.PlayOneShot(sound[17]);
+    }
+    public static void BossCounteredDamage()
+    {
+        audioSource_tmp.PlayOneShot(sound[18]);
     }
 }
