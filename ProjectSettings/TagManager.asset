@@ -15,6 +15,7 @@ TagManager:
   - TargetD
   - TargetE
   - Wall
+  - BossWall
   layers:
   - Default
   - TransparentFX
