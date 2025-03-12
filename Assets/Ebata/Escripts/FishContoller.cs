@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -96,10 +97,14 @@ public class FishContoller : MonoBehaviour
         Instantiate(CoDFishB, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
     }
-    public void spawnLeafFish() //木の葉さかな
+    public async void spawnLeafFish() //木の葉さかな
     {
-        SoundSE.Sound_SpawnFish();
-        Instantiate(LeafFish, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
+        for(int i = 0; i < 3; i++)
+        {
+            SoundSE.Sound_SpawnFish();
+            Instantiate(LeafFish, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
+            await Task.Delay(800);
+        }
     }
     public void spawnPenetrateFish() //盾貫通さかな
     {
