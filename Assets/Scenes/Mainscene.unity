@@ -1346,6 +1346,7 @@ MonoBehaviour:
   PenetrateFish: {fileID: 7214076394174812922, guid: b54e0a720fab909409eccdaa26a02947, type: 3}
   PenetrateFishA: {fileID: 7214076394174812922, guid: 561362f3037c3bb48a3c95d59ecf6121, type: 3}
   PenetrateFishB: {fileID: 7214076394174812922, guid: 70d6a993f00068a4daeea5ecad93dfea, type: 3}
+  Effect: {fileID: 795467425007550345, guid: 70a9e2a57d8ee56448807f504d8a068d, type: 3}
   bossHP: {fileID: 942665715}
 --- !u!1001 &202845600
 PrefabInstance:
