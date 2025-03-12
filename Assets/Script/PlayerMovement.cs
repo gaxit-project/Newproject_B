@@ -144,6 +144,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
 {
+    IdentifiableObject identifiableObject = other.GetComponent<IdentifiableObject>();
+
+    if (identifiableObject != null && identifiableObject.isSpecialObject)
+    {
+        Debug.Log("特定のオブジェクトと衝突！モーションを再生します。");
+        animator.SetTrigger("specialCollisionTrigger"); // Animator の Trigger を発火
+    }
+
     if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
     {
         if (other.CompareTag("Rubble"))
