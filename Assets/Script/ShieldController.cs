@@ -185,11 +185,19 @@ public class ShieldController : MonoBehaviour
 
         if (currentShieldHP <= 0)
         {
-            LogInfo($"盾 {currentShieldIndex + 1} が破壊されました。次の盾に切り替えます。");
-            ReplaceShield();
-            //壊れる盾SE
-            SoundSE.BreakShield();
-
+            if (currentShieldIndex < shieldPrefabs.Count - 1)
+            {
+                LogInfo($"盾 {currentShieldIndex + 1} が破壊されました。次の盾に切り替えます。");
+                ReplaceShield();
+                // 壊れる盾SE
+                SoundSE.BreakShield();
+            }
+            else
+            {
+                // 最後の盾はHPが0未満にならないようにする
+                currentShieldHP = 0;
+                LogInfo("最後の盾です。壊れませんが、HPは0になりました。");
+            }
         }
     }
 
@@ -329,8 +337,17 @@ public class ShieldController : MonoBehaviour
 
         if (currentShieldHP <= 0)
         {
-            LogInfo($"盾 {currentShieldIndex + 1} が破壊されました。次の盾に切り替えます。");
-            ReplaceShield();
+            if (currentShieldIndex < shieldPrefabs.Count - 1)
+            {
+                LogInfo($"盾 {currentShieldIndex + 1} が破壊されました。次の盾に切り替えます。");
+                ReplaceShield();
+            }
+            else
+            {
+                // 最後の盾はHPが0未満にならないようにする
+                currentShieldHP = 0;
+                LogInfo("最後の盾です。壊れませんが、HPは0になりました。");
+            }
         }
 
         // ボス攻撃のクールダウン開始

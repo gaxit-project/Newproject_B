@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isInvincible = false;              // 無敵状態かどうかのフラグ
     private bool isKnockback = false;               // ノックバック中かどうかのフラグ
 
+    private BossScript bossScript;
+    private bool isBossDefeated = false;            // ボスが倒れたかのフラグ
+
     private Animator animator;                      // Animator コンポーネント
     private Renderer playerRenderer;               // プレイヤーのRenderer
     private CharacterController characterController; // CharacterController 追加
@@ -30,6 +33,13 @@ public class PlayerMovement : MonoBehaviour
         playerRenderer = GetComponentInChildren<Renderer>(); // Renderer を取得
         characterController = GetComponent<CharacterController>(); // CharacterController を取得
         shieldController = FindObjectOfType<ShieldController>();
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+
+        //Boss
+        if (boss != null)
+        {
+            bossScript = boss.GetComponent<BossScript>();
+        }
 
         // シールドの反射時間と同期
         if (shieldController != null)
@@ -45,6 +55,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // **ボスの HP を確認し、0 以下なら移動を無効化**
+        if (bossScript != null && bossScript.GetBossHP() <= 0)
+        {
+            isBossDefeated = true;
+        }
+        if (isBossDefeated)
+        {
+            currentVelocity = Vector3.zero; // 移動を完全に停止
+            animator.SetFloat("Speed", 0); // アニメーションを停止
+            return;
+        }
+
         if (isDodging || isKnockback) return; // 回避中 or ノックバック中は移動を無効化
 
         UpdateSpeedBasedOnShield(); // 盾の状態に応じた速度調整
@@ -102,9 +124,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(int damage = 1) // デフォルトダメージ1
     {
-        if (isInvincible)
+        if (isInvincible || isBossDefeated) // **ボスが倒れていたらダメージを無効化**
         {
-            Debug.Log("無敵状態のためダメージを無効化しました。");
+            Debug.Log("無敵状態またはボスが倒れたためダメージを無効化しました。");
             return;
         }
 
@@ -143,44 +165,45 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-{
-    IdentifiableObject identifiableObject = other.GetComponent<IdentifiableObject>();
-
-    if (identifiableObject != null && identifiableObject.isSpecialObject)
     {
-        Debug.Log("特定のオブジェクトと衝突！モーションを再生します。");
-        animator.SetTrigger("specialCollisionTrigger"); // Animator の Trigger を発火
-    }
-
-    if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
-    {
-        if (other.CompareTag("Rubble"))
+        if (isBossDefeated) return; // **ボスが倒れていたらダメージ処理をスキップ**
+        
+        IdentifiableObject identifiableObject = other.GetComponent<IdentifiableObject>();
+        if (identifiableObject != null && identifiableObject.isSpecialObject)
         {
-            // **シールドが直近0.5秒以内にRubbleと衝突していたらダメージを受けない**
-            if (Time.time - shieldController.GetLastRubbleShieldCollisionTime() < shieldController.rubbleShieldCollisionCooldown)
+            Debug.Log("特定のオブジェクトと衝突！モーションを再生します。");
+            animator.SetTrigger("specialCollisionTrigger"); // Animator の Trigger を発火
+        }
+
+        if (other.CompareTag("Fish") || other.CompareTag("Rubble"))
+        {
+            if (other.CompareTag("Rubble"))
             {
-                Debug.Log("Rubbleの衝突クールダウン中のためダメージ無効");
-                return;
+                // **シールドが直近0.5秒以内にRubbleと衝突していたらダメージを受けない**
+                if (Time.time - shieldController.GetLastRubbleShieldCollisionTime() < shieldController.rubbleShieldCollisionCooldown)
+                {
+                    Debug.Log("Rubbleの衝突クールダウン中のためダメージ無効");
+                    return;
+                }
+            }
+
+            Debug.Log(other.tag + " に当たりました！");
+            TakeDamage(); // HPを減少させる
+        }
+        else if (other.CompareTag("Boss"))
+        {
+            if (Time.time - shieldController.GetLastBossShieldCollisionTime() > shieldController.bossShieldCollisionCooldown)
+            {
+                Debug.Log("ボスがプレイヤーに直接衝突！ HP -3 & ノックバック");
+                TakeDamage(3);
+                ApplyKnockback((transform.position - other.transform.position).normalized, 20f, 0.5f);
+            }
+            else
+            {
+                Debug.Log("ボスは最近シールドに当たったため、プレイヤーに影響なし");
             }
         }
-
-        Debug.Log(other.tag + " に当たりました！");
-        TakeDamage(); // HPを減少させる
     }
-    else if (other.CompareTag("Boss"))
-    {
-        if (Time.time - shieldController.GetLastBossShieldCollisionTime() > shieldController.bossShieldCollisionCooldown)
-        {
-            Debug.Log("ボスがプレイヤーに直接衝突！ HP -3 & ノックバック");
-            TakeDamage(3);
-            ApplyKnockback((transform.position - other.transform.position).normalized, 20f, 0.5f);
-        }
-        else
-        {
-            Debug.Log("ボスは最近シールドに当たったため、プレイヤーに影響なし");
-        }
-    }
-}
 
 
     public void ApplyKnockback(Vector3 direction, float distance, float duration)
