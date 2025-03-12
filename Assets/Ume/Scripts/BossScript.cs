@@ -326,15 +326,14 @@ public class BossScript : MonoBehaviour
                 //Destroy(collision.gameObject);
             }
         }
-
-        else if (collision.gameObject.CompareTag("BossWall") && isCountered)
+        else if (collision.gameObject.CompareTag("Wall") && isCountered)
         {
             bossHpSlider.value -= 10;
             rb.velocity = Vector3.zero;
             //transform.position = new Vector3(0, 0, 0);
             // 元の位置に戻る
-            isCountered = false;  // ここでフラグを変更
             StartCoroutine(MoveTo(new Vector3(0, 0, 0), chargeSpeed * 0.2f));
+            isCountered = false;  // ここでフラグを変更
 
         }
         else if (collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting())
@@ -413,8 +412,8 @@ public class BossScript : MonoBehaviour
         else // HP 5~
         {
             attackPattern.Add(99); // 特殊行動
-            attackPattern.AddRange(new List<int> { 5, 2, 6, 6, 6, 50, 7, 10, 2, 11, 8, 50, 50, 12, 13 }); // 2方向突進さかな(緑)⇒岩⇒木の葉さかな(橙)*3⇒突進⇒盾貫通さかな(紫)⇒ノーマルさかな+2方向突進さかな
-                                                                                                          //  ⇒岩⇒追尾さかな+突進さかな(11)⇒2方向盾貫通さかな⇒突進⇒突進⇒2方向盾貫通さかな+追尾さかな(12)⇒突進さかな+2方向さかな(13)
+            attackPattern.AddRange(new List<int> { 5, 2, 6, 50, 7, 10, 2, 11, 8, 50, 50, 12, 13 }); // 2方向突進さかな(緑)⇒岩⇒木の葉さかな(橙)*3⇒突進⇒盾貫通さかな(紫)⇒ノーマルさかな+2方向突進さかな
+                                                                                                    //  ⇒岩⇒追尾さかな+突進さかな(11)⇒2方向盾貫通さかな⇒突進⇒突進⇒2方向盾貫通さかな+追尾さかな(12)⇒突進さかな+2方向さかな(13)
         }
 
         currentAttackIndex = 0; // パターンを最初から開始
