@@ -30,7 +30,7 @@ public class LeafFish : MonoBehaviour
 
         if (boss != null)
         {
-            rotationAxis = boss.transform.position;
+            rotationAxis = new Vector3(boss.transform.position.x, 4f, boss.transform.position.z);
         }
         else
         {
