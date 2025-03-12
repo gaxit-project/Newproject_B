@@ -7244,7 +7244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gaugeSlider: {fileID: 1825904220}
-  maxValue: 120
+  targetSlider: {fileID: 942665715}
+  maxValue: 180
   decreaseRate: 1
 --- !u!114 &1762876531
 MonoBehaviour:
@@ -7572,6 +7573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gaugeSlider: {fileID: 1825904220}
+  targetSlider: {fileID: 0}
   maxValue: 180
   decreaseRate: 1
 --- !u!114 &1825904220
