@@ -14,11 +14,11 @@ public class LeafFish : MonoBehaviour
     void Start()
     {
         Invoke("Dissappear", naturalDisappearTime); //指定時間後消滅させる
+        Invoke("DefineBossPosition", 0f);
     }
 
     void Update()
     {
-        Invoke("DefineBossPosition", 0f);
         //ボスの周りを回転させる
         transform.RotateAround(rotationAxis, Vector3.up, -360 / rotationPeriod * Time.deltaTime);
     }
