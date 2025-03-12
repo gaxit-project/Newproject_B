@@ -69,7 +69,7 @@ public class SoundSE : MonoBehaviour
         audioSource_tmp.PlayOneShot(sound[9]);
     }
 
-    //Player�֘A��SE
+    //PlayerSE
     public static void PlayerDamage()
     {
         audioSource_tmp.PlayOneShot(sound[10]);
@@ -93,5 +93,14 @@ public class SoundSE : MonoBehaviour
     public static void Sound_SpawnFish()
     {
         audioSource_tmp.PlayOneShot(sound[14]);
+    }
+    //貫通魚
+    public static void FishShild()
+    {
+        audioSource_tmp.PlayOneShot(sound[15]);
+    }
+    public static void FishPlayer()
+    {
+        audioSource_tmp.PlayOneShot(sound[16]);
     }
 }

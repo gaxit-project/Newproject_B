@@ -74,10 +74,15 @@ public class Penetratefish : MonoBehaviour
         //Playerタグと衝突した場合にオブジェクトを点滅
         else if(other.CompareTag("Player") && !isAttacking)
         {
+            SoundSE.FishPlayer();
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突しました。");
             isAttacking = true;
             gameObject.layer = LayerMask.NameToLayer("BlinkingFish");
             Invoke("Blink", 0);
+        }
+        else if(other.CompareTag("Shield"))
+        {
+            SoundSE.FishShild();
         }
     }
     private void Blink() //点滅させる
