@@ -8,6 +8,8 @@ public class BossScript : MonoBehaviour
 {
     Rigidbody rb;
 
+    //[SerializeField] private ShieldController shieldController;
+
     private SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] private float blinkDuration = 0.2f; // 点滅の長さ
     [SerializeField] private int blinkCount = 3;        // 点滅の回数
@@ -341,7 +343,20 @@ public class BossScript : MonoBehaviour
             if (isCountered) return;
             isCountered = true;  // ここでフラグを変更
             rb.velocity = Vector3.zero;  // 速度をリセット
-            Vector3 counteredForce = -transform.forward * 30;
+            Vector3 counteredForce;
+
+            if (shieldController.GetCurrentShieldIndex() == 0)
+            {
+                counteredForce = -transform.forward * 15;
+            }
+            else if (shieldController.GetCurrentShieldIndex() == 1)
+            {
+                counteredForce = -transform.forward * 25;
+            }
+            else
+            {
+                counteredForce = -transform.forward * 30;
+            }
 
             // 攻撃を停止
             CancelInvoke("Attack");
@@ -423,7 +438,7 @@ public class BossScript : MonoBehaviour
     {
         CancelInvoke("Attack");
         float speed = 10f;
-        Time.timeScale = 0.4f;
+        Time.timeScale = 0.7f;
         bossAnim.SetTrigger(deathTrigger);
         while (Vector3.Distance(transform.position, player.position) > 20f)
         {

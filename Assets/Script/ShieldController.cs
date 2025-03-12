@@ -96,40 +96,40 @@ public class ShieldController : MonoBehaviour
     }
 
     private IEnumerator RecoverShieldHP()
-{
-    while (true)
     {
-        yield return new WaitForSeconds(hpRecoveryInterval);
-
-        if (currentShieldHP < shieldHP[currentShieldIndex] || currentShieldIndex > 0)
+        while (true)
         {
-            currentShieldHP += hpRecoveryAmount;
-            LogInfo($"盾 {currentShieldIndex + 1} のHPが {hpRecoveryAmount} 回復しました。現在のHP: {currentShieldHP}");
+            yield return new WaitForSeconds(hpRecoveryInterval);
 
-            if (currentShieldHP > shieldHP[currentShieldIndex])
+            if (currentShieldHP < shieldHP[currentShieldIndex] || currentShieldIndex > 0)
             {
-                int excessHP = currentShieldHP - shieldHP[currentShieldIndex];
-                currentShieldHP = shieldHP[currentShieldIndex];
+                currentShieldHP += hpRecoveryAmount;
+                LogInfo($"盾 {currentShieldIndex + 1} のHPが {hpRecoveryAmount} 回復しました。現在のHP: {currentShieldHP}");
 
-                if (currentShieldIndex > 0)
+                if (currentShieldHP > shieldHP[currentShieldIndex])
                 {
-                    DestroyCurrentShield(); // 現在のシールドを破棄
-                    currentShieldIndex--; // 前のシールドに切り替え
-                    SpawnShield(); // 新しいシールドを生成
-                    currentShieldHP = 1; // 戻ったシールドのHPを1に設定
-                    //前のたてに戻るSE
-                    SoundSE.RepairShield();
-                    LogInfo($"盾 {currentShieldIndex + 1} に切り替わりました。現在の盾のHPは {currentShieldHP} です。");
+                    int excessHP = currentShieldHP - shieldHP[currentShieldIndex];
+                    currentShieldHP = shieldHP[currentShieldIndex];
+
+                    if (currentShieldIndex > 0)
+                    {
+                        DestroyCurrentShield(); // 現在のシールドを破棄
+                        currentShieldIndex--; // 前のシールドに切り替え
+                        SpawnShield(); // 新しいシールドを生成
+                        currentShieldHP = 1; // 戻ったシールドのHPを1に設定
+                                             //前のたてに戻るSE
+                        SoundSE.RepairShield();
+                        LogInfo($"盾 {currentShieldIndex + 1} に切り替わりました。現在の盾のHPは {currentShieldHP} です。");
+                    }
                 }
             }
         }
     }
-}
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0")&& !isReflecting)
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0") && !isReflecting)
         {
             StartCoroutine(ReflectCoroutine());
         }
@@ -250,14 +250,14 @@ public class ShieldController : MonoBehaviour
 
 
     private void DestroyCurrentShield()
-{
-    if (currentShield != null)
     {
-        Destroy(currentShield);
-        currentShield = null;
-        LogInfo("現在の盾を破壊しました。");
+        if (currentShield != null)
+        {
+            Destroy(currentShield);
+            currentShield = null;
+            LogInfo("現在の盾を破壊しました。");
+        }
     }
-}
 
     private void ChangeShieldColor(Color color)
     {
@@ -389,21 +389,21 @@ public class ShieldController : MonoBehaviour
         return currentShieldIndex;
     }
 
-//3/11
-private float lastRubbleShieldCollisionTime = -10f; // 最後にRubbleとシールドが衝突した時間
-public float rubbleShieldCollisionCooldown = 0.3f; // 0.5秒以内にRubbleがシールドと衝突していればダメージ無効
+    //3/11
+    private float lastRubbleShieldCollisionTime = -10f; // 最後にRubbleとシールドが衝突した時間
+    public float rubbleShieldCollisionCooldown = 0.3f; // 0.5秒以内にRubbleがシールドと衝突していればダメージ無効
 
-// **Rubbleとシールドの衝突時間を更新**
-public void RegisterRubbleShieldCollision()
-{
-    lastRubbleShieldCollisionTime = Time.time;
-}
+    // **Rubbleとシールドの衝突時間を更新**
+    public void RegisterRubbleShieldCollision()
+    {
+        lastRubbleShieldCollisionTime = Time.time;
+    }
 
-// **Rubbleの最後の衝突時間を取得**
-public float GetLastRubbleShieldCollisionTime()
-{
-    return lastRubbleShieldCollisionTime;
-}
+    // **Rubbleの最後の衝突時間を取得**
+    public float GetLastRubbleShieldCollisionTime()
+    {
+        return lastRubbleShieldCollisionTime;
+    }
 
 
 
