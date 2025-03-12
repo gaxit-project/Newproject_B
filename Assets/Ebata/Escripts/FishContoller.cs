@@ -21,6 +21,7 @@ public class FishContoller : MonoBehaviour
     [SerializeField] private GameObject PenetrateFish; //盾を貫通するさかなのprefabその1
     [SerializeField] private GameObject PenetrateFishA; //盾を貫通するさかなのprefabその2
     [SerializeField] private GameObject PenetrateFishB; //盾を貫通するさかなのprefabその3
+    [SerializeField] private GameObject Effect; //出現時に出すエフェクトを入れる
     [SerializeField] private Slider bossHP; //ボスHPスライダーを入れる
 
     // Start is called before the first frame update
@@ -68,33 +69,39 @@ public class FishContoller : MonoBehaviour
     public void spawnRubble() //岩
     {
         SoundSE.Sound_SpawnRubble();
-        Instantiate(Rubble, spawnPosition, spawnPoint.transform.rotation); 
+        Instantiate(Rubble, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);  
         Invoke("ChangePosition", 0);
     }
     public void spawnNormalFish() //ノーマルさかな
     {
         SoundSE.Sound_SpawnFish();
         Instantiate(NormalFish, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
     }
     public void spawnChaseFish() //追尾さかな
     {
         SoundSE.Sound_SpawnFish();
         Instantiate(ChaseFish, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
     }
     public void spawnDashFish() //突進さかな
     {
         SoundSE.Sound_SpawnFish();
         Instantiate(DashFish, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
     }
     public void spawnCoDFish() //2方向突進さかな
     {
         SoundSE.Sound_SpawnFish();
         Instantiate(CoDFishA, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
         Instantiate(CoDFishB, spawnPosition, spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
     }
     public async void spawnLeafFish() //木の葉さかな
@@ -103,6 +110,7 @@ public class FishContoller : MonoBehaviour
         {
             SoundSE.Sound_SpawnFish();
             Instantiate(LeafFish, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
             await Task.Delay(800);
         }
     }
@@ -110,14 +118,17 @@ public class FishContoller : MonoBehaviour
     {
         SoundSE.Sound_SpawnFish();
         Instantiate(PenetrateFish, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
     }
     public void spawnTwoWayPenetrateFish() //2方向盾貫通さかな
     {
         SoundSE.Sound_SpawnFish();
         Instantiate(PenetrateFishA, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         Invoke("ChangePosition", 0);
         Instantiate(PenetrateFishB, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
+        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
         if(position <= 3)
         Invoke("ChangePosition", 0);
     }
