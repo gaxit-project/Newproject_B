@@ -96,10 +96,12 @@ public class PlayerMovement : MonoBehaviour
         // アニメーションパラメーターを更新
         animator.SetFloat("Speed", currentVelocity.magnitude);
 
+        /*
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0"))
         {
             StartCoroutine(Dodge());
         }
+        */
     }
 
     private void UpdateSpeedBasedOnShield()
@@ -232,4 +234,14 @@ public class PlayerMovement : MonoBehaviour
 
         isKnockback = false; // ノックバック終了
     }
+
+    //ボタン
+        public void StartDodge()
+    {
+        if (!isDodging)
+        {
+            StartCoroutine(Dodge());
+        }
+    }
+
 }

@@ -129,10 +129,13 @@ public class ShieldController : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown("joystick button 0") && !isReflecting)
         {
             StartCoroutine(ReflectCoroutine());
         }
+        */
+
     }
 
     private IEnumerator ReflectCoroutine()
@@ -404,6 +407,15 @@ public class ShieldController : MonoBehaviour
     {
         return lastRubbleShieldCollisionTime;
     }
+
+    //ボタン
+    public void TriggerReflect()
+{
+    if (!isReflecting)
+    {
+        StartCoroutine(ReflectCoroutine());
+    }
+}
 
 
 
