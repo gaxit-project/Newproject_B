@@ -87,6 +87,8 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
+        UpdatePlayerPosition();
+        LookAtDelayedPlayer();
         if (bossHpSlider.value <= 50 && !changePattern)
         {
             UpdateAttackPattern();
@@ -94,8 +96,8 @@ public class BossScript : MonoBehaviour
         }
         if (!isCharging)
         {
-            UpdatePlayerPosition();
-            LookAtDelayedPlayer();
+
+
         }
         if (bossHpSlider.value <= 0 && !lastATk)
         {
@@ -197,18 +199,23 @@ public class BossScript : MonoBehaviour
                 fishContoller.spawnCoDFish();
                 break;
             case 50: // 突進
-                StartCoroutine(ChargeAttack());
+                int rnd = Random.Range(0, 2);
+                if (!isCharging)
+                {
+                    if (rnd == 0)
+                    {
+                        StartCoroutine(ChargeAttack());
+                    }
+                    else
+                    {
+                        StartCoroutine(ChargeAttackLong());
+                    }
+                }
                 break;
             case 99: // 特殊行動（盾破壊）
                 StartCoroutine(SpecialAction());
                 break; // 特殊行動は通常攻撃と別処理なのでここで終了
         }
-
-        /*if (currentAttack != null)
-        {
-            Vector3 spawnPosition = spawnPoint.position + spawnPoint.forward * 10f;
-            Instantiate(currentAttack, spawnPosition, spawnPoint.rotation);
-        }*/
 
         // 次の攻撃へ
         currentAttackIndex = (currentAttackIndex + 1) % attackPattern.Count;
@@ -251,6 +258,51 @@ public class BossScript : MonoBehaviour
         StartCoroutine(WaitTime(3));
     }
 
+    IEnumerator ChargeAttackLong()
+    {
+        isCharging = true;  // ここでフラグを立てる
+        CancelInvoke("Attack");
+
+        chargedPosition = transform.position;
+        Quaternion originalRotation = transform.rotation;
+        bossAnim.SetTrigger(chargeAttack);
+        SoundSE.BossDashAttack();
+
+        float angle = 30f;
+        float duration = 0.5f;
+        Quaternion leftRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y - angle, transform.eulerAngles.z);
+        Quaternion rightRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + angle, transform.eulerAngles.z);
+
+        yield return RotateTo(leftRotation, duration);
+        yield return RotateTo(rightRotation, duration);
+        yield return RotateTo(originalRotation, duration);
+
+        // **ここで目の前にターゲットが来るまで待機**
+        while (!IsTargetInFrontStrict())
+        {
+            Debug.Log("ターゲットを待っています...");
+            yield return null;
+        }
+
+        // **ターゲットが前に来たら処理を実行**
+        Debug.Log("視界に入ったよ！突進開始！");
+
+        // 突進を開始
+        Vector3 chargeDirection = transform.forward;
+        chargeDistance = Vector3.Distance(transform.position, player.position);
+        Vector3 targetPosition = transform.position + chargeDirection * chargeDistance;
+        chargeMoveCoroutine = StartCoroutine(MoveTo(targetPosition, chargeSpeed));
+        SoundSE.BossChargingAttack();
+
+        // 噛みつくアニメーション
+        bossAnim.SetTrigger(canHit);
+
+        yield return chargeMoveCoroutine; // 突進が終わるのを待つ
+
+        isCharging = false; // 終了時にフラグを戻す
+        StartCoroutine(WaitTime(3));
+    }
+
 
 
     IEnumerator RotateTo(Quaternion targetRotation, float duration)
@@ -286,6 +338,16 @@ public class BossScript : MonoBehaviour
 
         transform.position = targetPosition; // 最後に確実に目標地点へ
     }
+    bool IsTargetInFrontStrict()
+    {
+
+        Vector3 forward = transform.forward;
+        Vector3 toTarget = (player.position - transform.position).normalized;
+
+        float dot = Vector3.Dot(forward, toTarget); // -1 〜 1 の範囲
+
+        return dot > 0.99f; // ほぼ1なら直線上
+    }
 
 
     IEnumerator SpecialAction()
@@ -312,7 +374,7 @@ public class BossScript : MonoBehaviour
             {
                 // 体力変更，カウンターアニメーション追加
                 bossHpSlider.value -= 10;
-                bossAnim.SetTrigger(damaged);
+                //bossAnim.SetTrigger(damaged);
                 SoundSE.BossCounteredDamage();
             }
 
@@ -334,7 +396,7 @@ public class BossScript : MonoBehaviour
             }
 
         }
-        else if (collision.gameObject.CompareTag("Wall") && isCountered)
+        if (collision.gameObject.CompareTag("Wall") && isCountered)
         {
             bossHpSlider.value -= 10;
             rb.velocity = Vector3.zero;
@@ -344,7 +406,7 @@ public class BossScript : MonoBehaviour
             isCountered = false;  // ここでフラグを変更
 
         }
-        else if (collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting())
+        if (collision.gameObject.CompareTag("Shield") && shieldController.IsReflecting())
         {
             if (isCountered) return;
             isCountered = true;  // ここでフラグを変更
@@ -384,26 +446,11 @@ public class BossScript : MonoBehaviour
             //rb.AddForce(counteredForce);
             StartCoroutine(MoveTo(counteredForce, chargeSpeed * 0.5f));
 
-            StartCoroutine(WaitTime(3));
+            StartCoroutine(WaitTime(4));
             isCharging = false; // 突進を終了
         }
     }
-    /*void OnCollisionEnter(Collision collision)
-    {
-        transform.position = new Vector3(0, 0, 0);
-        if (collision.gameObject.CompareTag("Wall"))
-        {
 
-        }
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            rb.velocity = Vector3.zero;
-
-            transform.position = new Vector3(0, 0, 0);
-            // 元の位置に戻る
-            StartCoroutine(MoveTo(new Vector3(0, 0, 0), chargeSpeed * 10f));
-        }
-    }*/
 
     IEnumerator WaitTime(int second)
     {
@@ -438,6 +485,11 @@ public class BossScript : MonoBehaviour
         }
         else // HP 5~
         {
+            attackInterval = 1.5f;
+            if (!IsInvoking("Attack"))
+            {
+                InvokeRepeating("Attack", attackInterval, attackInterval); // 攻撃を再開
+            }
             attackPattern.Add(99); // 特殊行動
             attackPattern.AddRange(new List<int> { 5, 2, 6, 50, 7, 10, 2, 11, 8, 50, 50, 12, 13 }); // 2方向突進さかな(緑)⇒岩⇒木の葉さかな(橙)*3⇒突進⇒盾貫通さかな(紫)⇒ノーマルさかな+2方向突進さかな
                                                                                                     //  ⇒岩⇒追尾さかな+突進さかな(11)⇒2方向盾貫通さかな⇒突進⇒突進⇒2方向盾貫通さかな+追尾さかな(12)⇒突進さかな+2方向さかな(13)
@@ -466,3 +518,20 @@ public class BossScript : MonoBehaviour
         SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
     }
 }
+
+/*void OnCollisionEnter(Collision collision)
+{
+    transform.position = new Vector3(0, 0, 0);
+    if (collision.gameObject.CompareTag("Wall"))
+    {
+
+    }
+    if (collision.gameObject.CompareTag("Wall"))
+    {
+        rb.velocity = Vector3.zero;
+
+        transform.position = new Vector3(0, 0, 0);
+        // 元の位置に戻る
+        StartCoroutine(MoveTo(new Vector3(0, 0, 0), chargeSpeed * 10f));
+    }
+}*/
