@@ -94,11 +94,6 @@ public class BossScript : MonoBehaviour
             UpdateAttackPattern();
             changePattern = true;
         }
-        if (!isCharging)
-        {
-
-
-        }
         if (bossHpSlider.value <= 0 && !lastATk)
         {
             lastATk = true;
