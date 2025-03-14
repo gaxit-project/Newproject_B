@@ -11,8 +11,12 @@ public class testcamera : MonoBehaviour
     public Vector2 stageMin = new Vector2(0,0);
     public Vector2 stageMax = new Vector2(100,100);
 
+    public static bool isStopStart = false;
+    // if(!testcamera.isStopStart)
+    
     void LateUpdate()
     {
+        
         if (target1 == null || target2 == null)
         {
             Debug.LogWarning("ターゲットが設定されていません");
