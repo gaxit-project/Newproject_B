@@ -30,7 +30,8 @@ public class BossScript : MonoBehaviour
     private bool isCharging = false;
     private bool isCountered = false;
     private Vector3 originalPosition;
-    private bool lastAttack = false; //攻撃パターンを変更する用
+    private bool changePattern = false; //攻撃パターンを変更する用
+    private bool lastATk = false; //最後の演出をしているか判断する用
     private Vector3 chargedPosition; //突進攻撃する前のポジションを入れる
     private float chargeDistance;
     private Queue<Vector3> playerPositions = new Queue<Vector3>();
@@ -86,25 +87,22 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
-        if (bossHpSlider.value <= 50 && !lastAttack)
+        if (bossHpSlider.value <= 50 && !changePattern)
         {
             UpdateAttackPattern();
-            lastAttack = true;
+            changePattern = true;
         }
         if (!isCharging)
         {
             UpdatePlayerPosition();
             LookAtDelayedPlayer();
         }
-        if (bossHpSlider.value <= 0 && lastAtkSecond == 0)
+        if (bossHpSlider.value <= 0 && !lastATk)
         {
-            lastAtkSecond += Time.deltaTime;
+            lastATk = true;
+            CancelInvoke("Attack");
             StartCoroutine(LastAttack());
             SoundBGM.StopBGM();
-            if (lastAtkSecond > 10)
-            {
-                //   SceneManager.LoadScene("ClearScene"); //HPが0になったらシーン遷移
-            }
         }
     }
 
@@ -310,23 +308,31 @@ public class BossScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Rubble") && isCountered)
         {
-            // 体力変更，カウンターアニメーション追加
-            bossHpSlider.value -= 10;
-            bossAnim.SetTrigger(damaged);
-            SoundSE.BossCounteredDamage();
+            if (!lastATk)
+            {
+                // 体力変更，カウンターアニメーション追加
+                bossHpSlider.value -= 10;
+                bossAnim.SetTrigger(damaged);
+                SoundSE.BossCounteredDamage();
+            }
+
         }
         else if (collision.gameObject.CompareTag("Rubble") && !isCharging)
         {
-            TestRubble rubble = collision.gameObject.GetComponent<TestRubble>();
-            if (rubble != null && rubble.isReflected)
+            if (!lastATk)
             {
-                bossHpSlider.value -= 5;
-                bossAnim.SetTrigger(damaged);
-                SoundSE.BossRockDamage();
+                TestRubble rubble = collision.gameObject.GetComponent<TestRubble>();
+                if (rubble != null && rubble.isReflected)
+                {
+                    bossHpSlider.value -= 5;
+                    bossAnim.SetTrigger(damaged);
+                    SoundSE.BossRockDamage();
 
-                //Debug.Log($"Boss HP: {bossHpSlider.value}");
-                //Destroy(collision.gameObject);
+                    //Debug.Log($"Boss HP: {bossHpSlider.value}");
+                    //Destroy(collision.gameObject);
+                }
             }
+
         }
         else if (collision.gameObject.CompareTag("Wall") && isCountered)
         {
@@ -370,7 +376,10 @@ public class BossScript : MonoBehaviour
 
             // 体力変更，カウンターアニメーション追加
             bossHpSlider.value -= 2;
-            bossAnim.SetTrigger(counter);
+            if (!lastATk)
+            {
+                bossAnim.SetTrigger(counter);
+            }
 
             //rb.AddForce(counteredForce);
             StartCoroutine(MoveTo(counteredForce, chargeSpeed * 0.5f));
@@ -400,7 +409,10 @@ public class BossScript : MonoBehaviour
     {
         yield return new WaitForSeconds(second);
         //rb.velocity = Vector3.zero;  // 速度をリセット
-        InvokeRepeating("Attack", attackInterval, attackInterval); // 攻撃を再開
+        if (!lastATk)
+        {
+            InvokeRepeating("Attack", attackInterval, attackInterval); // 攻撃を再開
+        }
 
     }
 
@@ -436,9 +448,10 @@ public class BossScript : MonoBehaviour
 
     IEnumerator LastAttack()
     {
+
         CancelInvoke("Attack");
         float speed = 10f;
-        Time.timeScale = 0.7f;
+        Time.timeScale = 0.4f;
         bossAnim.SetTrigger(deathTrigger);
         while (Vector3.Distance(transform.position, player.position) > 20f)
         {
