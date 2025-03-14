@@ -68,69 +68,93 @@ public class FishContoller : MonoBehaviour
     //スポーンさせるprefabの種類と数を攻撃パターンごとに分ける
     public void spawnRubble() //岩
     {
-        SoundSE.Sound_SpawnRubble();
-        Instantiate(Rubble, spawnPosition, spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);  
-        Invoke("ChangePosition", 0);
+        if(bossHP.value > 0)
+        {
+            SoundSE.Sound_SpawnRubble();
+            Instantiate(Rubble, spawnPosition, spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);  
+            Invoke("ChangePosition", 0);
+        }
     }
     public void spawnNormalFish() //ノーマルさかな
     {
-        SoundSE.Sound_SpawnFish();
-        Instantiate(NormalFish, spawnPosition, spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        Invoke("ChangePosition", 0);
+        if(bossHP.value > 0)
+        {
+            SoundSE.Sound_SpawnFish();
+            Instantiate(NormalFish, spawnPosition, spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            Invoke("ChangePosition", 0);
+        }
     }
     public void spawnChaseFish() //追尾さかな
     {
-        SoundSE.Sound_SpawnFish();
-        Instantiate(ChaseFish, spawnPosition, spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        Invoke("ChangePosition", 0);
+        if(bossHP.value > 0)
+        {
+            SoundSE.Sound_SpawnFish();
+            Instantiate(ChaseFish, spawnPosition, spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            Invoke("ChangePosition", 0);
+        }
     }
     public void spawnDashFish() //突進さかな
     {
-        SoundSE.Sound_SpawnFish();
-        Instantiate(DashFish, spawnPosition, spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        Invoke("ChangePosition", 0);
+        if(bossHP.value > 0)
+        {
+            SoundSE.Sound_SpawnFish();
+            Instantiate(DashFish, spawnPosition, spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            Invoke("ChangePosition", 0);
+        }
     }
     public void spawnCoDFish() //2方向突進さかな
     {
-        SoundSE.Sound_SpawnFish();
-        Instantiate(CoDFishA, spawnPosition, spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        Invoke("ChangePosition", 0);
-        Instantiate(CoDFishB, spawnPosition, spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        Invoke("ChangePosition", 0);
+        if(bossHP.value > 0)
+        {
+            SoundSE.Sound_SpawnFish();
+            Instantiate(CoDFishA, spawnPosition, spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            Invoke("ChangePosition", 0);
+            Instantiate(CoDFishB, spawnPosition, spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            Invoke("ChangePosition", 0);
+        }
     }
     public async void spawnLeafFish() //木の葉さかな
     {
-        for(int i = 0; i < 3; i++)
+        if(bossHP.value > 0)
         {
-            SoundSE.Sound_SpawnFish();
-            Instantiate(LeafFish, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
-            Instantiate(Effect, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
-            await Task.Delay(800);
+            for(int i = 0; i < 3; i++)
+            {
+                SoundSE.Sound_SpawnFish();
+                Instantiate(LeafFish, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
+                Instantiate(Effect, spawnPosition+ spawnPoint.transform.forward * 10f, spawnPoint.transform.rotation);
+                await Task.Delay(800);
+            }
         }
     }
     public void spawnPenetrateFish() //盾貫通さかな
     {
-        SoundSE.Sound_SpawnFish();
-        Instantiate(PenetrateFish, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        Invoke("ChangePosition", 0);
+        if(bossHP.value > 0)
+        {
+            SoundSE.Sound_SpawnFish();
+            Instantiate(PenetrateFish, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            Invoke("ChangePosition", 0);
+        }
     }
     public void spawnTwoWayPenetrateFish() //2方向盾貫通さかな
     {
-        SoundSE.Sound_SpawnFish();
-        Instantiate(PenetrateFishA, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        Invoke("ChangePosition", 0);
-        Instantiate(PenetrateFishB, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
-        Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
-        if(position <= 3)
-        Invoke("ChangePosition", 0);
+        if(bossHP.value > 0)
+        {
+            SoundSE.Sound_SpawnFish();
+            Instantiate(PenetrateFishA, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            Invoke("ChangePosition", 0);
+            Instantiate(PenetrateFishB, new Vector3(spawnPosition.x, 10f, spawnPosition.z), spawnPoint.transform.rotation);
+            Instantiate(Effect, spawnPosition, spawnPoint.transform.rotation);
+            if(position <= 3)
+            Invoke("ChangePosition", 0);
+        }
     }
     public void ChangePosition()
     {
