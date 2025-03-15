@@ -65,8 +65,8 @@ public class Penetratefish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Rubbleタグと衝突した場合にオブジェクトを破壊
-        if (other.CompareTag("Rubble"))
+        //RubbleタグまたはWallタグと衝突した場合にオブジェクトを破壊
+        if (other.CompareTag("Rubble") || other.CompareTag("Wall"))
         {
             Debug.Log($"{gameObject.name} が {other.gameObject.tag} と衝突し破壊されました。");
             Destroy(gameObject);
